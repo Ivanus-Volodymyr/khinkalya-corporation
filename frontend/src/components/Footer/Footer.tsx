@@ -6,7 +6,7 @@ const Footer :FC= () => {
 
             <div className={'footer'}>
                 <hr/>
-                {/*<a href="/"> <img src="/image-for-header/logoKhinkalnya.jpg" alt=""/></a>*/}
+                <a href="/"> <img src="/image-for-header/logoKhinkalnya.jpg" alt=""/></a>
             </div>
 
         </div>

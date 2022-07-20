@@ -3,5 +3,5 @@ import { PrismaService } from "../core/prisma.service";
 
 @Injectable()
 export class AdminService {
-  constructor(private prismaService: PrismaService) {}
+  constructor(prismaService: PrismaService) {}
 }

@@ -5,6 +5,7 @@ import * as AWS from "aws-sdk";
 @Injectable()
 export class S3Service {
   Bucket;
+
   constructor() {
     this.Bucket = new AWS.S3({
       region: process.env.region,
@@ -12,6 +13,7 @@ export class S3Service {
       secretAccessKey: process.env.secret_access_key_bucket,
     });
   }
+
   async uploadFile(@UploadedFile() file): Promise<ManagedUpload.SendData> {
     try {
       const filePath = this.filePath(file.originalname);

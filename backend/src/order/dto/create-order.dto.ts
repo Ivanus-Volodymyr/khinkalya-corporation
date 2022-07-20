@@ -1,1 +1,3 @@
-export interface CreateOrderDto {}
+export interface CreateOrderDto {
+  name: string;
+}

@@ -1,8 +1,7 @@
 # compiled output
-.env
 /dist
 /node_modules
-../../Khinkalnya/backend/.env
+.env
 # Logs
 logs
 *.log

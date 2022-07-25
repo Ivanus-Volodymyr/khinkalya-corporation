@@ -4,3 +4,8 @@ export interface ITokensPair {
     refreshToken: string,
     authorId: number,
 }
+
+export interface ITokenData {
+    role:string,
+    id: string,
+}

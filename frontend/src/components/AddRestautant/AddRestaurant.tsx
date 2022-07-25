@@ -1,7 +1,7 @@
 import React from 'react';
 import {useAppDispatch} from "../../hooks/redux";
 import {useForm} from "react-hook-form";
-import {addRestaurant} from "../../store/slices/admin.slice";
+import {addRestaurant} from "../../store";
 
 const AddRestaurant = () => {
     const dispatch = useAppDispatch()
@@ -20,4 +20,4 @@ const AddRestaurant = () => {
     );
 };
 
-export default AddRestaurant;
+export {AddRestaurant};

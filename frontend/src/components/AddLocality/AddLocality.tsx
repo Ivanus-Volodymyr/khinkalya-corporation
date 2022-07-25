@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {useAppDispatch} from "../../hooks/redux";
 import {useForm} from "react-hook-form";
-import {addLocality} from "../../store/slices/admin.slice";
-import {ILocality} from "../../interfaces/locality.interface";
+import {addLocality} from "../../store";
+import {ILocality} from "../../interfaces";
 
 const AddLocality: FC = () => {
     const dispatch = useAppDispatch()
@@ -24,4 +24,4 @@ const AddLocality: FC = () => {
     );
 };
 
-export default AddLocality;
+export {AddLocality};

@@ -48,4 +48,4 @@ const UserRegistration: FC = () => {
     );
 };
 
-export default UserRegistration;
+export {UserRegistration};

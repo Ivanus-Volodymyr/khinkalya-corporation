@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
-import {IUser} from "../../../interfaces";
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {loginUser} from "../../../store";
-import {Link, useNavigate} from "react-router-dom";
-import "./UserLogin.css";
+import {useNavigate} from "react-router-dom";
 
+import {IUser} from "../../../interfaces";
+import {useAppDispatch} from "../../../hooks/redux";
+import {setLoginActive, userLogin} from "../../../store";
+import "./UserLogin.css";
 
 const UserLogin: FC = () => {
     let navigate = useNavigate()
@@ -25,8 +25,11 @@ const UserLogin: FC = () => {
 
     const {register, handleSubmit, reset} = useForm<Partial<IUser>>()
     const onSubmitForm = async (data: Partial<IUser>) => {
-        await dispatch(loginUser(data))
+        dispatch(setLoginActive());
+        await dispatch(userLogin(data));
+
         await checkRole()
+        reset();
     }
 
     return (
@@ -58,4 +61,4 @@ const UserLogin: FC = () => {
     );
 };
 
-export default UserLogin;
+export {UserLogin};

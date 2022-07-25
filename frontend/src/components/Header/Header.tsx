@@ -1,22 +1,27 @@
 import React, {FC, useEffect} from 'react';
+import {Link} from "react-router-dom";
+
 import './Header.css'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {getLocality, logoutUser} from "../../store";
-import {Link} from "react-router-dom";
+import {getLocality, setLoginActive, userLogout} from "../../store";
+import {AuthModal} from "../AuthModal/AuthModal";
+import {UserLogin} from "../User/UserLogin/UserLogin";
+import {UserRegistration} from "../User/UserRegistration/UserRegistration";
 
 
 const Header: FC = () => {
-    const refresh = localStorage.getItem('refresh');
+    const dispatch = useAppDispatch();
+    const {user, isLoginActive, isRegisterActive} = useAppSelector((state) => state.authReducer);
     const {locality} = useAppSelector(state => state.adminReducer);
+
+    const refresh = localStorage.getItem('refresh');
+    const access = localStorage.getItem('access') as string;
+    const request = {...user, access};
+
     useEffect(() => {
             dispatch(getLocality())
         }
         , [refresh])
-    // const {isLog} = useAppSelector(state => state.authReducer)
-    const dispatch = useAppDispatch()
-    const logout: any = async () => {
-        dispatch(await logoutUser())
-    }
 
     return (
         <div>
@@ -36,13 +41,21 @@ const Header: FC = () => {
                     </Link>
                 </div>
                 <div>
-                    <div>{refresh ? <button onClick={logout}><a href="/auth/login">Вийти</a></button> :
-                        <div><a href="/auth/login">Увійти</a></div>} </div>
+                    {user && <div>{user.name}</div>}
+                    <button  onClick={() => {
+                        dispatch(setLoginActive());
+
+                        if(access && request) dispatch(userLogout({ accessToken: request.access}))
+                    }}>
+                        {!access ? "Увійти" : "Вийти"}
+                    </button>
                 </div>
             </div>
-            <hr/>
+            <AuthModal>
+                {isLoginActive ? <UserLogin/> : isRegisterActive ? <UserRegistration/> : null}
+            </AuthModal>
         </div>
     );
 };
 
-export default Header;
+export {Header};

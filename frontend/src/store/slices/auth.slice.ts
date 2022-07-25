@@ -1,9 +1,8 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {IAuthResponse, ILogoutRequest, IUser} from "../../interfaces";
+import {IAuthResponse, ILogoutRequest, ITokenData, IUser} from "../../interfaces";
 import {authService} from "../../services/auth.service";
 
 import {decodeToken} from "react-jwt";
-// import {getAllDishByLocalityId} from "./dish.slice";
 
 interface IInitialState {
     user: Partial<IUser>;
@@ -44,7 +43,7 @@ export const userLogin = createAsyncThunk<IAuthResponse, Partial<IUser>>(
     async (user: Partial<IUser>) => {
         try{
             const {data, status} =  await authService.login(user);
-
+            console.log(data);
             return { userData: data, status: status, error: undefined };
         } catch (error) {
             return { userData: undefined, status: 401, error: `${error}` };
@@ -54,13 +53,12 @@ export const userLogin = createAsyncThunk<IAuthResponse, Partial<IUser>>(
 
 export const userLogout = createAsyncThunk<void, ILogoutRequest>(
     'auth/logout',
-    async (accessToken) => {
+    async ({accessToken}) => {
         try {
-            await authService.logout(accessToken);
+            accessToken &&  await authService.logout(accessToken);
         } catch (error) {
             return undefined
         }
-        return localStorage.clear()
     }
 )
 
@@ -68,23 +66,6 @@ const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        setToken: (state, action: any) => {
-            state.error = action.payload.message
-            const access_token = action.payload.tokenPair.accessToken
-            localStorage.setItem('access', action.payload.tokenPair.accessToken)
-            localStorage.setItem('refresh', action.payload.tokenPair.refreshToken)
-            // state.isLog = true;
-            const {role, id} = decodeToken(access_token) as string | any
-            localStorage.setItem('role', role);
-            localStorage.setItem('userId', id);
-        },
-        setUsers: (state, action: any) => {
-            console.log('-----------------');
-            console.log(action.payload);
-            console.log('-----------------');
-            // state.users = action.payload
-        },
-
         setModalActive:(state) => {
             state.isLoginActive = false;
             state.isRegisterActive = false;
@@ -101,15 +82,22 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(userRegistration.fulfilled, (state, action) => {
-            state.accessToken = action.payload.userData?.tokensPair?.accessToken;
-            state.refreshToken = action.payload?.userData?.tokensPair?.refreshToken;
+            const access_token = action.payload.userData?.tokensPair.accessToken;
+            const refresh_token = action.payload?.userData?.tokensPair?.refreshToken;
+
+            state.accessToken = access_token;
+            state.refreshToken = refresh_token;
             state.user = {...action.payload?.userData?.user};
             state.status = action.payload?.status;
             state.error = action.payload.error || "";
 
             state.isRegisterActive = false;
-            localStorage.setItem('accessToken', action.payload.userData?.tokensPair.accessToken || '');
-            localStorage.setItem('refreshToken', action.payload.userData?.tokensPair.refreshToken || '');
+            localStorage.setItem('access', access_token || '');
+            localStorage.setItem('refresh', refresh_token || '');
+
+            const {role, id} = decodeToken(access_token || '') as ITokenData
+            localStorage.setItem('role', role);
+            localStorage.setItem('userId', id);
         });
 
         builder.addCase(userLogin.pending, (state, action) => {
@@ -117,25 +105,38 @@ const authSlice = createSlice({
         });
 
         builder.addCase(userLogin.fulfilled, (state, action) => {
+            console.log(action.payload);
             const access_token = action.payload.userData?.tokensPair.accessToken;
+            const refresh_token = action.payload?.userData?.tokensPair?.refreshToken;
+
             state.accessToken = access_token;
+            state.refreshToken = refresh_token;
             state.refreshToken = action.payload?.userData?.tokensPair.refreshToken;
             state.user = {...action.payload?.userData?.user};
             state.status = action.payload?.status;
 
             state.isLoginActive = false;
-            localStorage.setItem('accessToken', action.payload.userData?.tokensPair.accessToken || '');
-            localStorage.setItem('refreshToken', action.payload.userData?.tokensPair.refreshToken || '');
+            localStorage.setItem('access', access_token || '');
+            localStorage.setItem('refresh', refresh_token || '');
 
-            const {role, id} = decodeToken(access_token) as string | any
+            const {role, id} = decodeToken(access_token || '') as ITokenData
             localStorage.setItem('role', role);
             localStorage.setItem('userId', id);
         });
+
+        builder.addCase(userLogout.fulfilled, (state, action) => {
+            state.accessToken = undefined;
+            state.refreshToken = undefined;
+            state.user = {};
+            state.status = undefined;
+
+            state.isLoginActive = false;
+            state.isRegisterActive = false;
+            localStorage.clear();
+        })
 
     }
 })
 const authReducer = authSlice.reducer;
 export default authReducer;
-export const {
-    setToken, setUsers, setModalActive, setLoginActive, setRegisterActive
-} = authSlice.actions
+export const { setModalActive, setLoginActive, setRegisterActive } = authSlice.actions

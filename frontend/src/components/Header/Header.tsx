@@ -12,12 +12,12 @@ const Header: FC = () => {
             dispatch(getLocality())
         }
         , [refresh])
-    const {isLog} = useAppSelector(state => state.authReducer)
+    // const {isLog} = useAppSelector(state => state.authReducer)
     const dispatch = useAppDispatch()
     const logout: any = async () => {
         dispatch(await logoutUser())
     }
-    console.log({a:1}==={a:1})
+
     return (
         <div>
 

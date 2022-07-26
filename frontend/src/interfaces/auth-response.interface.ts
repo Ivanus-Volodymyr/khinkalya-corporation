@@ -3,7 +3,7 @@ import { ITokensPair } from './tokens.interface';
 
 export interface IAuthResponseApi {
     user: IUser,
-    tokensPair: ITokensPair,
+    tokenPair: ITokensPair,
 }
 
 export interface IAuthResponse {

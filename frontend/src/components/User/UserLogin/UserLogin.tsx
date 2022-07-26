@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 import {IUser} from "../../../interfaces";
 import {useAppDispatch} from "../../../hooks/redux";
-import {setLoginActive, userLogin} from "../../../store";
+import {setLoginActive, setRegisterActive, userLogin} from "../../../store";
 import "./UserLogin.css";
 
 const UserLogin: FC = () => {
@@ -52,7 +52,7 @@ const UserLogin: FC = () => {
                     {/*</Link>*/}
                     <a><h4>Забули пароль?</h4></a>
 
-                    <button>
+                    <button  onClick={() => {dispatch(setRegisterActive())}}>
                         Зареєструватись
                     </button>
                 </div>

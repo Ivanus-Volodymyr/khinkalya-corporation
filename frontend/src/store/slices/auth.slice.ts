@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IAuthResponse, ILogoutRequest, ITokenData, IUser} from "../../interfaces";
 import {authService} from "../../services/auth.service";
 
@@ -23,6 +23,7 @@ const initialState:IInitialState = {
     isLoginActive: false,
     isRegisterActive: false,
 }
+
 export const userRegistration = createAsyncThunk<IAuthResponse, IUser>(
     'auth/registration',
     async (user) => {
@@ -43,7 +44,6 @@ export const userLogin = createAsyncThunk<IAuthResponse, Partial<IUser>>(
     async (user: Partial<IUser>) => {
         try{
             const {data, status} =  await authService.login(user);
-            console.log(data);
             return { userData: data, status: status, error: undefined };
         } catch (error) {
             return { userData: undefined, status: 401, error: `${error}` };
@@ -81,9 +81,9 @@ const authSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(userRegistration.fulfilled, (state, action) => {
-            const access_token = action.payload.userData?.tokensPair.accessToken;
-            const refresh_token = action.payload?.userData?.tokensPair?.refreshToken;
+        builder.addCase(userRegistration.fulfilled, (state, action: PayloadAction<IAuthResponse>) => {
+            const access_token = action.payload.userData?.tokenPair?.accessToken;
+            const refresh_token = action.payload?.userData?.tokenPair?.refreshToken;
 
             state.accessToken = access_token;
             state.refreshToken = refresh_token;
@@ -95,23 +95,26 @@ const authSlice = createSlice({
             localStorage.setItem('access', access_token || '');
             localStorage.setItem('refresh', refresh_token || '');
 
-            const {role, id} = decodeToken(access_token || '') as ITokenData
-            localStorage.setItem('role', role);
-            localStorage.setItem('userId', id);
+            if (access_token != null) {
+                const {role, id} = decodeToken(access_token) as ITokenData
+                localStorage.setItem('role', role);
+                localStorage.setItem('userId', id);
+            }
+
         });
 
         builder.addCase(userLogin.pending, (state, action) => {
             state.status = 'Loading';
         });
 
-        builder.addCase(userLogin.fulfilled, (state, action) => {
-            console.log(action.payload);
-            const access_token = action.payload.userData?.tokensPair.accessToken;
-            const refresh_token = action.payload?.userData?.tokensPair?.refreshToken;
+        builder.addCase(userLogin.fulfilled, (state, action: PayloadAction<IAuthResponse>) => {
+
+            const access_token = action.payload.userData?.tokenPair?.accessToken;
+            const refresh_token = action.payload?.userData?.tokenPair?.refreshToken;
 
             state.accessToken = access_token;
             state.refreshToken = refresh_token;
-            state.refreshToken = action.payload?.userData?.tokensPair.refreshToken;
+            state.refreshToken = action.payload?.userData?.tokenPair.refreshToken;
             state.user = {...action.payload?.userData?.user};
             state.status = action.payload?.status;
 
@@ -119,9 +122,11 @@ const authSlice = createSlice({
             localStorage.setItem('access', access_token || '');
             localStorage.setItem('refresh', refresh_token || '');
 
-            const {role, id} = decodeToken(access_token || '') as ITokenData
-            localStorage.setItem('role', role);
-            localStorage.setItem('userId', id);
+            if (access_token != null) {
+                const {role, id} = decodeToken(access_token) as ITokenData;
+                localStorage.setItem('role', role);
+                localStorage.setItem('userId', id);
+            }
         });
 
         builder.addCase(userLogout.fulfilled, (state, action) => {
@@ -137,6 +142,7 @@ const authSlice = createSlice({
 
     }
 })
+
 const authReducer = authSlice.reducer;
 export default authReducer;
 export const { setModalActive, setLoginActive, setRegisterActive } = authSlice.actions

@@ -15,7 +15,7 @@ export const getLocality = createAsyncThunk(
     async (_, {dispatch, getState}) => {
         try {
             const state = getState() as { adminReducer: { locality: ILocality[] } };
-            if (state.adminReducer.locality.length == 0) {
+            if (state.adminReducer.locality.length === 0) {
                 await adminService.getLocality().then(value => dispatch(setLocalityData(value.data)))
             }
             if (state.adminReducer.locality.length > 0) {

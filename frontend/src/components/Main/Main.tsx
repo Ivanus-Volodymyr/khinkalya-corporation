@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import Cart from "../Cart/Cart";
-import BarChart from "../BarChart/BarChart";
+import React from 'react';
+
+import {Cart} from "../Cart/Cart";
+import {BarChart} from "../BarChart/BarChart";
 
 const Main = () => {
 
@@ -12,4 +13,4 @@ const Main = () => {
     );
 };
 
-export default Main;
+export {Main};

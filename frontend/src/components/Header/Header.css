@@ -17,3 +17,13 @@ a{
     text-decoration: none;
     color: #333;
 }
+
+.header_menu > div > button {
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    border:0;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    padding:  5px 10px;
+}

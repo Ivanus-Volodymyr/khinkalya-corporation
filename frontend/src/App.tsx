@@ -1,15 +1,8 @@
 import React from 'react';
 import './App.css';
-import UserRegistration from "./components/User/UserRegistration/UserRegistration";
 import {Route, Routes} from "react-router-dom";
-import UserLogin from "./components/User/UserLogin/UserLogin";
-import Layout from "./components/Layout/Layout";
-import AddDish from "./components/AddDish/AddDish";
-import Users from "./components/Users/Users";
-import Main from "./components/Main/Main";
-import DishView from "./components/ViewDishes/DishView";
-import Admin from "./components/Admin/Admin";
-import Cart from "./components/Cart/Cart";
+
+import {Admin, AddDish,  DishView, Layout, Main, UserLogin, UserRegistration, Users, Cart } from "./components";
 
 function App() {
 

@@ -1,10 +1,10 @@
 import React, {FC, useEffect} from 'react';
+import {Link} from "react-router-dom";
+
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {getLocality, getUserById} from "../../store";
-import {Link} from "react-router-dom";
-import AddLocality from "../AddLocality/AddLocality";
-import AddRestaurant from "../AddRestautant/AddRestaurant";
-
+import {AddLocality} from "../AddLocality/AddLocality";
+import {AddRestaurant} from "../AddRestautant/AddRestaurant";
 
 const Admin: FC = () => {
     const {user} = useAppSelector(state => state.userReducer);
@@ -46,4 +46,4 @@ const Admin: FC = () => {
     );
 };
 
-export default Admin;
+export {Admin};

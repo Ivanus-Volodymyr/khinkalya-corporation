@@ -1,10 +1,11 @@
 import React, {FC} from 'react';
 import {useForm} from "react-hook-form";
-import {IUser} from "../../../interfaces";
-import {useAppDispatch, useAppSelector} from "../../../hooks/redux";
-import {loginUser} from "../../../store";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
+import {IUser} from "../../../interfaces";
+import {useAppDispatch} from "../../../hooks/redux";
+import {setLoginActive, setRegisterActive, userLogin} from "../../../store";
+import "./UserLogin.css";
 
 const UserLogin: FC = () => {
     let navigate = useNavigate()
@@ -20,33 +21,44 @@ const UserLogin: FC = () => {
         console.log(role)
 
     }
-    const {isLog,status} = useAppSelector(state => state.authReducer)
+    // const {isLog,status} = useAppSelector(state => state.authReducer)
 
-    const {register, handleSubmit, reset} = useForm()
-    const submit: any = async (data: Partial<IUser>) => {
-        await dispatch(loginUser(data))
+    const {register, handleSubmit, reset} = useForm<Partial<IUser>>()
+    const onSubmitForm = async (data: Partial<IUser>) => {
+        dispatch(setLoginActive());
+        await dispatch(userLogin(data));
+
         await checkRole()
+        reset();
     }
 
     return (
         <div>
-            <form onSubmit={handleSubmit(submit)}>
-                <div>
-                    <div><input type="text" placeholder={'email'}{...register('email')}/></div>
-                    <div><input type="text" placeholder={'password'}{...register('password')}/></div>
+            <form onSubmit={handleSubmit(onSubmitForm)} className="logIn-form">
+                <div className={'logIn-content'}>
+                    <label>Email</label>
+                    <input type="text"{...register('email')}/>
                 </div>
-                <div>
-                    <button> Login</button>
+
+                <div className={'logIn-content'}>
+                    <label>Password</label>
+                    <input type="text" {...register('password')}/>
                 </div>
-                <a href="#"><h4>Forgot Password?</h4></a>
-                <Link to={'/auth/registration'}>
-                    <button>
-                        Registration new account
+
+                <div className="btn-container">
+                    <button>Увійти</button>
+                    {/*<Link to={'/auth/google'}>*/}
+                    {/*    <GoogleAuth/>*/}
+                    {/*</Link>*/}
+                    <a><h4>Забули пароль?</h4></a>
+
+                    <button  onClick={() => {dispatch(setRegisterActive())}}>
+                        Зареєструватись
                     </button>
-                </Link>
+                </div>
             </form>
         </div>
     );
 };
 
-export default UserLogin;
+export {UserLogin};

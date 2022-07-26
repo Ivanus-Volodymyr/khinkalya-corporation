@@ -42,6 +42,7 @@ model Order {
   userId       Int
   restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
   restaurantId Int?
+  quantity     Int?
   dish         Int[]
   createdAt    DateTime    @default(now())
   totalPrice   Int
@@ -97,7 +98,7 @@ model TokenPair {
   authorId     Int?   @unique
 }
 
-// prisma format  // check
+// npx prisma format  // check
 // npx prisma generate // синхронізація схеми з базою
 // npx prisma migrate dev --name change_post_table --create-only  // add new column to db
 // npx prisma migrate dev --name init

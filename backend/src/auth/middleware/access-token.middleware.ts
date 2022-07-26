@@ -12,8 +12,15 @@ export class AccessTokenMiddleware implements NestMiddleware {
   constructor(private tokenService: TokenService) {}
   async use(req: Request, res: Response, next: NextFunction) {
     try {
+      console.log(req.headers.authorization);
+      console.log(typeof undefined);
+      if (!req.headers.authorization) {
+        next(new UnauthorizedException(HttpStatus.UNAUTHORIZED, "hello"));
+      }
       const bearer = req.headers.authorization.split(" ")[0];
       const access_token = req.headers.authorization.split(" ")[1];
+
+      console.log(bearer, access_token);
       if (!bearer || !access_token) {
         next(
           new UnauthorizedException(HttpStatus.UNAUTHORIZED, "UNAUTHORIZED")

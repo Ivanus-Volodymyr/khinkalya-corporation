@@ -1,15 +1,12 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
+
 import {IDish} from "../../interfaces";
-import {useForm} from "react-hook-form";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {useAppDispatch} from "../../hooks/redux";
 import {createOrder} from "../../store/slices/order.slice";
 
 const Dishes: FC<{ results: IDish }> = ({results}) => {
-    const {orders} = useAppSelector(state => state.orderReducer);
+    // const {orders} = useAppSelector(state => state.orderReducer);
     const dispatch = useAppDispatch();
-    // const submit: any = () => {
-    //     dispatch(createOrder(results))
-    // }
 
     return (
         <div>
@@ -25,4 +22,4 @@ const Dishes: FC<{ results: IDish }> = ({results}) => {
     );
 };
 
-export default Dishes;
+export { Dishes};

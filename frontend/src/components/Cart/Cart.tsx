@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {IDish} from "../../interfaces";
-import Dishes from "../Dishes/Dishes";
+
 import {useAppDispatch} from "../../hooks/redux";
 import {saveOrderInDb} from "../../store/slices/order.slice";
-import {useNavigate} from "react-router-dom";
 
 const Cart = () => {
     const dispatch = useAppDispatch()
@@ -49,4 +48,4 @@ const Cart = () => {
     );
 };
 
-export default Cart;
+export {Cart};

@@ -1,9 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useForm} from "react-hook-form";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 
-import AddLocality from "../AddLocality/AddLocality";
-import AddRestaurant from "../AddRestautant/AddRestaurant";
+
 import {addDish, getLocality, getRestaurant} from "../../store";
 import {IDish} from "../../interfaces";
 import './AddDish.css'
@@ -75,4 +74,4 @@ const AddDish: FC = () => {
     );
 };
 
-export default AddDish;
+export { AddDish };

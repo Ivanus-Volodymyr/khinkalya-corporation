@@ -1,10 +1,10 @@
 import {axiosService} from "./axios.service";
 import {urls} from "../constants";
-import {IUser} from "../interfaces";
+import {IUser, IAuthResponseApi} from "../interfaces";
 
 export const authService = {
-    registration: (data: IUser) => axiosService.post<any>(urls.registration, data),
-    login: (data: Partial<IUser>) => axiosService.post<any>(urls.login, data),
+    registration: (data: IUser) => axiosService.post<IAuthResponseApi>(urls.registration, data),
+    login: (data: Partial<IUser>) => axiosService.post<IAuthResponseApi>(urls.login, data),
     refresh: (refresh: string) => axiosService.post<any>(urls.refresh, {data: refresh}),
-    logout: () => axiosService.post(urls.logout)
+    logout: (accessToken: string) => axiosService.post(urls.logout, accessToken)
 }

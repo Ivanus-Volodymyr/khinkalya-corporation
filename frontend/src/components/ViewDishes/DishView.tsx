@@ -1,8 +1,8 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {useParams} from "react-router-dom";
-import {getAllDishByLocalityId} from "../../store/slices/dish.slice";
+import {getAllDishByLocalityId} from "../../store";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import Dishes from "../Dishes/Dishes";
+import {Dishes} from "../Dishes/Dishes";
 
 const DishView: FC = () => {
     const {result, status} = useAppSelector(state => state.dishReducer);
@@ -24,4 +24,4 @@ const DishView: FC = () => {
     );
 };
 
-export default DishView;
+export {DishView};

@@ -13,9 +13,7 @@ import { TokenService } from "./auth/token/token.service";
 import { LocalityModule } from "./locality/locality.module";
 import { RestaurantModule } from "./restaurant/restaurant.module";
 import { OrderModule } from "./order/order.module";
-import {AdminMiddleware} from "./auth/middleware/admin_middleware";
-import {UserController} from "./user/user.controller";
-import {AdminController} from "./admin/admin.controller";
+import { AdminMiddleware } from "./auth/middleware/admin_middleware";
 
 @Module({
   imports: [

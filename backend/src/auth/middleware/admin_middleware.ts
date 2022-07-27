@@ -1,4 +1,9 @@
-import { Injectable, NestMiddleware } from "@nestjs/common";
+import {
+  HttpStatus,
+  Injectable,
+  NestMiddleware,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
 
 import { TokenService } from "../token/token.service";
@@ -8,7 +13,6 @@ export class AdminMiddleware implements NestMiddleware {
   constructor(private tokenService: TokenService) {}
   async use(req: Request, res: Response, next: NextFunction) {
     try {
-      const bearer = req.headers.authorization.split(" ")[0];
       const access_token = req.headers.authorization.split(" ")[1];
 
       const tokenPayload = await this.tokenService.verifyToken(
@@ -16,7 +20,25 @@ export class AdminMiddleware implements NestMiddleware {
         "Access"
       );
 
-      console.log(bearer, tokenPayload);
+      if (!tokenPayload) {
+        next(
+          new UnauthorizedException(
+            HttpStatus.FORBIDDEN,
+            "invalid token from access"
+          )
+        );
+      }
+      const { role } = tokenPayload;
+
+      if (role !== "admin") {
+        next(
+          new UnauthorizedException(
+            HttpStatus.FORBIDDEN,
+            "forbidden resource, only for admin"
+          )
+        );
+      }
+      next();
     } catch (e) {
       next(e.message);
     }

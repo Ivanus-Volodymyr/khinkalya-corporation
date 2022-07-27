@@ -1,7 +1,15 @@
-import {Body, Controller, Get, Param, Put, UploadedFile, UseInterceptors} from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Put,
+  UploadedFile,
+  UseInterceptors,
+} from "@nestjs/common";
 import { UserService } from "./user.service";
-import {FileInterceptor} from "@nestjs/platform-express";
-import {User} from "@prisma/client";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { User } from "@prisma/client";
 
 @Controller("user")
 export class UserController {

@@ -13,6 +13,7 @@ import { TokenService } from "./auth/token/token.service";
 import { LocalityModule } from "./locality/locality.module";
 import { RestaurantModule } from "./restaurant/restaurant.module";
 import { OrderModule } from "./order/order.module";
+import { AdminMiddleware } from "./auth/middleware/admin_middleware";
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { OrderModule } from "./order/order.module";
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
-    consumer.apply(AccessTokenMiddleware).forRoutes("user");
+    consumer.apply(AccessTokenMiddleware).forRoutes("users", "admin");
+    consumer.apply(AdminMiddleware).forRoutes("admin");
   }
 }

@@ -38,14 +38,15 @@ model Restaurant {
 
 model Order {
   id           Int         @id @default(autoincrement())
-  user         User        @relation(fields: [userId], references: [id])
-  userId       Int
+  user         User?       @relation(fields: [userId], references: [id])
+  userId       Int?
   restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
   restaurantId Int?
-  quantity     Int?
   dish         Int[]
+  quantity     Int?
   createdAt    DateTime    @default(now())
   totalPrice   Int
+  Dish         Dish[]
 }
 
 model Dish {
@@ -62,6 +63,8 @@ model Dish {
   Restaurant    Restaurant?   @relation(fields: [restaurantId], references: [id])
   restaurantId  Int?
   createdAt     DateTime      @default(now())
+  Order         Order?        @relation(fields: [orderId], references: [id])
+  orderId       Int?
 }
 
 model Locality {

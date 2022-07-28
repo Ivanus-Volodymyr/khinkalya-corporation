@@ -2,9 +2,9 @@ import React, {FC, useEffect} from 'react';
 import {useParams} from "react-router-dom";
 import {getAllDishByLocalityId} from "../../store";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-import {Dishes} from "../Dishes/Dishes";
+import {Dish} from "../Dish/Dish";
 
-const DishView: FC = () => {
+const DishList: FC = () => {
     const {result, status} = useAppSelector(state => state.dishReducer);
     const {id} = useParams();
     const dispatch = useAppDispatch();
@@ -13,15 +13,15 @@ const DishView: FC = () => {
         if (id) {
             dispatch(getAllDishByLocalityId(id))
         }
-    }, [id])
-    console.log(status);
+    }, [id,dispatch])
+
     return (
         <div style={{display: 'flex'}}>
             {status === 'Loading' && <h1>Loading...</h1>}
             {result && status === 'fulfilled' &&
-                result.map(results => <Dishes key={results.id} results={results}/>)}
+                result.map(results => <Dish key={results.id} results={results}/>)}
         </div>
     );
 };
 
-export {DishView};
+export {DishList};

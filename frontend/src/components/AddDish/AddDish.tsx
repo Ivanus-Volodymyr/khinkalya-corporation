@@ -6,6 +6,8 @@ import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {addDish, getLocality, getRestaurant} from "../../store";
 import {IDish} from "../../interfaces";
 import './AddDish.css'
+import {AddLocality} from "../AddLocality/AddLocality";
+import {AddRestaurant} from "../AddRestautant/AddRestaurant";
 
 const AddDish: FC = () => {
 
@@ -30,13 +32,11 @@ const AddDish: FC = () => {
         await dispatch(addDish(formData))
     }
 
-
-
-
-
     return (
 
         <div>
+            <AddRestaurant/>
+            <AddLocality/>
             Добавити Страву
             <form onSubmit={handleSubmit(submit)}>
                 <div>

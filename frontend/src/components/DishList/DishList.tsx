@@ -13,7 +13,7 @@ const DishList: FC = () => {
         if (id) {
             dispatch(getAllDishByLocalityId(id))
         }
-    }, [id])
+    }, [id,dispatch])
 
     return (
         <div style={{display: 'flex'}}>

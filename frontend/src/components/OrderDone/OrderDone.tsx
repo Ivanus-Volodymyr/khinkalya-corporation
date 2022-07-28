@@ -8,11 +8,11 @@ const OrderDone = () => {
     const {orderFromDb} = useAppSelector(state => state.orderReducer);
     const {dish} = useAppSelector(state => state.dishReducer);
     const dispatch = useAppDispatch();
-    let [total, setTotal] = useState(0);
+    let [total] = useState(0);
     useEffect(() => {
         dispatch(getAllOrders())
         dispatch(getAllDish())
-    }, [])
+    }, [dispatch])
 
     let arrayOrder: { productId: number; quantity: number; }[] = []
     let count = {} as any
@@ -46,7 +46,6 @@ const OrderDone = () => {
                         const product = PRODUCTS_MAP[value.productId];
                         const price = product?.price || 0;
                         const number = value.quantity * price;
-                        total += number;
                         return (
                             <div key={value.productId}>
                                 <div>{product?.name}</div>

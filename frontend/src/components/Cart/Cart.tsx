@@ -1,16 +1,18 @@
-import React from 'react';
+import React  from 'react';
 
-import {useAppDispatch} from "../../hooks/redux";
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {dec, inc, removeItem, saveOrderInDb} from "../../store/slices/order.slice";
 import {IOrder} from "../../interfaces/order.interface";
 import {useNavigate} from "react-router-dom";
 import {Button, ButtonGroup} from "@mui/material";
 
 const Cart = () => {
+    const {orders} = useAppSelector(state => state.orderReducer);
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
     let totalPrice: number = 0
     const userId = localStorage.getItem('userId');
+
     const item = localStorage.getItem('order');
     let dishFromCart = JSON.parse(item as string) as IOrder[];
     const submit = async () => {
@@ -21,7 +23,6 @@ const Cart = () => {
         }))
         navigate('/cart/orderDone')
     }
-
 
     let arrDishId: IOrder[] = []
     if (dishFromCart) {
@@ -54,6 +55,6 @@ const Cart = () => {
 
         </div>
     );
-};
+}
 
 export {Cart};

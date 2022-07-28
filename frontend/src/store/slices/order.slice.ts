@@ -1,10 +1,13 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {orderService} from "../../services/order.service";
-import {IDish} from "../../interfaces";
+import {IOrder} from "../../interfaces/order.interface";
+import {IOrderFromDbInterface} from "../../interfaces/orderFromDb.interface";
 
 
 const initialState = {
-    orders: [] as IDish[]
+    orders: [] as IOrder[],
+    orderFromDb: {} as IOrderFromDbInterface,
+    order: {} as IOrder
 }
 
 export const getAllOrders = createAsyncThunk(
@@ -24,17 +27,31 @@ export const saveOrderInDb = createAsyncThunk(
     async (data: any, {dispatch, rejectWithValue}) => {
         try {
             const axiosResponse = await orderService.saveOrders(data);
-            console.log(axiosResponse)
+            if (axiosResponse) {
+                dispatch(clearState(axiosResponse))
+            }
         } catch (e) {
             rejectWithValue(e)
         }
     }
 )
 
+export const incOrder = createAsyncThunk(
+    'order/create',
+    async (data: IOrder, {dispatch, rejectWithValue}) => {
+        try {
+            data.quantity++
+            dispatch(setOrder(data))
+        } catch (e) {
+            rejectWithValue(e)
+        }
+    }
+);
+
 
 export const createOrder = createAsyncThunk(
     'order/create',
-    async (data: any, {dispatch, rejectWithValue}) => {
+    async (data: IOrder, {dispatch, rejectWithValue}) => {
         try {
             dispatch(setOrder(data))
         } catch (e) {
@@ -47,19 +64,74 @@ const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
-        setOrder: (state, action) => {
-            state.orders.push(action.payload)
-            localStorage.setItem('order', JSON.stringify(state.orders))
-            if (state.orders.length === 0) {
-                const saveOrder = localStorage.getItem('order');
-                state.orders = JSON.parse(saveOrder as string)
+        clearState: (state, action) => {
+            localStorage.removeItem('order')
+            state.orders.length = 0
+        },
+        setOrder: (state, action: PayloadAction<IOrder>) => {
+            const item = localStorage.getItem('order');
+            if (item) {
+                state.orders = JSON.parse(item as string)
             }
+            let find = state.orders.find(value => value.dish.id === action.payload.dish.id);
+            if (find) {
+                state.orders = state.orders.map(value => value.dish.id === find?.dish.id ? {
+                    ...find,
+                    quantity: find.quantity + action.payload.quantity
+                } : value)
+                localStorage.setItem('order', JSON.stringify(state.orders))
+            }
+            if (!find) {
+                state.orders.push(action.payload);
+                localStorage.setItem('order', JSON.stringify(state.orders))
+            }
+        },
+        inc: (state, action) => {
+            console.log(action.payload)
+            const item = localStorage.getItem('order');
 
+            const dishFromCart = JSON.parse(item as string) as IOrder[]
+            console.log(dishFromCart)
+            let iOrder = dishFromCart.find(value => value.dish.id === action.payload.dish.id);
+            if (iOrder) {
+                state.orders = dishFromCart.map(value => value.dish.id === iOrder?.dish.id ? {
+                            ...iOrder,
+                            quantity: iOrder.quantity + 1
+                        }
+                        : value
+                );
+                localStorage.setItem('order', JSON.stringify(state.orders))
+            }
+        },
+        dec: (state, action) => {
+            console.log(action.payload)
+            const item = localStorage.getItem('order');
+
+            const dishFromCart = JSON.parse(item as string) as IOrder[]
+            console.log(dishFromCart)
+            let iOrder = dishFromCart.find(value => value.dish.id === action.payload.dish.id);
+            if (iOrder) {
+                state.orders = dishFromCart.map(value => value.dish.id === iOrder?.dish.id ? {
+                            ...iOrder,
+                            quantity: iOrder.quantity - 1
+                        }
+                        : value
+                );
+                if (iOrder.quantity <= 1) {
+                    state.orders = state.orders.filter(value => value.dish.id !== iOrder?.dish.id)
+                    localStorage.setItem('order', JSON.stringify(state.orders))
+                }
+                localStorage.setItem('order', JSON.stringify(state.orders))
+            }
+        },
+        removeItem:(state, action)=>{
+            state.orders = state.orders.filter(value => value.dish.id !== action.payload.dish.id)
+            localStorage.setItem('order', JSON.stringify(state.orders))
         }
     },
     extraReducers: builder => {
-        builder.addCase(getAllOrders.fulfilled, (state, action) => {
-            state.orders = action.payload
+        builder.addCase(getAllOrders.fulfilled, (state, action: any) => {
+            state.orderFromDb = action.payload.slice(-1)[0] as IOrderFromDbInterface
         })
     }
 });
@@ -69,4 +141,6 @@ export default orderReducer;
 
 export const {
     setOrder,
+    clearState, inc, dec,removeItem
+
 } = orderSlice.actions;

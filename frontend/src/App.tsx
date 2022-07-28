@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
 
-import {Admin, AddDish,  DishView, Layout, Main, UserLogin, UserRegistration, Users, Cart } from "./components";
+import {Admin, AddDish,  DishList, Layout, Main, UserLogin, UserRegistration, Users, Cart } from "./components";
+import OrderDone from "./components/OrderDone/OrderDone";
 
 function App() {
 
@@ -16,8 +17,9 @@ function App() {
                     <Route path={'/admin/AddDish'} element={<AddDish/>}></Route>
                     <Route path={'/admin'} element={<Admin/>}></Route>
                     <Route path={'/users'} element={<Users/>}></Route>
-                    <Route path={'/dish/:id'} element={<DishView/>}></Route>
+                    <Route path={'/dish/:id'} element={<DishList/>}></Route>
                     <Route path={'/cart'} element={<Cart/>}></Route>
+                    <Route path={'/cart/orderDone'} element={<OrderDone/>}></Route>
                 </Route>
             </Routes>
         </div>

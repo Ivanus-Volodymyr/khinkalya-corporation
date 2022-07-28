@@ -4,8 +4,23 @@ import {IDish} from "../../interfaces";
 
 const initialState = {
     result: [] as IDish[],
-    status: 'Loading'
+    status: 'Loading',
+    dish: [] as IDish[],
 }
+
+
+export const getAllDish = createAsyncThunk(
+    'dish/all',
+    async (_, {dispatch, getState}) => {
+        try {
+            const {data} = await dishService.getDish();
+            return data
+        } catch (e) {
+            console.log(e);
+        }
+
+    });
+
 
 export const getAllDishByLocalityId = createAsyncThunk(
     'auth/user',
@@ -23,9 +38,9 @@ const dishSlice = createSlice({
     name: 'dish',
     initialState,
     reducers: {
-        setFirstDish: (state, action: PayloadAction<IDish[]>) => {
-            state.result = action.payload;
-        },
+        // setFirstDish: (state, action: PayloadAction<IDish[]>) => {
+        //     state.result = action.payload;
+        // },
     },
     extraReducers: (builder) => {
         builder.addCase(getAllDishByLocalityId.pending, (state, action) => {
@@ -37,10 +52,18 @@ const dishSlice = createSlice({
                 state.result = action.payload;
             }
         });
+        // builder.addCase(getAllDish.pending, (state, action) => {
+        //
+        // });
+        builder.addCase(getAllDish.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.dish = action.payload;
+            }
+        });
     }
 })
 const dishReducer = dishSlice.reducer;
 export default dishReducer;
 export const {
-    setFirstDish
+
 } = dishSlice.actions

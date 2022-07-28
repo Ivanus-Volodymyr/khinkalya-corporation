@@ -8,7 +8,7 @@ const Main = () => {
     return (
         <div>
             <BarChart  />
-            <Cart/>
+            {/*<Cart/>*/}
         </div>
     );
 };

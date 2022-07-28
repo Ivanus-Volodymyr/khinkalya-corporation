@@ -47,7 +47,6 @@ const OrderDone = () => {
                         const price = product?.price || 0;
                         const number = value.quantity * price;
                         total += number;
-                        let totalPrice = +value.quantity * price
                         return (
                             <div key={value.productId}>
                                 <div>{product?.name}</div>

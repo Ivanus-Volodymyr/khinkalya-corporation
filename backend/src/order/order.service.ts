@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../core/prisma.service";
-import { Dish, Order } from "@prisma/client";
+import { Order } from "@prisma/client";
 import { DishService } from "../dish/dish.service";
+import { CreateOrderDto } from "./dro/create-order.dto";
 
 @Injectable()
 export class OrderService {
@@ -14,8 +15,8 @@ export class OrderService {
     return this.prismaService.order.findMany();
   }
 
-  async createOrder(data: any): Promise<Order> {
-    const arrDishId = [] as Dish[];
+  async createOrder(data: CreateOrderDto): Promise<Order> {
+    const arrDishId = [];
     for (const datum of data.dish) {
       for (let i = 0; i < datum.quantity; i++) {
         arrDishId.push(datum.dish.id);

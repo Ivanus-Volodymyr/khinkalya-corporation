@@ -1,13 +1,12 @@
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {orderService} from "../../services/order.service";
 import {IOrder} from "../../interfaces/order.interface";
-import {IOrderFromDbInterface} from "../../interfaces/orderFromDb.interface";
+import {IOrderFromDbInterface, ISaveOrder} from "../../interfaces/orderFromDb.interface";
 
 
 const initialState = {
     orders: [] as IOrder[],
     orderFromDb: {} as IOrderFromDbInterface,
-    order: {} as IOrder
 }
 
 export const getAllOrders = createAsyncThunk(
@@ -15,7 +14,7 @@ export const getAllOrders = createAsyncThunk(
     async (_, {rejectWithValue}) => {
         try {
             const {data} = await orderService.getAllOrders();
-            return data
+            return data as IOrderFromDbInterface[]
         } catch (e) {
             rejectWithValue(e);
         }
@@ -24,11 +23,11 @@ export const getAllOrders = createAsyncThunk(
 
 export const saveOrderInDb = createAsyncThunk(
     'order/save',
-    async (data: any, {dispatch, rejectWithValue}) => {
+    async (data: ISaveOrder, {dispatch, rejectWithValue}) => {
         try {
             const axiosResponse = await orderService.saveOrders(data);
             if (axiosResponse) {
-                dispatch(clearState(axiosResponse))
+                dispatch(clearState())
             }
         } catch (e) {
             rejectWithValue(e)
@@ -64,7 +63,7 @@ const orderSlice = createSlice({
     name: 'order',
     initialState,
     reducers: {
-        clearState: (state, action) => {
+        clearState: state => {
             localStorage.removeItem('order')
             state.orders.length = 0
         },
@@ -86,7 +85,7 @@ const orderSlice = createSlice({
                 localStorage.setItem('order', JSON.stringify(state.orders))
             }
         },
-        inc: (state, action) => {
+        inc: (state, action: PayloadAction<IOrder>) => {
             console.log(action.payload)
             const item = localStorage.getItem('order');
 
@@ -103,7 +102,7 @@ const orderSlice = createSlice({
                 localStorage.setItem('order', JSON.stringify(state.orders))
             }
         },
-        dec: (state, action) => {
+        dec: (state, action: PayloadAction<IOrder>) => {
             console.log(action.payload)
             const item = localStorage.getItem('order');
 
@@ -124,14 +123,15 @@ const orderSlice = createSlice({
                 localStorage.setItem('order', JSON.stringify(state.orders))
             }
         },
-        removeItem:(state, action)=>{
+        removeItem: (state, action: PayloadAction<IOrder>) => {
             state.orders = state.orders.filter(value => value.dish.id !== action.payload.dish.id)
             localStorage.setItem('order', JSON.stringify(state.orders))
         }
     },
     extraReducers: builder => {
-        builder.addCase(getAllOrders.fulfilled, (state, action: any) => {
-            state.orderFromDb = action.payload.slice(-1)[0] as IOrderFromDbInterface
+        builder.addCase(getAllOrders.fulfilled, (state, action: PayloadAction<IOrderFromDbInterface[] | undefined>) => {
+            if (action.payload)
+                state.orderFromDb = action.payload.slice(-1)[0] as IOrderFromDbInterface
         })
     }
 });
@@ -141,6 +141,6 @@ export default orderReducer;
 
 export const {
     setOrder,
-    clearState, inc, dec,removeItem
+    clearState, inc, dec, removeItem
 
 } = orderSlice.actions;

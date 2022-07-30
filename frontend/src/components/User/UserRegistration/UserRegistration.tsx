@@ -44,8 +44,6 @@ const UserRegistration: FC = () => {
         <div className="btn-container">
           <button>Зареєструватись</button>
         </div>
-        Зареєструватись через?
-        <UserGoogleLogin/>
       </form>
     </div>
   );

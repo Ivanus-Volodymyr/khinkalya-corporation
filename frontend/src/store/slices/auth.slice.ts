@@ -71,12 +71,12 @@ export const userLogout = createAsyncThunk<void, ILogoutRequest>(
 export const userGoogleLogin = createAsyncThunk<
   ITokensPair | undefined,
   GoogleSignupRequest
->('auth/google/registration', async (response) => {
-  if ('credential' in response) {
+>('auth/google/login', async (response) => {
+  if ('clientId' in response) {
     try {
-      const token = response.token || '';
+      const apiToken = response.token || '';
 
-      const { data } = await authService.googleLogin(token);
+      const { data } = await authService.googleLogin(apiToken);
       return data;
     } catch (e) {
       return undefined;
@@ -141,7 +141,6 @@ const authSlice = createSlice({
 
         state.accessToken = access_token;
         state.refreshToken = refresh_token;
-        state.refreshToken = action.payload?.userData?.tokenPair.refreshToken;
         state.user = { ...action.payload?.userData?.user };
         state.status = action.payload?.status;
 
@@ -175,8 +174,8 @@ const authSlice = createSlice({
       state.accessToken = access_token;
       state.refreshToken = refresh_token;
 
-      localStorage.setItem('accessToken', access_token || '');
-      localStorage.setItem('refreshToken', refresh_token || '');
+      localStorage.setItem('access', access_token || '');
+      localStorage.setItem('refresh', refresh_token || '');
 
       if (access_token != null) {
         const { role, id } = decodeToken(access_token) as ITokenData;

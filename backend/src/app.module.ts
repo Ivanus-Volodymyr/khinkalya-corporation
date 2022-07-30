@@ -13,6 +13,7 @@ import { TokenService } from "./auth/token/token.service";
 import { LocalityModule } from "./locality/locality.module";
 import { RestaurantModule } from "./restaurant/restaurant.module";
 import { OrderModule } from "./order/order.module";
+import { GoogleModule } from "./google/google.module";
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { OrderModule } from "./order/order.module";
     LocalityModule,
     RestaurantModule,
     OrderModule,
+    GoogleModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, TokenService, JwtService],

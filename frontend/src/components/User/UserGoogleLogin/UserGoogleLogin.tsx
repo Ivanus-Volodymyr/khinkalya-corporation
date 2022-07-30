@@ -13,6 +13,7 @@ const UserGoogleLogin: FC = () => {
 
   const onSuccess = async (response: CredentialResponse) => {
     try {
+      console.log(response, response.credential)
       const tokens = await dispatch(
         userGoogleLogin({
           token: response.credential || '',

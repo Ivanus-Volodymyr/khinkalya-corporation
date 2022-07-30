@@ -1,51 +1,60 @@
-import React from 'react';
-import { IDish } from '../../interfaces';
+import React  from 'react';
 
-import { useAppDispatch } from '../../hooks/redux';
-import { saveOrderInDb } from '../../store/slices/order.slice';
+import {useAppDispatch, useAppSelector} from "../../hooks/redux";
+import {dec, inc, removeItem, saveOrderInDb} from "../../store/slices/order.slice";
+import {IOrder} from "../../interfaces/order.interface";
+import {useNavigate} from "react-router-dom";
+import {Button, ButtonGroup} from "@mui/material";
 
 const Cart = () => {
-  const dispatch = useAppDispatch();
-  let totalPrice = 0;
-  const userId = localStorage.getItem('userId');
-  const item = localStorage.getItem('order');
-  const dishFromCart = JSON.parse(item as string) as IDish[];
-  console.log(dishFromCart);
+    const {orders} = useAppSelector(state => state.orderReducer);
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate();
+    let totalPrice = 0
+    const userId = localStorage.getItem('userId');
 
-  // dishFromCart.map(value => value.price)
-  const arrDishId: number[] = [];
+    const item = localStorage.getItem('order');
+    const dishFromCart = JSON.parse(item as string) as IOrder[];
+    const submit = async () => {
+        await dispatch(saveOrderInDb({
+            userId: Number(userId),
+            totalPrice: Number(totalPrice),
+            dish: arrDishId,
+        }))
+        navigate('/cart/orderDone')
+    }
 
-  for (const iDish of dishFromCart) {
-    totalPrice += iDish.price;
-    arrDishId.push(iDish.id);
-  }
+    const arrDishId: IOrder[] = []
+    if (dishFromCart) {
+        for (const iDish of dishFromCart) {
+            totalPrice += iDish.dish.price * iDish.quantity
+            arrDishId.push(iDish)
+        }
+    } else {
+        return (
+            <h1>Полистай щось замов</h1>
+        )
+    }
+    return (
+        <div>
+            {dishFromCart.map((value, index) => <div key={index}>
+                <h4>{value.dish.name}</h4>
+                <span>{value.dish.price}</span>* <span>{value.quantity}</span>
+                <ButtonGroup variant="outlined" aria-label="outlined button group">
+                    <Button onClick={() => dispatch(inc(value))}>+</Button>
+                    <Button onClick={()=>dispatch(dec(value))}>-</Button>
+                    <Button onClick={()=>dispatch(removeItem(value))}>x</Button>
+                    sum: <span>{value.dish.price * value.quantity}</span>
+                </ButtonGroup>
 
-  console.log(totalPrice);
+            </div>)}
 
-  function submit() {
-    dispatch(
-      saveOrderInDb({
-        userId: Number(userId),
-        totalPrice: Number(totalPrice),
-        dish: arrDishId,
-      }),
-    );
-    localStorage.clear();
-  }
+            <h4>Сума замовлення-{totalPrice}</h4>
 
-  return (
-    <div>
-      {dishFromCart.map((value, index) => (
-        <div key={index}>
-          <h4>{value.name}</h4>
-          <p>{value.price}</p>
+            <button onClick={() => submit()}>Оформи Замовлення</button>
+
         </div>
-      ))}
-      <h4>Сума замовлення-{totalPrice}</h4>
-
-      <button onClick={() => submit()}>Оформи Замовлення</button>
-    </div>
-  );
-};
+    );
+}
 
 export { Cart };

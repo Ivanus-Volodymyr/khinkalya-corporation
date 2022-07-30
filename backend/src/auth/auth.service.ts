@@ -9,7 +9,6 @@ import { UserService } from "../user/user.service";
 import * as bcrypt from "bcrypt";
 import { TokenService } from "./token/token.service";
 import { LoginUserDto } from "./dto/login-user.dto";
-import { User } from "@prisma/client";
 
 @Injectable()
 export class AuthService {

@@ -11,8 +11,7 @@ const UserRegistration: FC = () => {
   const dispatch = useAppDispatch();
 
   const onSubmitForm = async (data: IUser) => {
-    const res = await dispatch(userRegistration(data));
-    console.log(res);
+    await dispatch(userRegistration(data));
   };
   return (
     <div>

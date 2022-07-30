@@ -1,6 +1,7 @@
 import { axiosService } from './axios.service';
 import { urls } from '../constants';
 import { IUser, IAuthResponseApi, ITokensPair } from '../interfaces';
+import { AxiosResponse } from "axios";
 
 export const authService = {
   registration: (data: IUser) =>
@@ -11,5 +12,5 @@ export const authService = {
     axiosService.post<ITokensPair>(urls.refresh, { data: refresh }),
   logout: (accessToken: string) => axiosService.post(urls.logout, accessToken),
   googleLogin: (data: string) =>
-    axiosService.post<ITokensPair>(urls.googleLogin, { token: data }),
+    axiosService.post<IAuthResponseApi>(urls.googleLogin, { token: data }),
 };

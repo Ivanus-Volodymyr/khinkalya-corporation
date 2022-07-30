@@ -32,6 +32,17 @@ export const getUserById = createAsyncThunk(
   },
 );
 
+// export const getCurrentUser = createAsyncThunk<IUser | undefined, string>('auth/currentUser',
+//   async (token) => {
+//     try {
+//       const user = await userService.getUserByToken(token);
+//       return user;
+//     } catch (e) {
+//       return undefined;
+//     }
+//   })
+
+
 const userSlice = createSlice({
   name: 'user',
   initialState,

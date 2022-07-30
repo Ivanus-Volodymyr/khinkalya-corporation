@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsString } from "class-validator";
+import { TokenPair, User } from "@prisma/client";
 
 export class LoginGoogleTokenDto {
   @IsString()
@@ -15,4 +16,9 @@ export class GoogleTokenInfo{
   family_name: string;
   @IsString()
   picture: string;
+}
+
+export class GoogleResponse {
+  user: User;
+  tokenPair: TokenPair;
 }

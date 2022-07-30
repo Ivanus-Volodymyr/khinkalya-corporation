@@ -1,15 +1,15 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  IAuthResponse,
+  IAuthResponse, IAuthResponseApi,
   ILogoutRequest,
   ITokenData,
-  ITokensPair,
-  IUser,
-} from '../../interfaces';
+  IUser
+} from "../../interfaces";
 import { authService } from '../../services/auth.service';
 
 import { decodeToken } from 'react-jwt';
 import { GoogleSignupRequest } from '../../interfaces/google-request.interface';
+import { userService } from '../../services/user.service';
 
 interface IInitialState {
   user: Partial<IUser>;
@@ -69,7 +69,7 @@ export const userLogout = createAsyncThunk<void, ILogoutRequest>(
 );
 
 export const userGoogleLogin = createAsyncThunk<
-  ITokensPair | undefined,
+  IAuthResponseApi | undefined,
   GoogleSignupRequest
 >('auth/google/login', async (response) => {
   if ('clientId' in response) {
@@ -77,6 +77,7 @@ export const userGoogleLogin = createAsyncThunk<
       const apiToken = response.token || '';
 
       const { data } = await authService.googleLogin(apiToken);
+
       return data;
     } catch (e) {
       return undefined;
@@ -168,9 +169,10 @@ const authSlice = createSlice({
     });
 
     builder.addCase(userGoogleLogin.fulfilled, (state, action) => {
-      const access_token = action.payload?.accessToken;
-      const refresh_token = action.payload?.refreshToken;
+      const access_token = action.payload?.tokenPair.accessToken;
+      const refresh_token = action.payload?.tokenPair.refreshToken;
 
+      state.user = { ...action.payload?.user};
       state.accessToken = access_token;
       state.refreshToken = refresh_token;
 
@@ -183,6 +185,7 @@ const authSlice = createSlice({
         localStorage.setItem('userId', id);
       }
     });
+
   },
 });
 

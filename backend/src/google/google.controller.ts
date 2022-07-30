@@ -11,9 +11,4 @@ export class GoogleController {
   async userGoogleLogin(@Body() body: LoginGoogleTokenDto) {
     return await this.GoogleService.userGoogleLogin(body.token);
   }
-
-  // @Post("logout")
-  // async userGoogleLogout(@Body() userEmail: string) {
-  //   await this.GoogleService.userGoogleLogout(userEmail);
-  // }
 }

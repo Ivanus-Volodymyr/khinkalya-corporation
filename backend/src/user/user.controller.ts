@@ -1,7 +1,8 @@
-import {Body, Controller, Get, Param, Put, UploadedFile, UseInterceptors} from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { UserService } from "./user.service";
 import {FileInterceptor} from "@nestjs/platform-express";
 import {User} from "@prisma/client";
+import { LoginGoogleTokenDto } from "../google/dto/google.dto";
 
 @Controller("user")
 export class UserController {

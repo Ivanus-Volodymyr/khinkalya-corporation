@@ -1,8 +1,13 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Controller } from "@nestjs/common";
 import { DishService } from "../dish/dish.service";
-import { CreateDishDto } from "../dish/dto/create-dish.dto";
+import { LocalityService } from "../locality/locality.service";
+import { RestaurantService } from "../restaurant/restaurant.service";
 
 @Controller("admin")
 export class AdminController {
-  constructor(private dishService: DishService) {}
+  constructor(
+    private dishService: DishService,
+    private localityService: LocalityService,
+    private restaurantService: RestaurantService
+  ) {}
 }

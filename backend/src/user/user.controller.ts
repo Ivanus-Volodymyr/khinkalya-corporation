@@ -7,10 +7,10 @@ import {
   UploadedFile,
   UseInterceptors,
 } from "@nestjs/common";
-import { UserService } from "./user.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { User } from "@prisma/client";
-import { LoginGoogleTokenDto } from "../google/dto/google.dto";
+
+import { UserService } from "./user.service";
 
 @Controller("user")
 export class UserController {
@@ -24,7 +24,12 @@ export class UserController {
 
   @Get("/:id")
   getUserById(@Param("id") id: string) {
-    return this.userService.getUsersById(id);
+    return this.userService.getUserById(id);
+  }
+
+  @Get("currentUser/:accessToken")
+  getUserByToken(@Param("accessToken") accessToken: string) {
+    return this.userService.getUserByToken(accessToken);
   }
 
   @Put("/:id")

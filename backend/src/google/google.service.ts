@@ -21,7 +21,6 @@ export class GoogleService {
       const tokenInfo = (await this.jwtService.decode(
         token
       )) as GoogleTokenInfo;
-      console.log(tokenInfo);
       const userDB = await this.userService.getUserByEmail(tokenInfo.email);
 
       if (userDB) {
@@ -32,7 +31,7 @@ export class GoogleService {
         const { tokenPair, user } = await this.tokenService.generateToken(
           userDB
         );
-        console.log(tokenPair);
+
         if (!tokenPair)
           return new HttpException("Bad GoogleLogin", HttpStatus.UNAUTHORIZED);
         else return { user, tokenPair };

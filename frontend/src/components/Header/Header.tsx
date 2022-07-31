@@ -64,8 +64,10 @@ const Header: FC = () => {
           </Link>
         </div>
         <div>
-          {user && <div>{user.name}</div>}
-          { currentUser && <div>{currentUser.name}</div> }
+          <div>
+            {user && <div>{user.name}</div>}
+            { currentUser && <div>{currentUser.name}</div> }
+          </div>
           <button
             onClick={() => {
               dispatch(setLoginActive());

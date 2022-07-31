@@ -1,148 +1,195 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IAuthResponse, ILogoutRequest, ITokenData, IUser} from "../../interfaces";
-import {authService} from "../../services/auth.service";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {
+  IAuthResponse, IAuthResponseApi,
+  ILogoutRequest,
+  ITokenData,
+  IUser
+} from "../../interfaces";
+import { authService } from '../../services/auth.service';
 
-import {decodeToken} from "react-jwt";
+import { decodeToken } from 'react-jwt';
+import { GoogleSignupRequest } from '../../interfaces/google-request.interface';
+import { userService } from '../../services/user.service';
 
 interface IInitialState {
-    user: Partial<IUser>;
-    accessToken?: string;
-    refreshToken?: string;
-    status?: number | string;
-    isLoginActive:  boolean,
-    isRegisterActive: boolean,
-    error: string,
+  user: Partial<IUser>;
+  accessToken?: string;
+  refreshToken?: string;
+  status?: number | string;
+  isLoginActive: boolean;
+  isRegisterActive: boolean;
+  error: string;
 }
 
-const initialState:IInitialState = {
-    user: {},
-    accessToken: '',
-    refreshToken: '',
-    error: '',
-    status: 200,
-    isLoginActive: false,
-    isRegisterActive: false,
-}
+const initialState: IInitialState = {
+  user: {},
+  accessToken: '',
+  refreshToken: '',
+  error: '',
+  status: 200,
+  isLoginActive: false,
+  isRegisterActive: false,
+};
 
 export const userRegistration = createAsyncThunk<IAuthResponse, IUser>(
-    'auth/registration',
-    async (user) => {
-        try {
-            const response = await authService.registration(user);
-            const { data, status } = response;
+  'auth/registration',
+  async (user) => {
+    try {
+      const response = await authService.registration(user);
+      const { data, status } = response;
 
-            return { userData: data, status: status, error: undefined };
-
-        } catch (e) {
-            return { userData: undefined, status: 401, error: `${e}` };
-        }
+      return { userData: data, status: status, error: undefined };
+    } catch (e) {
+      return { userData: undefined, status: 401, error: `${e}` };
     }
-)
+  },
+);
 
 export const userLogin = createAsyncThunk<IAuthResponse, Partial<IUser>>(
-    'auth/login',
-    async (user: Partial<IUser>) => {
-        try{
-            const {data, status} =  await authService.login(user);
-            return { userData: data, status: status, error: undefined };
-        } catch (error) {
-            return { userData: undefined, status: 401, error: `${error}` };
-        }
+  'auth/login',
+  async (user: Partial<IUser>) => {
+    try {
+      const { data, status } = await authService.login(user);
+      return { userData: data, status: status, error: undefined };
+    } catch (error) {
+      return { userData: undefined, status: 401, error: `${error}` };
     }
-)
+  },
+);
 
 export const userLogout = createAsyncThunk<void, ILogoutRequest>(
-    'auth/logout',
-    async ({accessToken}) => {
-        try {
-            accessToken &&  await authService.logout(accessToken);
-        } catch (error) {
-            return undefined
-        }
+  'auth/logout',
+  async ({ accessToken }) => {
+    try {
+      accessToken && (await authService.logout(accessToken));
+    } catch (error) {
+      return undefined;
     }
-)
+  },
+);
+
+export const userGoogleLogin = createAsyncThunk<
+  IAuthResponseApi | undefined,
+  GoogleSignupRequest
+>('auth/google/login', async (response) => {
+  if ('clientId' in response) {
+    try {
+      const apiToken = response.token || '';
+
+      const { data } = await authService.googleLogin(apiToken);
+
+      return data;
+    } catch (e) {
+      return undefined;
+    }
+  } else {
+    return undefined;
+  }
+});
 
 const authSlice = createSlice({
-    name: 'auth',
-    initialState,
-    reducers: {
-        setModalActive:(state) => {
-            state.isLoginActive = false;
-            state.isRegisterActive = false;
-        },
-
-        setLoginActive:(state) => {
-            state.isLoginActive= !state.isLoginActive;
-        },
-
-        setRegisterActive:(state) => {
-            state.isRegisterActive= !state.isRegisterActive;
-            state.isLoginActive = false;
-        },
+  name: 'auth',
+  initialState,
+  reducers: {
+    setModalActive: (state) => {
+      state.isLoginActive = false;
+      state.isRegisterActive = false;
     },
-    extraReducers: (builder) => {
-        builder.addCase(userRegistration.fulfilled, (state, action: PayloadAction<IAuthResponse>) => {
-            const access_token = action.payload.userData?.tokenPair?.accessToken;
-            const refresh_token = action.payload?.userData?.tokenPair?.refreshToken;
 
-            state.accessToken = access_token;
-            state.refreshToken = refresh_token;
-            state.user = {...action.payload?.userData?.user};
-            state.status = action.payload?.status;
-            state.error = action.payload.error || "";
+    setLoginActive: (state) => {
+      state.isLoginActive = !state.isLoginActive;
+    },
 
-            state.isRegisterActive = false;
-            localStorage.setItem('access', access_token || '');
-            localStorage.setItem('refresh', refresh_token || '');
+    setRegisterActive: (state) => {
+      state.isRegisterActive = !state.isRegisterActive;
+      state.isLoginActive = false;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(
+      userRegistration.fulfilled,
+      (state, action: PayloadAction<IAuthResponse>) => {
+        const access_token = action.payload.userData?.tokenPair?.accessToken;
+        const refresh_token = action.payload?.userData?.tokenPair?.refreshToken;
 
-            if (access_token != null) {
-                const {role, id} = decodeToken(access_token) as ITokenData
-                localStorage.setItem('role', role);
-                localStorage.setItem('userId', id);
-            }
+        state.accessToken = access_token;
+        state.refreshToken = refresh_token;
+        state.user = { ...action.payload?.userData?.user };
+        state.status = action.payload?.status;
+        state.error = action.payload.error || '';
 
-        });
+        state.isRegisterActive = false;
+        localStorage.setItem('access', access_token || '');
+        localStorage.setItem('refresh', refresh_token || '');
 
-        builder.addCase(userLogin.pending, (state, action) => {
-            state.status = 'Loading';
-        });
+        if (access_token != null) {
+          const { role, id } = decodeToken(access_token) as ITokenData;
+          localStorage.setItem('role', role);
+          localStorage.setItem('userId', id);
+        }
+      },
+    );
 
-        builder.addCase(userLogin.fulfilled, (state, action: PayloadAction<IAuthResponse>) => {
+    builder.addCase(userLogin.pending, (state, action) => {
+      state.status = 'Loading';
+    });
 
-            const access_token = action.payload.userData?.tokenPair?.accessToken;
-            const refresh_token = action.payload?.userData?.tokenPair?.refreshToken;
+    builder.addCase(
+      userLogin.fulfilled,
+      (state, action: PayloadAction<IAuthResponse>) => {
+        const access_token = action.payload.userData?.tokenPair?.accessToken;
+        const refresh_token = action.payload?.userData?.tokenPair?.refreshToken;
 
-            state.accessToken = access_token;
-            state.refreshToken = refresh_token;
-            state.refreshToken = action.payload?.userData?.tokenPair.refreshToken;
-            state.user = {...action.payload?.userData?.user};
-            state.status = action.payload?.status;
+        state.accessToken = access_token;
+        state.refreshToken = refresh_token;
+        state.user = { ...action.payload?.userData?.user };
+        state.status = action.payload?.status;
 
-            state.isLoginActive = false;
-            localStorage.setItem('access', access_token || '');
-            localStorage.setItem('refresh', refresh_token || '');
+        state.isLoginActive = false;
+        localStorage.setItem('access', access_token || '');
+        localStorage.setItem('refresh', refresh_token || '');
 
-            if (access_token != null) {
-                const {role, id} = decodeToken(access_token) as ITokenData;
-                localStorage.setItem('role', role);
-                localStorage.setItem('userId', id);
-            }
-        });
+        if (access_token != null) {
+          const { role, id } = decodeToken(access_token) as ITokenData;
+          localStorage.setItem('role', role);
+          localStorage.setItem('userId', id);
+        }
+      },
+    );
 
-        builder.addCase(userLogout.fulfilled, (state, action) => {
-            state.accessToken = undefined;
-            state.refreshToken = undefined;
-            state.user = {};
-            state.status = undefined;
+    builder.addCase(userLogout.fulfilled, (state, action) => {
+      state.accessToken = undefined;
+      state.refreshToken = undefined;
+      state.user = {};
+      state.status = undefined;
 
-            state.isLoginActive = false;
-            state.isRegisterActive = false;
-            localStorage.clear();
-        })
+      state.isLoginActive = false;
+      state.isRegisterActive = false;
+      localStorage.clear();
+    });
 
-    }
-})
+    builder.addCase(userGoogleLogin.fulfilled, (state, action) => {
+      const access_token = action.payload?.tokenPair.accessToken;
+      const refresh_token = action.payload?.tokenPair.refreshToken;
+
+      state.user = { ...action.payload?.user};
+      state.accessToken = access_token;
+      state.refreshToken = refresh_token;
+
+      localStorage.setItem('access', access_token || '');
+      localStorage.setItem('refresh', refresh_token || '');
+
+      if (access_token != null) {
+        const { role, id } = decodeToken(access_token) as ITokenData;
+        localStorage.setItem('role', role);
+        localStorage.setItem('userId', id);
+      }
+    });
+
+  },
+});
 
 const authReducer = authSlice.reducer;
 export default authReducer;
-export const { setModalActive, setLoginActive, setRegisterActive } = authSlice.actions
+export const { setModalActive, setLoginActive, setRegisterActive } =
+  authSlice.actions;

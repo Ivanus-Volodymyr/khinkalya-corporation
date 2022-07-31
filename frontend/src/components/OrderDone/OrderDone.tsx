@@ -8,16 +8,16 @@ const OrderDone = () => {
     const {orderFromDb} = useAppSelector(state => state.orderReducer);
     const {dish} = useAppSelector(state => state.dishReducer);
     const dispatch = useAppDispatch();
-    let [total] = useState(0);
+    const [total] = useState(0);
     useEffect(() => {
         dispatch(getAllOrders())
         dispatch(getAllDish())
     }, [dispatch])
 
-    let arrayOrder: { productId: number; quantity: number; }[] = []
-    let count = {} as any
+    const arrayOrder: { productId: number; quantity: number; }[] = []
+    const count = {} as any
     if (orderFromDb.dish) {
-        for (let elem of orderFromDb.dish) {
+        for (const elem of orderFromDb.dish) {
             if (count[elem] === undefined) {
                 count[elem] = 1;
             } else {
@@ -26,7 +26,7 @@ const OrderDone = () => {
         }
     }
     for (const countElement in count) {
-        let order = {
+        const order = {
             productId: +countElement,
             quantity: +count[countElement]
         }

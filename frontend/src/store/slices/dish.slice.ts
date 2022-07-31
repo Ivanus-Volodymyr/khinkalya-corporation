@@ -1,13 +1,12 @@
-import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {dishService} from "../../services/dish.service";
-import {IDish} from "../../interfaces";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { dishService } from '../../services/dish.service';
+import { IDish } from '../../interfaces';
 
 const initialState = {
     result: [] as IDish[],
     status: 'Loading',
     dish: [] as IDish[],
 }
-
 
 export const getAllDish = createAsyncThunk(
     'dish/all',
@@ -23,16 +22,16 @@ export const getAllDish = createAsyncThunk(
 
 
 export const getAllDishByLocalityId = createAsyncThunk(
-    'auth/user',
-    async (id: string, {dispatch, getState}) => {
-        try {
-            const {data} = await dishService.getDish();
-            return data.filter(value => value.localityId === Number(id))
-        } catch (e) {
-            console.log(e);
-        }
-
-    });
+  'auth/user',
+  async (id: string, { dispatch, getState }) => {
+    try {
+      const { data } = await dishService.getDish();
+      return data.filter((value) => value.localityId === Number(id));
+    } catch (e) {
+      console.log(e);
+    }
+  },
+);
 
 const dishSlice = createSlice({
     name: 'dish',
@@ -64,6 +63,5 @@ const dishSlice = createSlice({
 })
 const dishReducer = dishSlice.reducer;
 export default dishReducer;
-export const {
+export const { } = dishSlice.actions;
 
-} = dishSlice.actions

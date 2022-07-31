@@ -6,3 +6,4 @@ export const orderService = {
     getAllOrders: () => axiosService.get<IOrderFromDbInterface[]>(urls.order),
     saveOrders: (data:ISaveOrder) => axiosService.post<ISaveOrder>(urls.order,data)
 }
+

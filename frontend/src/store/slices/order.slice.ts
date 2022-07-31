@@ -1,3 +1,4 @@
+
 import {createAsyncThunk, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {orderService} from "../../services/order.service";
 import {IOrder} from "../../interfaces/order.interface";
@@ -72,7 +73,7 @@ const orderSlice = createSlice({
             if (item) {
                 state.orders = JSON.parse(item as string)
             }
-            let find = state.orders.find(value => value.dish.id === action.payload.dish.id);
+            const find = state.orders.find(value => value.dish.id === action.payload.dish.id);
             if (find) {
                 state.orders = state.orders.map(value => value.dish.id === find?.dish.id ? {
                     ...find,
@@ -91,7 +92,7 @@ const orderSlice = createSlice({
 
             const dishFromCart = JSON.parse(item as string) as IOrder[]
             console.log(dishFromCart)
-            let iOrder = dishFromCart.find(value => value.dish.id === action.payload.dish.id);
+            const iOrder = dishFromCart.find(value => value.dish.id === action.payload.dish.id);
             if (iOrder) {
                 state.orders = dishFromCart.map(value => value.dish.id === iOrder?.dish.id ? {
                             ...iOrder,
@@ -108,7 +109,7 @@ const orderSlice = createSlice({
 
             const dishFromCart = JSON.parse(item as string) as IOrder[]
             console.log(dishFromCart)
-            let iOrder = dishFromCart.find(value => value.dish.id === action.payload.dish.id);
+            const iOrder = dishFromCart.find(value => value.dish.id === action.payload.dish.id);
             if (iOrder) {
                 state.orders = dishFromCart.map(value => value.dish.id === iOrder?.dish.id ? {
                             ...iOrder,
@@ -138,9 +139,7 @@ const orderSlice = createSlice({
 
 const orderReducer = orderSlice.reducer;
 export default orderReducer;
-
 export const {
     setOrder,
-    clearState, inc, dec, removeItem
+    clearState, inc, dec, removeItem } = orderSlice.actions;
 
-} = orderSlice.actions;

@@ -10,6 +10,7 @@ import {
 import { UserService } from "./user.service";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { User } from "@prisma/client";
+import { LoginGoogleTokenDto } from "../google/dto/google.dto";
 
 @Controller("user")
 export class UserController {

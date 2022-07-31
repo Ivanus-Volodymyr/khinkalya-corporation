@@ -2,14 +2,18 @@ import { HttpException, Injectable } from "@nestjs/common";
 import { PrismaService } from "../core/prisma.service";
 import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
+
 import { CreateUserDto } from "../auth/dto/create-user.dto";
 import { S3Service } from "../s3/s3.service";
+import { GoogleTokenInfo } from "../google/dto/google.dto";
+import { JwtService } from "@nestjs/jwt";
 
 @Injectable()
 export class UserService {
   constructor(
     private prismaService: PrismaService,
-    private s3Service: S3Service
+    private s3Service: S3Service,
+    private jwtService: JwtService,
   ) {}
 
   async getAll(): Promise<User[]> {

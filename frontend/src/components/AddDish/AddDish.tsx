@@ -1,7 +1,6 @@
-import React, {FC, useEffect} from 'react';
-import {useForm} from "react-hook-form";
-import {useAppDispatch, useAppSelector} from "../../hooks/redux";
-
+import React, { FC, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 import {addDish, getLocality, getRestaurant} from "../../store";
 import {IDish} from "../../interfaces";
@@ -10,7 +9,6 @@ import {AddLocality} from "../AddLocality/AddLocality";
 import {AddRestaurant} from "../AddRestautant/AddRestaurant";
 
 const AddDish: FC = () => {
-
     const {locality, restaurant} = useAppSelector(state => state.adminReducer)
     const {register, handleSubmit, reset} = useForm()
 
@@ -20,6 +18,7 @@ const AddDish: FC = () => {
         dispatch(getLocality())
         dispatch(getRestaurant())
     }, [])
+    
     const submit: any = async (data: IDish) => {
         const formData = new FormData();
         formData.append('image', data.image[0])
@@ -32,8 +31,10 @@ const AddDish: FC = () => {
         await dispatch(addDish(formData))
     }
 
-    return (
-
+  return (
+    <div>
+      Добавити Страву
+      <form onSubmit={handleSubmit(submit)}>
         <div>
             <AddRestaurant/>
             <AddLocality/>
@@ -68,10 +69,14 @@ const AddDish: FC = () => {
             {/*<AddLocality/>*/}
             {/*<hr/>*/}
             {/*<AddRestaurant/>*/}
-
-
         </div>
-    );
+      </form>
+      {/*<hr/>*/}
+      {/*<AddLocality/>*/}
+      {/*<hr/>*/}
+      {/*<AddRestaurant/>*/}
+    </div>
+  );
 };
 
 export { AddDish };

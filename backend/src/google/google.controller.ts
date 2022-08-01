@@ -5,10 +5,10 @@ import { GoogleService } from "./google.service";
 
 @Controller("auth/google")
 export class GoogleController {
-  constructor(private readonly GoogleService: GoogleService) {}
+  constructor(private readonly googleService: GoogleService) {}
 
   @Post("login")
   async userGoogleLogin(@Body() body: LoginGoogleTokenDto) {
-    return await this.GoogleService.userGoogleLogin(body.token);
+    return await this.googleService.userGoogleLogin(body.token);
   }
 }

@@ -12,9 +12,9 @@ export class TokenService {
 
   public verifyToken(token, tokenType = "Access") {
     try {
-      let secret = "Access";
+      let secret = process.env.ACCESS_TOKEN_SECRET as string;
       if (tokenType === "Refresh") {
-        secret = "Refresh";
+        secret = process.env.REFRESH_TOKEN_SECRET as string;
       }
       if (tokenType === "Action") {
         secret = "Action";
@@ -30,8 +30,14 @@ export class TokenService {
     try {
       const payload = { email: user.email, id: user.id, role: user.role };
       const [access, refresh] = await Promise.all([
-        this.jwtService.sign(payload, { secret: "Access", expiresIn: "2d" }),
-        this.jwtService.sign(payload, { secret: "Refresh", expiresIn: "1d" }),
+        this.jwtService.sign(payload, {
+          secret: process.env.ACCESS_TOKEN_SECRET as string,
+          expiresIn: "2d",
+        }),
+        this.jwtService.sign(payload, {
+          secret: process.env.REFRESH_TOKEN_SECRET as string,
+          expiresIn: "1d",
+        }),
       ]);
       const tokenPair = await this.saveToken({ access, refresh }, user.id);
       return {

@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { userService } from '../../services/user.service';
 import { IUser } from '../../interfaces';
 
@@ -8,7 +8,7 @@ const initialState = {
   allUser: [] as IUser[],
 };
 
-export const getAll = createAsyncThunk(
+export const getAll = createAsyncThunk<IUser[] | undefined, void>(
   'auth/user',
   async (_, { dispatch, getState }) => {
     try {
@@ -16,31 +16,33 @@ export const getAll = createAsyncThunk(
       return data;
     } catch (e) {
       console.log(e);
+      return undefined;
     }
   },
 );
 
-export const getUserById = createAsyncThunk(
+export const getUserById = createAsyncThunk<IUser | undefined, string>(
   'userById',
-  async (id: string, { dispatch, getState }) => {
+  async (id, { dispatch, getState }) => {
     try {
       const { data } = await userService.getUserById(id);
       return data;
     } catch (e) {
       console.log(e);
+      return undefined;
     }
   },
 );
 
-// export const getCurrentUser = createAsyncThunk<IUser | undefined, string>('auth/currentUser',
-//   async (token) => {
-//     try {
-//       const user = await userService.getUserByToken(token);
-//       return user;
-//     } catch (e) {
-//       return undefined;
-//     }
-//   })
+export const getCurrentUser = createAsyncThunk<IUser | undefined , string>('auth/currentUser',
+  async (accessToken) => {
+  try{
+    const {data} = await userService.getUserByToken(accessToken);
+    return data;
+  } catch (e) {
+    return undefined;
+   }
+  })
 
 
 const userSlice = createSlice({
@@ -51,16 +53,22 @@ const userSlice = createSlice({
     builder.addCase(getUserById.pending, (state, action) => {
       state.status = 'Loading';
     });
-    builder.addCase(getUserById.fulfilled, (state, action) => {
+    builder.addCase(getUserById.fulfilled, (state, action:PayloadAction<IUser | undefined>) => {
       state.status = 'fulfilled';
       if (action.payload) state.user = action.payload;
     });
     builder.addCase(getAll.pending, (state, action) => {
       state.status = 'Loading';
     });
-    builder.addCase(getAll.fulfilled, (state, action) => {
+    builder.addCase(getAll.fulfilled, (state, action:PayloadAction<IUser[] | undefined>) => {
       state.status = 'fulfilled';
       if (action.payload) state.allUser = action.payload as IUser[];
+    });
+    builder.addCase(getCurrentUser.fulfilled, (state, action:PayloadAction<IUser | undefined>) => {
+      state.status = 'fulfilled';
+      if (action.payload) {
+        state.user = action.payload;
+      }
     });
   },
 });

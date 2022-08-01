@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getLocality, setLoginActive, userLogout } from '../../store';
+import { getCurrentUser, getLocality, setLoginActive, userLogout } from "../../store";
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
@@ -14,6 +14,7 @@ const Header: FC = () => {
     (state) => state.authReducer,
   );
   const { locality } = useAppSelector((state) => state.adminReducer);
+  const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
   const refresh = localStorage.getItem('refresh');
   const access = localStorage.getItem('access') as string;
@@ -21,7 +22,8 @@ const Header: FC = () => {
 
   useEffect(() => {
     dispatch(getLocality());
-  }, [refresh]);
+    access && !currentUser.name &&  !user.name && dispatch(getCurrentUser(access));
+  }, [refresh, currentUser, user, access]);
 
   return (
     <div>
@@ -62,7 +64,10 @@ const Header: FC = () => {
           </Link>
         </div>
         <div>
-          {user && <div>{user.name}</div>}
+          <div>
+            {user && <div>{user.name}</div>}
+            { currentUser && <div>{currentUser.name}</div> }
+          </div>
           <button
             onClick={() => {
               dispatch(setLoginActive());

@@ -1,8 +1,21 @@
-/*.footer{*/
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-/*    padding-top: 40px;*/
-/*    padding-bottom: 40px;*/
-/*    align-items: center;*/
-/*}*/
+.footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--primary-color);
+    display:flex;
+    justify-content: space-between;
+    color: var(--secondary-color);
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    padding: 20px 40px;
+}
+
+.footer > div.footer-item > div{
+    padding: 10px;
+}
+
+.icons-container > a{
+    padding-right: 10px;
+}

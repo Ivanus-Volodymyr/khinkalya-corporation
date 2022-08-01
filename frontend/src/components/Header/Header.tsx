@@ -26,7 +26,7 @@ const Header: FC = () => {
   }, [refresh, currentUser, user, access]);
 
   return (
-    <div>
+    <header>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -87,7 +87,7 @@ const Header: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-    </div>
+    </header>
   );
 };
 

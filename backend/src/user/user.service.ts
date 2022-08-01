@@ -1,22 +1,25 @@
 import { HttpException, Injectable } from "@nestjs/common";
-import { PrismaService } from "../core/prisma.service";
-import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
+import { JwtService } from "@nestjs/jwt";
+
 import { CreateUserDto } from "../auth/dto/create-user.dto";
 import { S3Service } from "../s3/s3.service";
+import { PrismaService } from "../core/prisma.service";
+import { User } from "@prisma/client";
 
 @Injectable()
 export class UserService {
   constructor(
     private prismaService: PrismaService,
-    private s3Service: S3Service
+    private s3Service: S3Service,
+    private jwtService: JwtService
   ) {}
 
   async getAll(): Promise<User[]> {
     return this.prismaService.user.findMany({ include: { order: true } });
   }
 
-  getUsersById(id: string): Promise<User> {
+  async getUserById(id: string): Promise<User> {
     return this.prismaService.user.findUnique({
       where: { id: Number(id) },
     });
@@ -24,6 +27,14 @@ export class UserService {
 
   async getUserByEmail(email: string): Promise<User> {
     return this.prismaService.user.findUnique({ where: { email: email } });
+  }
+
+  async getUserByToken(accessToken: string): Promise<User> {
+    const tokenInfo = (await this.jwtService.decode(
+      accessToken
+    )) as Partial<User>;
+    const user = await this.getUserByEmail(tokenInfo.email);
+    return user;
   }
 
   async createUser(user: CreateUserDto): Promise<User> {
@@ -36,7 +47,7 @@ export class UserService {
     id: string
   ): Promise<User> {
     try {
-      const userFromDb = await this.getUsersById(id);
+      const userFromDb = await this.getUserById(id);
       if (userFromDb === null) {
         throw new HttpException(`user with id ${id} was not found in Db`, 404);
       }

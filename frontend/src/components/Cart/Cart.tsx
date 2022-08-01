@@ -10,11 +10,11 @@ const Cart = () => {
     const {orders} = useAppSelector(state => state.orderReducer);
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
-    let totalPrice: number = 0
+    let totalPrice = 0
     const userId = localStorage.getItem('userId');
 
     const item = localStorage.getItem('order');
-    let dishFromCart = JSON.parse(item as string) as IOrder[];
+    const dishFromCart = JSON.parse(item as string) as IOrder[];
     const submit = async () => {
         await dispatch(saveOrderInDb({
             userId: Number(userId),
@@ -24,7 +24,7 @@ const Cart = () => {
         navigate('/cart/orderDone')
     }
 
-    let arrDishId: IOrder[] = []
+    const arrDishId: IOrder[] = []
     if (dishFromCart) {
         for (const iDish of dishFromCart) {
             totalPrice += iDish.dish.price * iDish.quantity
@@ -57,4 +57,4 @@ const Cart = () => {
     );
 }
 
-export {Cart};
+export { Cart };

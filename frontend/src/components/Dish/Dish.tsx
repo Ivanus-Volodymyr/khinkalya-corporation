@@ -7,7 +7,7 @@ import {createOrder} from "../../store/slices/order.slice";
 const Dish: FC<{ results: IDish }> = ({results}) => {
     const dispatch = useAppDispatch();
     const [quantity,setQuantity] = useState(1);
-    let order = {
+    const order = {
         dish: results,
         quantity: quantity
     }

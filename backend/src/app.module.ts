@@ -1,4 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { JwtModule, JwtService } from "@nestjs/jwt";
+
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
@@ -8,11 +10,11 @@ import { AdminModule } from "./admin/admin.module";
 import { DishModule } from "./dish/dish.module";
 import { S3Module } from "./s3/s3.module";
 import { AccessTokenMiddleware } from "./auth/middleware/access-token.middleware";
-import { JwtModule, JwtService } from "@nestjs/jwt";
 import { TokenService } from "./auth/token/token.service";
 import { LocalityModule } from "./locality/locality.module";
 import { RestaurantModule } from "./restaurant/restaurant.module";
 import { OrderModule } from "./order/order.module";
+import { GoogleModule } from "./google/google.module";
 import { AdminMiddleware } from "./auth/middleware/admin_middleware";
 
 @Module({
@@ -26,6 +28,7 @@ import { AdminMiddleware } from "./auth/middleware/admin_middleware";
     LocalityModule,
     RestaurantModule,
     OrderModule,
+    GoogleModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService, TokenService, JwtService],

@@ -1,5 +1,6 @@
 import { FacebookOutlined, InstagramOutlined  } from '@ant-design/icons';
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import './Footer.css';
 
@@ -11,9 +12,9 @@ const Footer: FC = () => {
       <div>
         Наші ресторани
       </div>
-        <div>
+        <Link to={'about'}>
           Про нас
-        </div>
+        </Link>
       </div>
         <div className={'footer-item'}>
           <div>

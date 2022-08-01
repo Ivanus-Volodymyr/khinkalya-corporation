@@ -1,8 +1,4 @@
 .footer{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    right: 0;
     background-color: var(--primary-color);
     display:flex;
     justify-content: space-between;
@@ -16,6 +12,12 @@
     padding: 10px;
 }
 
+.footer > div.footer-item > a {
+    color: var(--secondary-color);
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    padding: 10px;
+}
 .icons-container > a{
     padding-right: 10px;
 }

@@ -14,3 +14,4 @@ export * from './Dish/Dish';
 export * from './Main/Main';
 export * from './DishList/DishList';
 export * from './Cart/Cart';
+export * from './About/About'

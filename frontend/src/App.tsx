@@ -4,16 +4,16 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 
 import {
-      Admin,
-      AddDish,
-      Layout,
-      Main,
-      UserLogin,
-      UserRegistration,
-      Users,
-      Cart,
-      DishList,
-    } from './components';
+  Admin,
+  AddDish,
+  Layout,
+  Main,
+  UserLogin,
+  UserRegistration,
+  Users,
+  Cart,
+  DishList, About,
+} from './components';
 import OrderDone from "./components/OrderDone/OrderDone";
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
           <Route path={'/dish/:id'} element={<DishList/>}></Route>
           <Route path={'/cart'} element={<Cart/>}></Route>
           <Route path={'/cart/orderDone'} element={<OrderDone/>}></Route>
+          <Route path={'/about'} element={<About/>}></Route>
         </Route>
       </Routes>
     );

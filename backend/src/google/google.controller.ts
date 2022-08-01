@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Post } from "@nestjs/common";
 
 import { LoginGoogleTokenDto } from "./dto/google.dto";
 import { GoogleService } from "./google.service";
@@ -9,6 +9,7 @@ export class GoogleController {
 
   @Post("login")
   async userGoogleLogin(@Body() body: LoginGoogleTokenDto) {
-    return await this.googleService.userGoogleLogin(body.token);
+    console.log(body);
+    // return await this.googleService.userGoogleLogin(body.token);
   }
 }

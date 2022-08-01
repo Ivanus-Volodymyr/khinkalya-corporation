@@ -7,7 +7,7 @@ export class LoginGoogleTokenDto {
   token: string;
 }
 
-export class GoogleTokenInfo{
+export class GoogleTokenInfo {
   @IsString()
   email: string;
   @IsString()

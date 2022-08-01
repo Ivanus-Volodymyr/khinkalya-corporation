@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Dish, Locality } from "@prisma/client";
+import { Locality } from "@prisma/client";
 import { PrismaService } from "../core/prisma.service";
 import { CreateLocalityDto } from "./dto/create-locality.dto";
 import { S3Service } from "../s3/s3.service";

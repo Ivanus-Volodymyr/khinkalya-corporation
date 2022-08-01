@@ -4,7 +4,7 @@ export interface CreateOrderDto {
   dish: createDishOrderDto[];
 }
 
-export interface createDishOrderDto{
+export interface createDishOrderDto {
   dish: {
     id: number;
   };

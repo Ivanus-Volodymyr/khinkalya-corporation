@@ -26,6 +26,7 @@ model User {
 
 model Restaurant {
   id        Int      @id @default(autoincrement())
+  image     String?
   name      String
   createdAt DateTime @default(now())
   dish      Dish[]

@@ -1,18 +1,27 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { useForm } from 'react-hook-form';
-import { addRestaurant } from '../../store';
+import { addRestaurant } from "../../store";
+import { IRestaurant } from "../../interfaces/restaurant.interface";
 
 const AddRestaurant = () => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit, reset } = useForm();
-  const submit = (data: any) => {
-    dispatch(addRestaurant(data));
+
+
+  const submit: any = async (data: IRestaurant) => {
+    const formData = new FormData();
+    formData.append('image', data.image[0]);
+    formData.append('name', data.name);
+    await dispatch(addRestaurant(formData));
   };
   return (
     <div>
       Add Restaurant
       <form onSubmit={handleSubmit(submit)}>
+        <div>
+          <input type="file" {...register('image')} />
+        </div>
         <div>
           <input type="text" placeholder={'name'} {...register('name')} />
         </div>

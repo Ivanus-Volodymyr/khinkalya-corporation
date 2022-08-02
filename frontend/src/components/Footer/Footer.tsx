@@ -1,13 +1,15 @@
 import { FacebookOutlined, InstagramOutlined  } from '@ant-design/icons';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
+import { Layout } from 'antd';
 
 import './Footer.css';
 
-const Footer: FC = () => {
+const { Footer } = Layout;
+
+const FooterComponent: FC = () => {
   return (
-    <footer>
-      <div className={'footer'}>
+    <Footer className={'footer'}>
       <div className={'footer-item'}>
       <div>
         Наші ресторани
@@ -47,9 +49,8 @@ const Footer: FC = () => {
             <img src="/image-for-header/mastercard.svg" alt="mastercard" width={'50px'} height={'30px'}/>
           </div>
         </div>
-      </div>
-    </footer>
+    </Footer>
   );
 };
 
-export { Footer };
+export { FooterComponent };

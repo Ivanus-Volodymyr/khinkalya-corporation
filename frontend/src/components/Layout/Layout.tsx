@@ -1,17 +1,18 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Layout } from 'antd';
 
-import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
+import { HeaderComponent } from '../Header/Header';
+import { FooterComponent } from '../Footer/Footer';
 
-const Layout: FC = () => {
+const LayoutComponent: FC = () => {
   return (
-    <div>
-      <Header />
+    <Layout>
+      <HeaderComponent />
       <Outlet />
-      <Footer />
-    </div>
+      <FooterComponent />
+    </Layout>
   );
 };
 
-export { Layout };
+export { LayoutComponent};

@@ -6,7 +6,7 @@ import { Route, Routes } from 'react-router-dom';
 import {
   Admin,
   AddDish,
-  Layout,
+  LayoutComponent,
   Main,
   UserLogin,
   UserRegistration,
@@ -20,7 +20,7 @@ function App() {
 
     return (
       <Routes>
-        <Route path={"/"} element={<Layout/>}>
+        <Route path={"/"} element={<LayoutComponent/>}>
           <Route path={'/main'} element={<Main/>}></Route>
           <Route path={'/auth/registration'} element={<UserRegistration/>}></Route>
           <Route path={'/auth/login'} element={<UserLogin/>}></Route>

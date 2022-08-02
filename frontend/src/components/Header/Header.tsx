@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Layout } from 'antd';
 
 import './Header.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -8,7 +9,9 @@ import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
 
-const Header: FC = () => {
+const { Header } = Layout;
+
+const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
@@ -26,7 +29,7 @@ const Header: FC = () => {
   }, [refresh, currentUser, user, access]);
 
   return (
-    <header>
+    <Header>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -87,8 +90,8 @@ const Header: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-    </header>
+    </Header>
   );
 };
 
-export { Header };
+export { HeaderComponent };

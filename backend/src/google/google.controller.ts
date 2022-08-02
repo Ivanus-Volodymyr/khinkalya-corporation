@@ -8,8 +8,7 @@ export class GoogleController {
   constructor(private readonly googleService: GoogleService) {}
 
   @Post("login")
-  async userGoogleLogin(@Body() body: LoginGoogleTokenDto) {
-    console.log("hello from google controller", body);
-    // return await this.googleService.userGoogleLogin(body.token);
+  public async userGoogleLogin(@Body() body: LoginGoogleTokenDto) {
+    return this.googleService.userGoogleLogin(body.token);
   }
 }

@@ -1,29 +1,39 @@
 import React, { FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 import './Header.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getCurrentUser, getLocality, setLoginActive, userLogout } from "../../store";
+import { getCurrentUser, getLocality, getRestaurant, setLoginActive, userLogout } from "../../store";
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 const Header: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
   );
-  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { locality,restaurant } = useAppSelector((state) => state.adminReducer);
   const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
   const refresh = localStorage.getItem('refresh');
   const access = localStorage.getItem('access') as string;
   const request = { ...user, access };
-
+  const navigate = useNavigate();
   useEffect(() => {
+    dispatch(getRestaurant())
     dispatch(getLocality());
+   
     access && !currentUser.name &&  !user.name && dispatch(getCurrentUser(access));
   }, [refresh, currentUser, user, access]);
+  const [restaurantId, setRestaurantId] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setRestaurantId(event.target.value as string);
+    localStorage.setItem('restaurantId',event.target.value as string)
+    navigate('/main')
+  };
 
   return (
     <div>
@@ -53,6 +63,16 @@ const Header: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
+        <FormControl style={{width:'250px'}} >
+        <InputLabel >Виберіть ресторан</InputLabel>
+        <Select
+          onChange={handleChange}
+          >
+            {restaurant && restaurant.map(result =>
+              <MenuItem key={result.id} value={result.id}>{result.name}
+              </MenuItem>)}
+          </Select>
+        </FormControl>
         <div>
           <Link to={'/cart'}>
             <img

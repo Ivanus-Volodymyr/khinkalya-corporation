@@ -34,11 +34,7 @@ const AddDish: FC = () => {
   return (
     <div>
       Добавити Страву
-      <form onSubmit={handleSubmit(submit)}>
         <div>
-            <AddRestaurant/>
-            <AddLocality/>
-            Добавити Страву
             <form onSubmit={handleSubmit(submit)}>
                 <div>
                     <div>
@@ -65,16 +61,7 @@ const AddDish: FC = () => {
                     </div>
                 </div>
             </form>
-            {/*<hr/>*/}
-            {/*<AddLocality/>*/}
-            {/*<hr/>*/}
-            {/*<AddRestaurant/>*/}
         </div>
-      </form>
-      {/*<hr/>*/}
-      {/*<AddLocality/>*/}
-      {/*<hr/>*/}
-      {/*<AddRestaurant/>*/}
     </div>
   );
 };

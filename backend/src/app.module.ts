@@ -16,6 +16,8 @@ import { RestaurantModule } from "./restaurant/restaurant.module";
 import { OrderModule } from "./order/order.module";
 import { GoogleModule } from "./google/google.module";
 import { AdminMiddleware } from "./auth/middleware/admin_middleware";
+import { GoogleTokenMiddleware } from "./auth/middleware/google_middleware";
+import { OAuth2Client } from "google-auth-library";
 
 @Module({
   imports: [
@@ -31,11 +33,18 @@ import { AdminMiddleware } from "./auth/middleware/admin_middleware";
     GoogleModule,
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService, TokenService, JwtService],
+  providers: [
+    AppService,
+    PrismaService,
+    TokenService,
+    JwtService,
+    OAuth2Client,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer.apply(AccessTokenMiddleware).forRoutes("users", "admin");
     consumer.apply(AdminMiddleware).forRoutes("admin");
+    consumer.apply(GoogleTokenMiddleware).forRoutes("auth/google");
   }
 }

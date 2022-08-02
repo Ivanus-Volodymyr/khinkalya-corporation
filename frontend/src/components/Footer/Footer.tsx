@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 
 import './Footer.css';
+import { FooterModal } from "../FooterModal/FooterModal";
+import { ReviewForm } from "../ReviewForm/ReviewForm";
 
 const { Footer } = Layout;
 
@@ -49,6 +51,9 @@ const FooterComponent: FC = () => {
             <img src="/image-for-header/mastercard.svg" alt="mastercard" width={'50px'} height={'30px'}/>
           </div>
         </div>
+      <FooterModal>
+          <ReviewForm/>
+      </FooterModal>
     </Footer>
   );
 };

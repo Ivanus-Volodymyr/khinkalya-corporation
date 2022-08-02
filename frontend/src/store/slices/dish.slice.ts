@@ -6,7 +6,7 @@ const initialState = {
     result: [] as IDish[],
     status: 'Loading',
     dish: [] as IDish[],
-    item:1
+    item: 1
 }
 
 export const getAllDish = createAsyncThunk(

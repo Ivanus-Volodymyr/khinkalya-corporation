@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { TokenPair, User } from "@prisma/client";
 
 import { UserService } from "../user/user.service";
 import { TokenService } from "../auth/token/token.service";
@@ -14,7 +13,7 @@ export class GoogleService {
     private tokenService: TokenService
   ) {}
 
-  async userGoogleLogin(
+  public async userGoogleLogin(
     token: string
   ): Promise<GoogleResponse | undefined | Error> {
     try {

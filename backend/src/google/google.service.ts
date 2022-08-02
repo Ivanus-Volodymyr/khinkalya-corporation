@@ -13,7 +13,7 @@ export class GoogleService {
     private tokenService: TokenService
   ) {}
 
-  async userGoogleLogin(
+  public async userGoogleLogin(
     token: string
   ): Promise<GoogleResponse | undefined | Error> {
     try {

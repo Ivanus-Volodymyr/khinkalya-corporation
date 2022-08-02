@@ -17,7 +17,10 @@ export class TokenService {
         secret = process.env.REFRESH_TOKEN_SECRET as string;
       }
       if (tokenType === "Action") {
-        secret = "Action";
+        secret = process.env.ACTION_TOKEN_SECRET;
+      }
+      if (tokenType === "Google") {
+        secret = process.env.GOOGLE_OAUTH_CLIENT_ID;
       }
       return this.jwtService.verify(token, { secret: secret });
     } catch (e) {

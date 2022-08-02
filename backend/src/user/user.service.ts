@@ -33,8 +33,7 @@ export class UserService {
     const tokenInfo = (await this.jwtService.decode(
       accessToken
     )) as Partial<User>;
-    const user = await this.getUserByEmail(tokenInfo.email);
-    return user;
+    return this.getUserByEmail(tokenInfo.email);
   }
 
   async createUser(user: CreateUserDto): Promise<User> {

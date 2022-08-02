@@ -9,7 +9,7 @@ export class GoogleController {
 
   @Post("login")
   async userGoogleLogin(@Body() body: LoginGoogleTokenDto) {
-    console.log(body);
+    console.log("hello from google controller", body);
     // return await this.googleService.userGoogleLogin(body.token);
   }
 }

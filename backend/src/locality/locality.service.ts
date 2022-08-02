@@ -9,7 +9,7 @@ export class LocalityService {
   constructor(private prismaService: PrismaService, private s3: S3Service) {}
 
   async getLocality(): Promise<Locality[]> {
-    return this.prismaService.locality.findMany({ include: { Dish: true } });
+    return this.prismaService.locality.findMany();
   }
 
   async addLocality(data: Locality, file): Promise<Locality> {

@@ -16,6 +16,7 @@ import { RestaurantModule } from "./restaurant/restaurant.module";
 import { OrderModule } from "./order/order.module";
 import { GoogleModule } from "./google/google.module";
 import { AdminMiddleware } from "./auth/middleware/admin_middleware";
+import { GoogleTokenMiddleware } from "./auth/middleware/google_middleware";
 
 @Module({
   imports: [
@@ -37,5 +38,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer.apply(AccessTokenMiddleware).forRoutes("users", "admin");
     consumer.apply(AdminMiddleware).forRoutes("admin");
+    consumer.apply(GoogleTokenMiddleware).forRoutes("auth/google");
   }
 }

@@ -1,9 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authReducer from './slices/auth.slice';
-import adminReducer from './slices/admin.slice';
-import dishReducer from './slices/dish.slice';
-import userReducer from './slices/user.slice';
-import orderReducer from './slices/order.slice';
+import { adminReducer, authReducer, dishReducer, orderReducer, reviewReducer, userReducer } from "./slices";
 
 const rootReducer = combineReducers({
   authReducer,
@@ -11,6 +7,7 @@ const rootReducer = combineReducers({
   dishReducer,
   userReducer,
   orderReducer,
+  reviewReducer,
 });
 export const setupStore = () =>
   configureStore({

@@ -95,5 +95,5 @@ const adminSlice = createSlice({
   },
 });
 const adminReducer = adminSlice.reducer;
-export default adminReducer;
+export {adminReducer};
 export const { setLocalityData, setRestaurantData } = adminSlice.actions;

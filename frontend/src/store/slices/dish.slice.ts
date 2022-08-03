@@ -61,6 +61,6 @@ const dishSlice = createSlice({
     }
 })
 const dishReducer = dishSlice.reducer;
-export default dishReducer;
+export {dishReducer};
 export const { } = dishSlice.actions;
 

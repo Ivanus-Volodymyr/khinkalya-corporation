@@ -5,6 +5,8 @@ import { useAppDispatch } from '../../../hooks/redux';
 import { userRegistration } from '../../../store';
 import './UserRegistrtion.css';
 import { UserGoogleLogin } from "../UserGoogleLogin/UserGoogleLogin";
+import { Input } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 const UserRegistration: FC = () => {
   const { register, handleSubmit, reset } = useForm<IUser>();
@@ -38,7 +40,9 @@ const UserRegistration: FC = () => {
 
         <div className={'signUp-content'}>
           <label>Пароль</label>
-          <input type="text" {...register('password')} />
+          <Input.Password {...register('password')}
+                          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          />
         </div>
         <div className="btn-container">
           <button>Зареєструватись</button>

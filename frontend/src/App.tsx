@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-no-undef */
 import React from 'react';
+import 'antd/dist/antd.css';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 

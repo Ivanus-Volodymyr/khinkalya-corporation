@@ -6,10 +6,13 @@ import { Layout } from 'antd';
 import './Footer.css';
 import { FooterModal } from "../FooterModal/FooterModal";
 import { ReviewForm } from "../ReviewForm/ReviewForm";
+import { useAppDispatch } from "../../hooks/redux";
+import { setReviewActive } from "../../store";
 
 const { Footer } = Layout;
 
 const FooterComponent: FC = () => {
+  const dispatch = useAppDispatch();
   return (
     <Footer className={'footer'}>
       <div className={'footer-item'}>
@@ -32,7 +35,7 @@ const FooterComponent: FC = () => {
           </div>
         </div>
         <div className={'footer-item'}>
-          <div>
+          <div onClick={() => dispatch(setReviewActive())}>
             Залишити відгук
           </div>
           <div>

@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Input } from 'antd';
 
 import { IUser } from '../../../interfaces';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -40,8 +42,10 @@ const UserLogin: FC = () => {
         </div>
 
         <div className={'logIn-content'}>
-          <label>Password</label>
-          <input type="text" {...register('password')} />
+          <label>Пароль</label>
+          <Input.Password {...register('password')}
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          />
         </div>
 
         <div className="btn-container">

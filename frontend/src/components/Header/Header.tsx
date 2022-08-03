@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { Link,  useNavigate  } from 'react-router-dom';
-import { Layout } from 'antd';
 
 import './Header.css';
 
@@ -8,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
   getLocality,
-  getRestaurant,
+  getRestaurants,
   setLoginActive,
   userLogout,
 } from '../../store';
@@ -22,8 +21,6 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
-
-const { Header } = Layout;
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +37,7 @@ const HeaderComponent: FC = () => {
   const request = { ...user, access };
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getRestaurant());
+    dispatch(getRestaurants());
     dispatch(getLocality());
 
     access &&
@@ -57,7 +54,7 @@ const HeaderComponent: FC = () => {
   };
 
   return (
-    <Header>
+    <header>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -129,7 +126,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-    </Header>
+    </header>
   );
 };
 

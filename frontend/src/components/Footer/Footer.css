@@ -11,12 +11,14 @@
 
 .footer > div.footer-item > div{
     padding: 10px;
+    cursor: pointer;
 }
 
 .footer > div.footer-item > a {
     color: var(--secondary-color);
     letter-spacing: 2px;
     font-size: 1.1rem;
+    cursor: pointer;
     padding: 10px;
 }
 .icons-container > a{

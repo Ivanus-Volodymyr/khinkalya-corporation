@@ -2,6 +2,8 @@ import { FC } from "react";
 import * as React from "react";
 
 import './FooterModal.css';
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { setReviewActive } from "../../store";
 
 type Props = {
   children?: React.ReactNode;
@@ -9,13 +11,16 @@ type Props = {
 
 
 const FooterModal: FC<Props> = ({children}) => {
+  const {isReviewActive} = useAppSelector(state => state.reviewReducer);
+  const dispatch = useAppDispatch();
+
   return  (
   <div
-    className={'footer-modal'}
-    onClick={() => {console.log('click')}}
+    className={ isReviewActive ? 'footer-modal active': 'footer-modal'}
+    onClick={() => {dispatch(setReviewActive())}}
   >
     <div
-      className={'footer-modal-content'}
+      className={ isReviewActive ? 'footer-modal-content active' : 'footer-modal-content '}
       onClick={(event) => event.stopPropagation()}
     >
       {children}

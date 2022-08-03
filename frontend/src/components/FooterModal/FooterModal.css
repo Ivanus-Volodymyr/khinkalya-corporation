@@ -14,7 +14,7 @@
     z-index: 3;
 }
 
-.footer-modal .active {
+.footer-modal.active {
     opacity: 1;
     pointer-events: all;
 }

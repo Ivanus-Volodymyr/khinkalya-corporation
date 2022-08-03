@@ -14,7 +14,7 @@ form.signUp-form {
     font-size: 1.3rem;
 }
 
-.signUp-content > input {
+.signUp-content > input, .signUp-content > span{
     width: 293px;
     font-size: 1.5rem;
     border-radius: 2px;

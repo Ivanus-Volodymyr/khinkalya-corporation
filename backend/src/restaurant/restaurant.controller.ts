@@ -5,20 +5,21 @@ import {
   Get,
   Param,
   Post,
-  Put, UploadedFile, UseInterceptors
+  Put,
+  UploadedFile, UseInterceptors
 } from "@nestjs/common";
 import { RestaurantService } from "./restaurant.service";
 import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Restaurant } from "@prisma/client";
 
-@Controller("restaurant")
+@Controller("restaurants")
 export class RestaurantController {
   constructor(private restaurantService: RestaurantService) {}
 
   @Get()
   GetRestaurant() {
-    return this.restaurantService.getRestaurant();
+    return this.restaurantService.getRestaurants();
   }
 
   @Post()

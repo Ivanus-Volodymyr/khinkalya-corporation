@@ -28,13 +28,13 @@ export const getLocality = createAsyncThunk(
     }
   },
 );
-export const getRestaurant = createAsyncThunk(
+export const getRestaurants = createAsyncThunk(
   'admin/AddDish',
   async (_, { dispatch }) => {
     try {
-      const { data } = await adminService.getRestaurant();
+      const { data } = await adminService.getRestaurants();
       if (data) {
-        dispatch(setRestaurantData(data));
+        dispatch(setRestaurantsData(data));
       }
     } catch (e) {
       console.log(e);
@@ -80,7 +80,7 @@ const adminSlice = createSlice({
     setLocalityData: (state, action: PayloadAction<ILocality[]>) => {
       state.locality = action.payload;
     },
-    setRestaurantData: (state, action: PayloadAction<ILocality[]>) => {
+    setRestaurantsData: (state, action: PayloadAction<ILocality[]>) => {
       state.restaurant = action.payload;
     },
   },
@@ -96,4 +96,4 @@ const adminSlice = createSlice({
 });
 const adminReducer = adminSlice.reducer;
 export {adminReducer};
-export const { setLocalityData, setRestaurantData } = adminSlice.actions;
+export const { setLocalityData, setRestaurantsData } = adminSlice.actions;

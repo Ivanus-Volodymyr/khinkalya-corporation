@@ -13,4 +13,5 @@ export const urls = {
   locality: '/locality',
   restaurant: '/restaurant',
   order: '/order',
+  reviews: '/reviews',
 };

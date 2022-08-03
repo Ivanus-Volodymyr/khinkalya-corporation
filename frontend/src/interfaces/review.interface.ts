@@ -1,8 +1,7 @@
 export interface IReview {
   id: number;
   body: string;
-  rating?:string;
-  restaurantId: number;
+  restaurantId?: number;
   userId?: number;
   createdAt: string;
 }

@@ -5,7 +5,9 @@ import {
   Get,
   Param,
   Post,
-  Put, UploadedFile, UseInterceptors
+  Put,
+  UploadedFile,
+  UseInterceptors,
 } from "@nestjs/common";
 import { RestaurantService } from "./restaurant.service";
 import { CreateRestaurantDto } from "./dto/create-restaurant.dto";

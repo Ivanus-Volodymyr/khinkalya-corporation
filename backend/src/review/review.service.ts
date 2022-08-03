@@ -11,4 +11,7 @@ export class ReviewService {
     return this.prismaService.review.findMany();
   }
 
+  public async CreateReview(review): Promise<Review> {
+    return this.prismaService.review.create(review);
+  }
 }

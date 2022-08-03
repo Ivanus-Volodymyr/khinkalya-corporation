@@ -4,10 +4,12 @@ import { IReview } from "../../interfaces";
 import { reviewService } from "../../services/review.service";
 
 interface IInitialState {
-  reviews?: IReview[]
+  reviews?: IReview[],
+  status: string,
 }
 const initialState:IInitialState = {
   reviews: [],
+  status: '',
 }
 
 export const GetAllReviews = createAsyncThunk<IReview[]| undefined, void>('reviewSlice/GetAllReviews',
@@ -20,6 +22,15 @@ export const GetAllReviews = createAsyncThunk<IReview[]| undefined, void>('revie
   }
 });
 
+export const CreateReview = createAsyncThunk<IReview | undefined,IReview>('reviewSlice/CreateReview', async(review) => {
+  try{
+    const {data} = await reviewService.CreateReview(review);
+    return data;
+  }catch (e) {
+    return undefined;
+  }
+})
+
  const reviewSlice = createSlice({
   name: "review",
   initialState,
@@ -28,6 +39,10 @@ export const GetAllReviews = createAsyncThunk<IReview[]| undefined, void>('revie
     builder.addCase(GetAllReviews.fulfilled, (state, action: PayloadAction<IReview[] | undefined>) => {
       state.reviews = action.payload;
     });
+     builder.addCase(CreateReview.fulfilled, (state, action: PayloadAction<IReview| undefined>) => {
+       action.payload && state.reviews &&  state.reviews.push(action.payload);
+       state.status = 'created';
+     });
   }
  });
 

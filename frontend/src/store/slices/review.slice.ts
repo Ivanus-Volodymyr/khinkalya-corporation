@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { IReview } from "../../interfaces";
-import { getLocality } from "./admin.slice";
 import { reviewService } from "../../services/review.service";
 
 interface IInitialState {
@@ -29,7 +28,8 @@ export const GetAllReviews = createAsyncThunk<IReview[]| undefined, void>('revie
     builder.addCase(GetAllReviews.fulfilled, (state, action: PayloadAction<IReview[] | undefined>) => {
       state.reviews = action.payload;
     });
-  });
+  }
+ });
 
 const reviewReducer = reviewSlice.reducer;
 export {reviewReducer};

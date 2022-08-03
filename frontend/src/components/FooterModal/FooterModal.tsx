@@ -12,7 +12,7 @@ const FooterModal: FC<Props> = ({children}) => {
   return  (
   <div
     className={'footer-modal'}
-    onClick={() => {}}
+    onClick={() => {console.log('click')}}
   >
     <div
       className={'footer-modal-content'}

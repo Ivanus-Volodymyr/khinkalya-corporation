@@ -3,7 +3,7 @@ import {
   Get,
 } from "@nestjs/common";
 
-import { ReviewModule } from "./review.module";
+import { ReviewService } from "./review.service";
 
 
 @Controller("reviews")
@@ -12,6 +12,6 @@ export class ReviewController {
 
   @Get()
   GetAllReviews() {
-    return this.reviewService;
+    return this.reviewService.getAllReviews();
   }
 }

@@ -1,4 +1,4 @@
-import { Button, Input, Select, Rate } from "antd";
+import { Button, Input, Select, Rate} from "antd";
 import React, { FC, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -35,6 +35,7 @@ const ReviewForm: FC = () => {
     data.restaurantId = +restaurantId;
     data.body = reviewBody;
     data.userId = +userId;
+    data.rating = rate;
 
     dispatch(CreateReview(data as IReview));
   }
@@ -57,7 +58,7 @@ const ReviewForm: FC = () => {
       </span>
        <TextArea showCount maxLength={100} style={{ height: 130}}
                 allowClear={true} {...register('body')} onChange={onChangeBody}/>
-        <Button htmlType="submit">
+        <Button htmlType="submit" disabled={!userId}>
          Надіслати
         </Button>
   </form>)

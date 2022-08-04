@@ -3,5 +3,6 @@ export interface IReview {
   body: string;
   restaurantId: number;
   userId: number;
-  createdAt: string
+  createdAt: string;
+  rating: number;
 }

@@ -32,3 +32,8 @@
 .footer-modal-content.active {
     transform: scale(1);
 }
+
+.ant-alert-error {
+    position: absolute;
+    top: 0;
+}

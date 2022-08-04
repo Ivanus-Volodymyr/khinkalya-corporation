@@ -18,6 +18,7 @@ export class ReviewService {
         restaurantId: review.restaurantId,
         body: review.body,
         userId: review.userId,
+        rating: review.rating,
       },
     });
   }

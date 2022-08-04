@@ -28,6 +28,8 @@ model Restaurant {
   id        Int      @id @default(autoincrement())
   image     String?
   name      String
+  city      String?
+  address   String?
   createdAt DateTime @default(now())
   dish      Dish[]
   order     Order[]

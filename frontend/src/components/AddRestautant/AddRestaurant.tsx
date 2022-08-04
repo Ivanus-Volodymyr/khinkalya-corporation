@@ -13,6 +13,8 @@ const AddRestaurant = () => {
     const formData = new FormData();
     formData.append('image', data.image[0]);
     formData.append('name', data.name);
+    formData.append('city', data.name);
+    formData.append('address', data.name);
     await dispatch(addRestaurant(formData));
   };
   return (
@@ -24,6 +26,12 @@ const AddRestaurant = () => {
         </div>
         <div>
           <input type="text" placeholder={'name'} {...register('name')} />
+        </div>
+        <div>
+          <input type="text" placeholder={'city'} {...register('city')} />
+        </div>
+        <div>
+          <input type="text" placeholder={'address'} {...register('address')} />
         </div>
         <button> Add Restaurant</button>
       </form>

@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { adminService } from '../../services/admin.service';
 import { IDish, ILocality } from '../../interfaces';
+import { IRestaurant } from "../../interfaces/restaurant.interface";
 
 const initialState = {
   result: [],
@@ -44,7 +45,7 @@ export const getRestaurant = createAsyncThunk(
 
 export const addRestaurant = createAsyncThunk(
   'admin/addRestaurant',
-  async (data: any, { dispatch }) => {
+  async (data: IRestaurant, { dispatch }) => {
     try {
       await adminService.addRestaurant(data);
     } catch (e) {
@@ -54,7 +55,7 @@ export const addRestaurant = createAsyncThunk(
 );
 export const addLocality = createAsyncThunk(
   'admin/AddLocality',
-  async (data: any, { dispatch }) => {
+  async (data: ILocality, { dispatch }) => {
     try {
       await adminService.addLocality(data);
     } catch (e) {
@@ -64,7 +65,7 @@ export const addLocality = createAsyncThunk(
 );
 export const addDish = createAsyncThunk(
   'admin/AddDish',
-  async (data: any, { dispatch }) => {
+  async (data: IDish, { dispatch }) => {
     try {
       await adminService.addDish(data);
     } catch (e) {
@@ -90,7 +91,6 @@ const adminSlice = createSlice({
     });
     builder.addCase(getLocality.fulfilled, (state, action) => {
       state.status = 'fulfilled';
-      // state.locality = action.payload.data;
     });
   },
 });

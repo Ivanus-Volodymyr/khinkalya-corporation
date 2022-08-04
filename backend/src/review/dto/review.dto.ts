@@ -1,7 +1,7 @@
 export class Review {
-  id: number;
+  id?: number;
   body: string;
   restaurantId?: number;
   userId?: number;
-  createdAt: Date;
+  createdAt?: Date;
 }

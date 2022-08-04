@@ -1,6 +1,6 @@
 export interface IReview {
   id?: number;
-  body: string;
+  body?: string;
   restaurantId?: number;
   userId?: number;
   createdAt?: string

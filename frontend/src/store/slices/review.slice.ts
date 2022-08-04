@@ -26,9 +26,9 @@ export const GetAllReviews = createAsyncThunk<IReview[]| undefined, void>('revie
   }
 });
 
-export const CreateReview = createAsyncThunk<IReview | undefined,IReview>('reviewSlice/CreateReview', async(review) => {
+export const CreateReview = createAsyncThunk('reviewSlice/CreateReview', async(review: IReview) => {
   try{
-    const {data} = await reviewService.CreateReview(review);
+    const data = await reviewService.CreateReview(review);
     return data;
   }catch (e) {
     return undefined;
@@ -50,8 +50,9 @@ export const CreateReview = createAsyncThunk<IReview | undefined,IReview>('revie
     builder.addCase(GetAllReviews.fulfilled, (state, action: PayloadAction<IReview[] | undefined>) => {
       state.reviews = action.payload;
     });
-     builder.addCase(CreateReview.fulfilled, (state, action: PayloadAction<IReview| undefined>) => {
-       action.payload && state.reviews &&  state.reviews.push(action.payload);
+     builder.addCase(CreateReview.fulfilled, (state, action) => {
+       const review = action.payload;
+       review  && state.reviews &&  state.reviews.push(review);
        state.status = 'created';
        state.isReviewActive = false;
      });

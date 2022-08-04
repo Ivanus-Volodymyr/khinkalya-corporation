@@ -56,7 +56,7 @@ const ReviewForm: FC = () => {
         <Rate tooltips={desc} onChange={setRate} value={rate} />
         {rate ? <span className="ant-rate-text">{desc[rate - 1]}</span> : ''}
       </span>
-       <TextArea showCount maxLength={100} style={{ height: 130}}
+       <TextArea showCount maxLength={200} style={{ height: 150}} autoSize={{ minRows: 8, maxRows: 10 }}
                 allowClear={true} {...register('body')} onChange={onChangeBody}/>
         <Button htmlType="submit" disabled={!userId}>
          Надіслати

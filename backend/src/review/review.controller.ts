@@ -6,7 +6,7 @@ import {
 } from "@nestjs/common";
 
 import { ReviewService } from "./review.service";
-import { Review } from "./dto/review.dto";
+import { CreateReview} from "./dto/review.dto";
 
 @Controller("reviews")
 export class ReviewController {
@@ -18,7 +18,7 @@ export class ReviewController {
   }
 
   @Post()
-  CreateReview(@Body() review: Review) {
+  CreateReview(@Body() review: CreateReview) {
     return this.reviewService.CreateReview(review);
   }
 }

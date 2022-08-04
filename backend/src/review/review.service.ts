@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
+import { Review } from "@prisma/client";
 import { PrismaService } from "../core/prisma.service";
 
-import { Review } from "./dto/review.dto";
+import { CreateReview } from "./dto/review.dto";
 
 @Injectable()
 export class ReviewService {
@@ -12,6 +13,12 @@ export class ReviewService {
   }
 
   public async CreateReview(review): Promise<Review> {
-    return this.prismaService.review.create(review);
+    return this.prismaService.review.create({
+      data: {
+        restaurantId: review.restaurantId,
+        body: review.body,
+        userId: review.userId,
+      },
+    });
   }
 }

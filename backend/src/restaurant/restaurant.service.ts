@@ -12,6 +12,14 @@ export class RestaurantService {
     return this.prismaService.restaurant.findMany();
   }
 
+  public async getRestaurantByID(restaurantId: string): Promise<Restaurant> {
+    return this.prismaService.restaurant.findUnique({
+      where: {
+        id: +restaurantId,
+      },
+    })
+  }
+
   public async addRestaurant(data: Restaurant, file): Promise<Restaurant> {
     const img = await this.s3.uploadFile(file);
     return this.prismaService.restaurant.create({

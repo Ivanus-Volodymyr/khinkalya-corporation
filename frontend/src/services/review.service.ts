@@ -6,5 +6,5 @@ import { IReview } from "../interfaces";
 
 export const reviewService = {
   GetAllReviews: () => axiosService.get<IReview[]>(urls.reviews),
-  CreateReview: (review:IReview) => axiosService.post<IReview>(urls.reviews, review),
+  CreateReview: (review:Partial<IReview>) => axiosService.post<IReview>(urls.reviews, review),
 }

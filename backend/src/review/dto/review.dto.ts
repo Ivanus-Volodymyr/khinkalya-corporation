@@ -1,7 +1,5 @@
-export class Review {
-  id?: number;
+export class CreateReview {
   body: string;
-  restaurantId?: number;
-  userId?: number;
-  createdAt?: Date;
+  restaurantId: number;
+  userId: number;
 }

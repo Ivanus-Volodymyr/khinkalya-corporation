@@ -45,7 +45,7 @@ export const getRestaurant = createAsyncThunk(
 
 export const addRestaurant = createAsyncThunk(
   'admin/addRestaurant',
-  async (data: IRestaurant, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       await adminService.addRestaurant(data);
     } catch (e) {
@@ -55,7 +55,7 @@ export const addRestaurant = createAsyncThunk(
 );
 export const addLocality = createAsyncThunk(
   'admin/AddLocality',
-  async (data: ILocality, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       await adminService.addLocality(data);
     } catch (e) {
@@ -65,7 +65,7 @@ export const addLocality = createAsyncThunk(
 );
 export const addDish = createAsyncThunk(
   'admin/AddDish',
-  async (data: IDish, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       await adminService.addDish(data);
     } catch (e) {

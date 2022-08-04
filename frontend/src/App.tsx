@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import React from 'react';
-import './App.css';
 import { Route, Routes } from 'react-router-dom';
+import './App.css';
 
 import {
       Admin,
@@ -13,8 +13,9 @@ import {
       Users,
       Cart,
       DishList,
+      DeliveryInfo,
+      OrderDone
     } from './components';
-import OrderDone from "./components/OrderDone/OrderDone";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           <Route path={'/dish/:id'} element={<DishList/>}></Route>
           <Route path={'/cart'} element={<Cart/>}></Route>
           <Route path={'/cart/orderDone'} element={<OrderDone/>}></Route>
+          <Route path={'/delivery'} element={<DeliveryInfo/>}></Route>
         </Route>
       </Routes>
     );

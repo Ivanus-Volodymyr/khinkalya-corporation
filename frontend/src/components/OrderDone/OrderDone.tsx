@@ -63,4 +63,4 @@ const OrderDone = () => {
     );
 };
 
-export default OrderDone;
+export {OrderDone};

@@ -47,7 +47,6 @@ const dishSlice = createSlice({
         builder.addCase(getAllDishByLocalityId.fulfilled, (state, action) => {
             state.status = "fulfilled";
             const item = localStorage.getItem("restaurantId")|| 1;
-
             if (action.payload) {
                 state.result = action.payload.filter(value=>value.restaurantId===+item);
             }

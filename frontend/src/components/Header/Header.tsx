@@ -61,7 +61,7 @@ const HeaderComponent: FC = () => {
             {' '}
             <img
               src="/image-for-header/logoKhinkalnya.jpg"
-              width={'150px'}
+              width={'100px'}
               alt="logo"
             />
           </a>

@@ -11,16 +11,12 @@
     gap: 10px;
     justify-content: space-between;
     align-items: center;
-    background-color: #61dafb;
+    background-color: var(--primary-color);
     color: white;
     border-radius: 2px;
     padding: 10px;
-    border: 1px solid black;
 }
 
-/*.delivery-destination-item > div {*/
-/*    color: black;*/
-/*}*/
 .delivery-main-container{
     display:flex;
     flex-direction: column;
@@ -28,19 +24,16 @@
     justify-content: space-between;
     padding: 10px;
     margin: 10px;
-    border: 1px solid black;
     font-size: 1.2rem;
 }
 
 .delivery-container {
     display:flex;
     flex: 1 0.5;
-    border: 1px solid black;
     margin: 10px;
-    background-color:#F7F7F8;
+    background-color: var(--delivery-color);
 }
 .delivery-container-block, .delivery-container-block-address{
-    border: 1px solid black;
     padding: 10px;
 }
 
@@ -94,6 +87,20 @@
     top: -10px;
     right: 0;
 
+}
+
+.delivery-amount{
+    font-weight: bold;
+    color:var(--primary-color);
+}
+.delivery-container-payment{
+    background-color: var(--delivery-color);
+    padding: 10px;
+    margin: 10px;
+}
+
+.logo-delivery-container{
+    margin-left: 40px;
 }
 
 

@@ -18,6 +18,7 @@ const AddDish: FC = () => {
         dispatch(getRestaurants())
     }, [])
 
+
     const submit: any = async (data: IDish) => {
         const formData = new FormData();
         formData.append('image', data.image[0])

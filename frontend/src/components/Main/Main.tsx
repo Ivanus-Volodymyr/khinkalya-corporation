@@ -1,14 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import {BarChart} from "../BarChart/BarChart";
+import { BarChart } from "../BarChart/BarChart";
 
 const Main = () => {
 
-    return (
-        <div>
-            <BarChart  />
-        </div>
-    );
+  return (
+    <div>
+
+      <BarChart />
+    </div>
+  );
 };
 
 export { Main };

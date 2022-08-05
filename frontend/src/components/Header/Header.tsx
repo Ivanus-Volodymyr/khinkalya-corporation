@@ -26,7 +26,7 @@ const Header: FC = () => {
     dispatch(getLocality());
    
     access && !currentUser.name &&  !user.name && dispatch(getCurrentUser(access));
-  }, [refresh, currentUser, user, access]);
+  }, [refresh, currentUser, user, access,dispatch]);
   const [restaurantId, setRestaurantId] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {

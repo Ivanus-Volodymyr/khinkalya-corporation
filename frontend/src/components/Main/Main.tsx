@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import {BarChart} from "../BarChart/BarChart";
-import Loader from "../Loader/Loader";
+import { BarChart } from "../BarChart/BarChart";
 
 const Main = () => {
 
-    return (
-        <div>
-<Loader/>
-            {/*<BarChart  />*/}
-        </div>
-    );
+  return (
+    <div>
+
+      <BarChart />
+    </div>
+  );
 };
 
 export { Main };

@@ -5,7 +5,7 @@ import "./About.css";
 const About:FC = () => {
   return (
     <div className={'about-container'}>
-     <img  src="/image-for-header/img.png" alt={"khinkalnya"}/>
+     <img src="/image-for-footer/img.png" alt={"khinkalnya"}/>
       <div>
         <h2>Хінкальня — мережа душевних ресторанів грузинської кухні</h2>
         <p>Хінкальня™ — найбільша міжнародна мережа гостинних ресторанів із лаконічним меню хітів грузинської кухні, головною стравою якого є хінкалі — приправлені спеціями, соковиті м’ясні мішечки з тугого тіста.</p>

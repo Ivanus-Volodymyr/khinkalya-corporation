@@ -4,11 +4,11 @@ import 'antd/dist/antd.css';
 import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
-
 import {
       Admin,
+      About,
       AddDish,
-      Layout,
+      LayoutComponent,
       Main,
       UserLogin,
       UserRegistration,

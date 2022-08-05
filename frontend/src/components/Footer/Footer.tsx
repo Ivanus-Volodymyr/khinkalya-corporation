@@ -50,8 +50,8 @@ const FooterComponent: FC = () => {
             </a>
           </div>
           <div className="payment">
-            <img  src="/image-for-header/visa.svg" alt="visa" width={'50px'} height={'30px'}/>
-            <img src="/image-for-header/mastercard.svg" alt="mastercard" width={'50px'} height={'30px'}/>
+            <img src="/image-for-footer/visa.svg" alt="visa" width={'50px'} height={'30px'}/>
+            <img src="/image-for-footer/mastercard.svg" alt="mastercard" width={'50px'} height={'30px'}/>
           </div>
         </div>
       <FooterModal>

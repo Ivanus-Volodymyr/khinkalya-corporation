@@ -164,9 +164,7 @@ const authSlice = createSlice({
         state.refreshToken = undefined;
         state.user = {};
         state.status = undefined;
-
-        // state.isLoginActive = false;
-        // state.isRegisterActive = false;
+        
         localStorage.clear();
       },
     );

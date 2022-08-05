@@ -1,7 +1,6 @@
 import { axiosService } from './axios.service';
 import { urls } from '../constants';
 import { IUser, IAuthResponseApi, ITokensPair } from '../interfaces';
-import { AxiosResponse } from 'axios';
 
 export const authService = {
   registration: (data: IUser) =>

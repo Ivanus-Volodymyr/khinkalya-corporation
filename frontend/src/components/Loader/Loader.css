@@ -1,18 +1,18 @@
 .lds-hourglass {
     display: flex;
     align-items: center;
-    /*width: 200px;*/
-    /*height: 200px;*/
+    width: 200px;
+    height: 300px;
 }
 .lds-hourglass:after {
     content: " ";
     display: block;
     border-radius: 50%;
     width: 0;
-    height: 0;
+    height: 0px;
     margin: 8px;
     box-sizing: border-box;
-    border: 32px solid #fff;
+    border: 75px solid #fff;
     border-color: #d71818 transparent #b61515 transparent;
     animation: lds-hourglass 1.2s infinite;
 }

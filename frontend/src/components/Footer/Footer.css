@@ -1,8 +1,26 @@
-/*.footer{*/
-/*    position: absolute;*/
-/*    bottom: 0;*/
-/*    width: 100%;*/
-/*    padding-top: 40px;*/
-/*    padding-bottom: 40px;*/
-/*    align-items: center;*/
-/*}*/
+
+.footer{
+    background-color: var(--primary-color);
+    display:flex;
+    justify-content: space-between;
+    color: var(--secondary-color);
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    padding: 10px 30px;
+}
+
+.footer > div.footer-item > div{
+    padding: 10px;
+    cursor: pointer;
+}
+
+.footer > div.footer-item > a {
+    color: var(--secondary-color);
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 10px;
+}
+.icons-container > a{
+    padding-right: 10px;
+}

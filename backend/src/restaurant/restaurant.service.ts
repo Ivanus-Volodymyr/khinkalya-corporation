@@ -8,8 +8,16 @@ import { S3Service } from "../s3/s3.service";
 export class RestaurantService {
   constructor(private prismaService: PrismaService, private s3: S3Service) {}
 
-  public async getRestaurant(): Promise<Restaurant[]> {
+  public async getRestaurants(): Promise<Restaurant[]> {
     return this.prismaService.restaurant.findMany();
+  }
+
+  public async getRestaurantByID(restaurantId: string): Promise<Restaurant> {
+    return this.prismaService.restaurant.findUnique({
+      where: {
+        id: +restaurantId,
+      },
+    })
   }
 
   public async addRestaurant(data: Restaurant, file): Promise<Restaurant> {

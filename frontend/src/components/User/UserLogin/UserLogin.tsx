@@ -1,6 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from "react";
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Input } from 'antd';
 
 import { IUser } from '../../../interfaces';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -11,6 +13,8 @@ import { UserGoogleLogin } from '../UserGoogleLogin/UserGoogleLogin';
 const UserLogin: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [password, setPassword] = useState("");
+
   const checkRole: any = async () => {
     const role = await localStorage.getItem('role');
     if (role === 'user') {
@@ -23,7 +27,14 @@ const UserLogin: FC = () => {
   };
 
   const { register, handleSubmit, reset } = useForm<Partial<IUser>>();
+
+  const onSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+   setPassword(e.target.value);
+  }
+
   const onSubmitForm = async (data: Partial<IUser>) => {
+    data.password = password;
+
     dispatch(setLoginActive());
     await dispatch(userLogin(data));
 
@@ -40,8 +51,10 @@ const UserLogin: FC = () => {
         </div>
 
         <div className={'logIn-content'}>
-          <label>Password</label>
-          <input type="text" {...register('password')} />
+          <label>Пароль</label>
+          <Input.Password {...register('password')} onChange={onSetPassword}
+            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          />
         </div>
 
         <div className="btn-container">

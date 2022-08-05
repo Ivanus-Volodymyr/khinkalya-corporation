@@ -29,13 +29,13 @@ export const getLocality = createAsyncThunk(
     }
   },
 );
-export const getRestaurant = createAsyncThunk(
+export const getRestaurants = createAsyncThunk(
   'admin/AddDish',
   async (_, { dispatch }) => {
     try {
-      const { data } = await adminService.getRestaurant();
+      const { data } = await adminService.getRestaurants();
       if (data) {
-        dispatch(setRestaurantData(data));
+        dispatch(setRestaurantsData(data));
       }
     } catch (e) {
       console.log(e);
@@ -45,7 +45,7 @@ export const getRestaurant = createAsyncThunk(
 
 export const addRestaurant = createAsyncThunk(
   'admin/addRestaurant',
-  async (data: IRestaurant, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       await adminService.addRestaurant(data);
     } catch (e) {
@@ -55,7 +55,7 @@ export const addRestaurant = createAsyncThunk(
 );
 export const addLocality = createAsyncThunk(
   'admin/AddLocality',
-  async (data: ILocality, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       await adminService.addLocality(data);
     } catch (e) {
@@ -65,7 +65,7 @@ export const addLocality = createAsyncThunk(
 );
 export const addDish = createAsyncThunk(
   'admin/AddDish',
-  async (data: IDish, { dispatch }) => {
+  async (data: any, { dispatch }) => {
     try {
       await adminService.addDish(data);
     } catch (e) {
@@ -81,7 +81,7 @@ const adminSlice = createSlice({
     setLocalityData: (state, action: PayloadAction<ILocality[]>) => {
       state.locality = action.payload;
     },
-    setRestaurantData: (state, action: PayloadAction<ILocality[]>) => {
+    setRestaurantsData: (state, action: PayloadAction<ILocality[]>) => {
       state.restaurant = action.payload;
     },
   },
@@ -95,5 +95,5 @@ const adminSlice = createSlice({
   },
 });
 const adminReducer = adminSlice.reducer;
-export default adminReducer;
-export const { setLocalityData, setRestaurantData } = adminSlice.actions;
+export {adminReducer};
+export const { setLocalityData, setRestaurantsData } = adminSlice.actions;

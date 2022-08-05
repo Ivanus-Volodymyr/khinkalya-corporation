@@ -40,18 +40,17 @@ const HeaderComponent: FC = () => {
     dispatch(getRestaurants());
     dispatch(getLocality());
 
-
-
     access &&
       !currentUser.name &&
       !user.name &&
       dispatch(getCurrentUser(access));
+
   }, [refresh, currentUser, user, access,dispatch]);
+
 
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
-
   };
 
   return (
@@ -67,20 +66,9 @@ const HeaderComponent: FC = () => {
             />
           </a>
         </div>
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
-          <Link to={'/promotions'}>
-            <img
-              src="/image-for-header/discount.svg"
-              width={'80px'}
-              height={'40px'}
-              alt="promotions"
-            />
-          </Link>
-          <div>Акції</div>
-        </div>
         {locality &&
           locality.map((value) => (
-            <div style={{display:'flex',flexDirection:"column",alignItems:"center"}} key={value.id}>
+            <div key={value.id}>
               <Link to={'/dish/' + value.id.toString()}>
                 {' '}
                 <img
@@ -93,7 +81,6 @@ const HeaderComponent: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
-
         <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
           <Link to={'/about'}>
             <img

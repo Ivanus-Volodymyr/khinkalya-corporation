@@ -72,6 +72,17 @@ const Header: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
+        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+          <Link to={'/about'}>
+            <img
+              src="/image-for-header/information.svg"
+              width={'80px'}
+              height={'40px'}
+              alt="information"
+            />
+          </Link>
+          <div>Інформація</div>
+        </div>
         <FormControl style={{width:'250px'}} >
         <InputLabel >Виберіть ресторан</InputLabel>
         <Select

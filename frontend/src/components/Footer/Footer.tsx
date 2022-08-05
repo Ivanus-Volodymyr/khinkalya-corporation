@@ -30,9 +30,9 @@ const FooterComponent: FC = () => {
           <div>
             Політика конфеденційності
           </div>
-          <div>
+          <Link to={'delivery'}>
             Доставка і оплата
-          </div>
+          </Link>
         </div>
         <div className={'footer-item'}>
           <div onClick={() => dispatch(setReviewActive())}>

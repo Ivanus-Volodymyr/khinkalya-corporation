@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { getAllDishByLocalityId } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Dish } from "../Dish/Dish";
-import Loader from "../Loader/Loader";
 
 const DishList: FC = () => {
   const { result, status, item } = useAppSelector(state => state.dishReducer);
@@ -14,15 +13,13 @@ const DishList: FC = () => {
     if (id) {
       dispatch(getAllDishByLocalityId(id));
     }
-  }, [id, item, dispatch]);
+  }, [id,item, dispatch]);
 
   return (
-    <div>
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-        {status === "Loading" && <Loader />}
-      </div>
-      <div style={{display:'flex',flexDirection: "row"}}>{result && status === "fulfilled" &&
-        result.map(results => <Dish key={results.id} results={results} />)}</div>
+    <div style={{ display: "flex" }}>
+      {status === "Loading" && <h1>Loading...</h1>}
+      {result && status === "fulfilled" &&
+        result.map(results => <Dish key={results.id} results={results} />)}
     </div>
   );
 };

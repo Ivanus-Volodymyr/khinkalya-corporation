@@ -40,20 +40,17 @@ const HeaderComponent: FC = () => {
     dispatch(getRestaurants());
     dispatch(getLocality());
 
-
-
     access &&
       !currentUser.name &&
       !user.name &&
       dispatch(getCurrentUser(access));
-  }, [refresh, currentUser, user, access,dispatch]);
+  }, [refresh, currentUser, user, access]);
   const [restaurantId, setRestaurantId] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
     setRestaurantId(event.target.value as string);
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
-
   };
 
   return (
@@ -69,20 +66,9 @@ const HeaderComponent: FC = () => {
             />
           </a>
         </div>
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
-          <Link to={'/promotions'}>
-            <img
-              src="/image-for-header/discount.svg"
-              width={'80px'}
-              height={'40px'}
-              alt="promotions"
-            />
-          </Link>
-          <div>Акції</div>
-        </div>
         {locality &&
           locality.map((value) => (
-            <div style={{display:'flex',flexDirection:"column",alignItems:"center"}} key={value.id}>
+            <div key={value.id}>
               <Link to={'/dish/' + value.id.toString()}>
                 {' '}
                 <img
@@ -95,27 +81,15 @@ const HeaderComponent: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
-
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
-          <Link to={'/about'}>
-            <img
-              src="/image-for-header/information.svg"
-              width={'80px'}
-              height={'40px'}
-              alt="information"
-            />
-          </Link>
-          <div>Інформація</div>
-        </div>
-        <FormControl style={{width:'250px'}} >
-        <InputLabel >Виберіть ресторан</InputLabel>
-        <Select
-          onChange={handleChange}
-          >
-            {restaurant && restaurant.map(result =>
-              <MenuItem key={result.id} value={result.id}>{result.name}
-              </MenuItem>)}
-
+        <FormControl style={{ width: '250px' }}>
+          <InputLabel>Виберіть ресторан</InputLabel>
+          <Select onChange={handleChange}>
+            {restaurant &&
+              restaurant.map((result) => (
+                <MenuItem key={result.id} value={result.id}>
+                  {result.name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
         <div>
@@ -152,12 +126,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-
-      <hr/>
-    </div>
-
     </header>
-
   );
 };
 

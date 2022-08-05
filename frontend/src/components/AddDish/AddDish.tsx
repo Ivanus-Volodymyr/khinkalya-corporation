@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
 
-import { addDish, getLocality, getRestaurant } from "../../store";
+import { addDish, getLocality, getRestaurants } from "../../store";
 import { IDish } from "../../interfaces";
 import "./AddDish.css";
 
@@ -15,7 +15,7 @@ const AddDish: FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(getLocality());
-    dispatch(getRestaurant());
+    dispatch(getRestaurants());
   }, []);
 
   const submit: any = async (data: IDish) => {

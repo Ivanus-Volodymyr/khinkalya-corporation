@@ -47,10 +47,8 @@ const HeaderComponent: FC = () => {
       !user.name &&
       dispatch(getCurrentUser(access));
   }, [refresh, currentUser, user, access,dispatch]);
-  const [restaurantId, setRestaurantId] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
-    setRestaurantId(event.target.value as string);
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
 
@@ -152,12 +150,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-
-      <hr/>
-    </div>
-
     </header>
-
   );
 };
 

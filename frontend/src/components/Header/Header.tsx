@@ -104,12 +104,13 @@ const HeaderComponent: FC = () => {
         </div>
         <div>
           <div>
-            {user && <div>{user.name}</div>}
-            {currentUser && <div>{currentUser.name}</div>}
+            {user && access && <div>{user.name}</div>}
+            {currentUser && access && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {
-              dispatch(setLoginActive());
+
+              !access && dispatch(setLoginActive());
 
               if (access && request)
                 dispatch(userLogout({ accessToken: request.access }));

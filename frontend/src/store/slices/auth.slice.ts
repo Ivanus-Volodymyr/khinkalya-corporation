@@ -162,8 +162,8 @@ const authSlice = createSlice({
       state.user = {};
       state.status = undefined;
 
-      state.isLoginActive = false;
-      state.isRegisterActive = false;
+      // state.isLoginActive = false;
+      // state.isRegisterActive = false;
       localStorage.clear();
     });
 

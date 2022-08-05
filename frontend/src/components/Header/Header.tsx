@@ -48,6 +48,7 @@ const HeaderComponent: FC = () => {
   }, [refresh, currentUser, user, access,dispatch]);
 
 
+
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
@@ -81,6 +82,7 @@ const HeaderComponent: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
+
         <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
           <Link to={'/about'}>
             <img

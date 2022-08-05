@@ -1,14 +1,14 @@
 import { axiosService } from './axios.service';
 import { urls } from '../constants';
-import {  ILocality } from '../interfaces';
-import { IRestaurant } from "../interfaces/restaurant.interface";
+import { IDish, ILocality } from '../interfaces';
 
 export const adminService = {
-  addDish: (data: FormData) => axiosService.post<FormData>(urls.dish, data),
+  addDish: (data: IDish) => axiosService.post<any>(urls.dish, data),
   getLocality: () => axiosService.get<ILocality[]>(urls.locality),
-
-  addLocality: (data: FormData) => axiosService.post<FormData>(urls.locality, data),
-  getRestaurant: () => axiosService.get<IRestaurant[]>(urls.restaurant),
-  addRestaurant: (data: FormData) => axiosService.post<FormData>(urls.restaurant, data),
+  getDishByLocalityId: (id: string) =>
+    axiosService.get<IDish[]>(urls.dish + '/locality/' + `${id}`),
+  addLocality: (data: any) => axiosService.post<any>(urls.locality, data),
+  getRestaurants: () => axiosService.get<any>(urls.restaurants),
   getRestaurantByID:(id: string) => axiosService.get<any>(urls.restaurants + id),
+  addRestaurant: (data: any) => axiosService.post<any>(urls.restaurants, data),
 };

@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-undef */
 import React from 'react';
+import 'antd/dist/antd.css';
 import { Route, Routes } from 'react-router-dom';
+
 import './App.css';
 
 import {
@@ -21,7 +23,7 @@ function App() {
 
     return (
       <Routes>
-        <Route path={"/"} element={<Layout/>}>
+        <Route path={"/"} element={<LayoutComponent/>}>
           <Route path={'/main'} element={<Main/>}></Route>
           <Route path={'/auth/registration'} element={<UserRegistration/>}></Route>
           <Route path={'/auth/login'} element={<UserLogin/>}></Route>
@@ -32,6 +34,7 @@ function App() {
           <Route path={'/cart'} element={<Cart/>}></Route>
           <Route path={'/cart/orderDone'} element={<OrderDone/>}></Route>
           <Route path={'/delivery'} element={<DeliveryInfo/>}></Route>
+          <Route path={'/about'} element={<About/>}></Route>
         </Route>
       </Routes>
     );

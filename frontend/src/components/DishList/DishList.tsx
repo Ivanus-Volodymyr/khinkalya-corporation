@@ -1,11 +1,12 @@
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import { getAllDishByLocalityId } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Dish } from "../Dish/Dish";
 
 const DishList: FC = () => {
-  const { result, status,item } = useAppSelector(state => state.dishReducer);
+  const { result, status, item } = useAppSelector(state => state.dishReducer);
   const { id } = useParams();
   const dispatch = useAppDispatch();
   useEffect(() => {

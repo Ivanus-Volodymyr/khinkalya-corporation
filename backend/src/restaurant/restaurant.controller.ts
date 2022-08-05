@@ -14,13 +14,18 @@ import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Restaurant } from "@prisma/client";
 
-@Controller("restaurant")
+@Controller("restaurants")
 export class RestaurantController {
   constructor(private restaurantService: RestaurantService) {}
 
   @Get()
-  GetRestaurant() {
-    return this.restaurantService.getRestaurant();
+  GetRestaurants() {
+    return this.restaurantService.getRestaurants();
+  }
+
+  @Get("/:id")
+  GetRestaurantByID(@Param("id") id: string) {
+    return this.restaurantService.getRestaurantByID(id);
   }
 
   @Post()

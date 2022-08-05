@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../core/prisma.service";
 import { Order } from "@prisma/client";
 import { DishService } from "../dish/dish.service";
-import { CreateOrderDto } from "./dro/create-order.dto";
+import { CreateOrderDto } from "./dto/create-order.dto";
 
 @Injectable()
 export class OrderService {

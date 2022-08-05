@@ -8,6 +8,7 @@ export const adminService = {
   getDishByLocalityId: (id: string) =>
     axiosService.get<IDish[]>(urls.dish + '/locality/' + `${id}`),
   addLocality: (data: any) => axiosService.post<any>(urls.locality, data),
-  getRestaurant: () => axiosService.get<any>(urls.restaurant),
-  addRestaurant: (data: any) => axiosService.post<any>(urls.restaurant, data),
+  getRestaurants: () => axiosService.get<any>(urls.restaurants),
+  getRestaurantByID:(id: string) => axiosService.get<any>(urls.restaurants + id),
+  addRestaurant: (data: any) => axiosService.post<any>(urls.restaurants, data),
 };

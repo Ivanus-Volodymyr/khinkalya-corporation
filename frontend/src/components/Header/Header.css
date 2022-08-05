@@ -1,9 +1,7 @@
 .header_menu{
-    margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    margin-right: 15px;
-    margin-left: 15px;
+    margin: 10px 15px 0;
     justify-content: space-around;
     align-content: center;
     align-items: center;

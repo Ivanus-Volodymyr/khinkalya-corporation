@@ -16,4 +16,7 @@ export * from './DishList/DishList';
 export * from './Cart/Cart';
 export * from './OrderDone/OrderDone';
 export * from './DeliveryInfo/DeliveryInfo';
+export * from './About/About';
+export * from './FooterModal/FooterModal';
+export * from './ReviewForm/ReviewForm'
 

@@ -138,7 +138,7 @@ const orderSlice = createSlice({
 });
 
 const orderReducer = orderSlice.reducer;
-export default orderReducer;
+export {orderReducer};
 export const {
     setOrder,
     clearState, inc, dec, removeItem } = orderSlice.actions;

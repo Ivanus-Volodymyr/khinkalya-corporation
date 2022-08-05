@@ -2,10 +2,10 @@ import React, { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 
+
 import { addDish, getLocality, getRestaurant } from "../../store";
 import { IDish } from "../../interfaces";
 import "./AddDish.css";
-
 
 const AddDish: FC = () => {
   const { locality, restaurant } = useAppSelector(state => state.adminReducer);
@@ -29,6 +29,7 @@ const AddDish: FC = () => {
     formData.append("restaurantId", data.restaurantId);
     await dispatch(addDish(formData));
   };
+
 
   return (
     <div>

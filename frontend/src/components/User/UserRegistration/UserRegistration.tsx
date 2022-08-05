@@ -1,16 +1,24 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from "react";
 import { useForm } from 'react-hook-form';
+import { Input } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+
 import { IUser } from '../../../interfaces';
 import { useAppDispatch } from '../../../hooks/redux';
 import { userRegistration } from '../../../store';
 import './UserRegistrtion.css';
-import { UserGoogleLogin } from "../UserGoogleLogin/UserGoogleLogin";
 
 const UserRegistration: FC = () => {
-  const { register, handleSubmit, reset } = useForm<IUser>();
+  const { register, handleSubmit } = useForm<IUser>();
   const dispatch = useAppDispatch();
+  const [password, setPassword] = useState("");
+
+  const onSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  }
 
   const onSubmitForm = async (data: IUser) => {
+    data.password = password;
     await dispatch(userRegistration(data));
   };
   return (
@@ -38,7 +46,9 @@ const UserRegistration: FC = () => {
 
         <div className={'signUp-content'}>
           <label>Пароль</label>
-          <input type="text" {...register('password')} />
+          <Input.Password {...register('password')} onChange={onSetPassword}
+                          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          />
         </div>
         <div className="btn-container">
           <button>Зареєструватись</button>

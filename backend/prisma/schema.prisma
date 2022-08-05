@@ -76,6 +76,13 @@ model Locality {
   createdAt DateTime @default(now())
 }
 
+model AddPromotions {
+  id           Int      @id @default(autoincrement())
+  image        String?
+  descriptions String
+  createdAt    DateTime @default(now())
+}
+
 model Ingredients {
   id     Int    @id @default(autoincrement())
   name   String

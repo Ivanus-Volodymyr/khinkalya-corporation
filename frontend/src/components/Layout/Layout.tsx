@@ -14,4 +14,4 @@ const LayoutComponent: FC = () => {
   );
 };
 
-export { LayoutComponent};
+export { LayoutComponent };

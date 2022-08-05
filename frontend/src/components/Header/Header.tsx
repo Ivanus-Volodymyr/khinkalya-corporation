@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { Link,  useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Header.css';
 
@@ -109,7 +109,6 @@ const HeaderComponent: FC = () => {
           </div>
           <button
             onClick={() => {
-
               !access && dispatch(setLoginActive());
 
               if (access && request)

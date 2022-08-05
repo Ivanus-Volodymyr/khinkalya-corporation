@@ -1,5 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { adminReducer, authReducer, dishReducer, orderReducer, reviewReducer, userReducer } from "./slices";
+import {
+  adminReducer,
+  authReducer,
+  dishReducer,
+  orderReducer,
+  reviewReducer,
+  userReducer,
+} from './slices';
 
 const rootReducer = combineReducers({
   authReducer,

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { adminService } from '../../services/admin.service';
 import { IDish, ILocality } from '../../interfaces';
-import { IRestaurant } from "../../interfaces/restaurant.interface";
+import { IRestaurant } from '../../interfaces/restaurant.interface';
 
 const initialState = {
   result: [],
@@ -95,5 +95,5 @@ const adminSlice = createSlice({
   },
 });
 const adminReducer = adminSlice.reducer;
-export {adminReducer};
+export { adminReducer };
 export const { setLocalityData, setRestaurantsData } = adminSlice.actions;

@@ -1,7 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Input } from "antd";
-import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Input } from 'antd';
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 
 import { IUser } from '../../../interfaces';
 import { useAppDispatch } from '../../../hooks/redux';
@@ -11,11 +11,11 @@ import './UserRegistrtion.css';
 const UserRegistration: FC = () => {
   const { register, handleSubmit } = useForm<IUser>();
   const dispatch = useAppDispatch();
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const onSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-  }
+  };
 
   const onSubmitForm = async (data: IUser) => {
     data.password = password;
@@ -46,8 +46,12 @@ const UserRegistration: FC = () => {
 
         <div className={'signUp-content'}>
           <label>Пароль</label>
-          <Input.Password {...register('password')} onChange={onSetPassword}
-                          iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          <Input.Password
+            {...register('password')}
+            onChange={onSetPassword}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
           />
         </div>
         <div className="btn-container">

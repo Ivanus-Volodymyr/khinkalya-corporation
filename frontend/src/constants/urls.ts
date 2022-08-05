@@ -11,6 +11,7 @@ export const urls = {
   logout: '/auth/logout',
   dish: '/dish',
   locality: '/locality',
-  restaurant: '/restaurant',
+  restaurants: '/restaurants',
   order: '/order',
+  reviews: '/reviews',
 };

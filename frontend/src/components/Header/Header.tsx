@@ -1,20 +1,35 @@
 import React, { FC, useEffect } from 'react';
-import { Link, useNavigate } from "react-router-dom";
+import { Link,  useNavigate  } from 'react-router-dom';
 
 import './Header.css';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getCurrentUser, getLocality, getRestaurant, setLoginActive, userLogout } from "../../store";
+import {
+  getCurrentUser,
+  getLocality,
+  getRestaurants,
+  setLoginActive,
+  userLogout,
+} from '../../store';
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 
-const Header: FC = () => {
+const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
   );
-  const { locality,restaurant } = useAppSelector((state) => state.adminReducer);
+  const { locality, restaurant } = useAppSelector(
+    (state) => state.adminReducer,
+  );
   const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
   const refresh = localStorage.getItem('refresh');
@@ -22,19 +37,27 @@ const Header: FC = () => {
   const request = { ...user, access };
   const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getRestaurant())
+    dispatch(getRestaurants());
     dispatch(getLocality());
-   
-    access && !currentUser.name &&  !user.name && dispatch(getCurrentUser(access));
+
+
+
+    access &&
+      !currentUser.name &&
+      !user.name &&
+      dispatch(getCurrentUser(access));
   }, [refresh, currentUser, user, access,dispatch]);
+  const [restaurantId, setRestaurantId] = React.useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
-    localStorage.setItem('restaurantId',event.target.value as string)
-    navigate('/main')
+    setRestaurantId(event.target.value as string);
+    localStorage.setItem('restaurantId', event.target.value as string);
+    navigate('/main');
+
   };
 
   return (
-    <div>
+    <header>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -72,6 +95,7 @@ const Header: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
+
         <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
           <Link to={'/about'}>
             <img
@@ -91,6 +115,7 @@ const Header: FC = () => {
             {restaurant && restaurant.map(result =>
               <MenuItem key={result.id} value={result.id}>{result.name}
               </MenuItem>)}
+
           </Select>
         </FormControl>
         <div>
@@ -106,7 +131,7 @@ const Header: FC = () => {
         <div>
           <div>
             {user && <div>{user.name}</div>}
-            { currentUser && <div>{currentUser.name}</div> }
+            {currentUser && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {
@@ -127,9 +152,13 @@ const Header: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
+
       <hr/>
     </div>
+
+    </header>
+
   );
 };
 
-export { Header };
+export { HeaderComponent };

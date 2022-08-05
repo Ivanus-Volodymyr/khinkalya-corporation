@@ -189,6 +189,6 @@ const authSlice = createSlice({
 });
 
 const authReducer = authSlice.reducer;
-export default authReducer;
+export {authReducer};
 export const { setModalActive, setLoginActive, setRegisterActive } =
   authSlice.actions;

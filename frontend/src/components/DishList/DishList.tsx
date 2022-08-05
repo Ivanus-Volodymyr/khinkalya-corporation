@@ -1,5 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { useParams } from "react-router-dom";
+
 import { getAllDishByLocalityId } from "../../store";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { Dish } from "../Dish/Dish";

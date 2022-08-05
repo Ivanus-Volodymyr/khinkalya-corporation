@@ -78,7 +78,7 @@ const Header: FC = () => {
               src="/image-for-header/information.svg"
               width={'80px'}
               height={'40px'}
-              alt="information"
+              alt="informations"
             />
           </Link>
           <div>Інформація</div>

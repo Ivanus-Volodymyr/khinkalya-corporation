@@ -3,7 +3,7 @@ import { urls } from '../constants';
 import { IDish, ILocality } from '../interfaces';
 
 export const adminService = {
-  addDish: (data: IDish) => axiosService.post<any>(urls.dish, data),
+  addDish: (data: FormData) => axiosService.post<FormData>(urls.dish, data),
   getLocality: () => axiosService.get<ILocality[]>(urls.locality),
   getDishByLocalityId: (id: string) =>
     axiosService.get<IDish[]>(urls.dish + '/locality/' + `${id}`),

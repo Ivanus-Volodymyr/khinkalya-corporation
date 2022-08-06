@@ -18,8 +18,8 @@
     "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "5.10.2",
-    "axios": "^0.27.2",
     "antd": "^4.20.7",
+    "axios": "^0.27.2",
     "chart.js": "^3.8.0",
     "eslint": "^8.3.0",
     "eslint-config-prettier": "8.1.0",
@@ -30,6 +30,7 @@
     "eslint-plugin-react": "7.27.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-webpack-plugin": "^3.1.1",
+    "generate-password": "^1.7.0",
     "google-auth-library": "^8.1.1",
     "jasmine-core": "^4.2.0",
     "prettier": "2.5.1",
@@ -48,7 +49,8 @@
   },
   "devDependencies": {
     "@types/react-calendar": "^3.5.1",
-    "@types/react-chartjs-2": "^2.5.7"
+    "@types/react-chartjs-2": "^2.5.7",
+    "@types/react-geocode": "^0.2.1"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx}": [

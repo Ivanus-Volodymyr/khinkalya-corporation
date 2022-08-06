@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC } from "react";
 import { CredentialResponse, GoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,7 @@ const UserGoogleLogin: FC = () => {
         dispatch(setLoginActive());
         navigate(redirectPage);
       }
-    } catch (error) {
+    }catch (error){
       alert('Спробуй ще раз 1!');
     }
   };

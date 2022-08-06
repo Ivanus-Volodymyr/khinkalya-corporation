@@ -15,3 +15,5 @@ export const urls = {
   order: '/order',
   reviews: '/reviews',
 };
+
+export const mapURL = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}`;

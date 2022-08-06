@@ -4,10 +4,10 @@ import { decodeToken } from 'react-jwt';
 import {
   IAuthResponse,
   IAuthResponseApi,
-  ILogoutRequest,
+  ILogoutRequest, IPosition,
   ITokenData,
-  IUser,
-} from '../../interfaces';
+  IUser
+} from "../../interfaces";
 import { authService } from '../../services/auth.service';
 import { GoogleSignupRequest } from '../../interfaces/google-request.interface';
 
@@ -72,11 +72,12 @@ export const userGoogleLogin = createAsyncThunk<
   IAuthResponseApi | undefined,
   GoogleSignupRequest
 >('auth/google/login', async (response) => {
+
   if ('clientId' in response) {
     try {
       const apiToken = response.token || '';
-
-      const { data } = await authService.googleLogin(apiToken);
+      const city = localStorage.getItem('city') as string;
+      const { data } = await authService.googleLogin(apiToken, city);
 
       return data;
     } catch (e) {
@@ -86,6 +87,16 @@ export const userGoogleLogin = createAsyncThunk<
     return undefined;
   }
 });
+
+export const getGeolocation = createAsyncThunk<string, IPosition>('auth/geolocation', async(position) => {
+  try{
+    const {data} = await  authService.getGeolocation(position.lat.toString(),position.lng.toString());
+    return data.plus_code.compound_code;
+  } catch(e){
+    console.log(e);
+    return '';
+  }
+})
 
 const authSlice = createSlice({
   name: 'auth',
@@ -164,7 +175,7 @@ const authSlice = createSlice({
         state.refreshToken = undefined;
         state.user = {};
         state.status = undefined;
-        
+
         localStorage.clear();
       },
     );
@@ -189,6 +200,10 @@ const authSlice = createSlice({
         }
       },
     );
+
+    builder.addCase(getGeolocation.fulfilled, (state, action) => {
+      action.payload !== '' && localStorage.setItem('city',action.payload.replace(',','').split(' ')[1] )
+    })
   },
 });
 

@@ -1,9 +1,15 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import generator from "generate-password";
 
 import { UserService } from "../user/user.service";
 import { TokenService } from "../auth/token/token.service";
-import { GoogleResponse, GoogleTokenInfo } from "./dto/google.dto";
+import {
+  GoogleResponse,
+  GoogleTokenInfo,
+  LoginGoogleDto,
+} from "./dto/google.dto";
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class GoogleService {
@@ -14,11 +20,11 @@ export class GoogleService {
   ) {}
 
   public async userGoogleLogin(
-    token: string
+    body: LoginGoogleDto
   ): Promise<GoogleResponse | undefined | Error> {
     try {
       const tokenInfo = (await this.jwtService.decode(
-        token
+        body.token
       )) as GoogleTokenInfo;
       const userDB = await this.userService.getUserByEmail(tokenInfo.email);
 
@@ -34,6 +40,19 @@ export class GoogleService {
         if (!tokenPair)
           return new HttpException("Bad GoogleLogin", HttpStatus.UNAUTHORIZED);
         else return { user, tokenPair };
+      } else {
+        const randomPassword = generator.generate({ length: 8, numbers: true });
+        const hashPassword = await bcrypt.hash(randomPassword, 10);
+        const googleUser = {
+          email: tokenInfo.email,
+          name: tokenInfo.given_name,
+          password: hashPassword,
+          avatar: tokenInfo.picture,
+          city: body.city,
+          age: 18,
+        };
+        const savedUser = await this.userService.createUser(googleUser);
+        return this.tokenService.generateToken(savedUser);
       }
     } catch (err) {
       return err;

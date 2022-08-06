@@ -6,11 +6,12 @@ import './Header.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
+  getGeolocation,
   getLocality,
   getRestaurants,
   setLoginActive,
-  userLogout,
-} from '../../store';
+  userLogout
+} from "../../store";
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
@@ -44,6 +45,15 @@ const HeaderComponent: FC = () => {
       !currentUser.name &&
       !user.name &&
       dispatch(getCurrentUser(access));
+
+    if(!access && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        dispatch(getGeolocation({lat, lng}));
+      })
+
+    }
   }, [refresh, currentUser, user, access, dispatch]);
   const [restaurantId, setRestaurantId] = React.useState('');
 
@@ -52,6 +62,8 @@ const HeaderComponent: FC = () => {
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
   };
+
+
 
   return (
     <header>
@@ -105,7 +117,7 @@ const HeaderComponent: FC = () => {
         <div>
           <div>
             {user && access && <div>{user.name}</div>}
-            {currentUser && access && <div>{currentUser.name}</div>}
+            {!user && currentUser && access && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {

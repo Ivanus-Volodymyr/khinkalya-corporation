@@ -15,3 +15,8 @@ export interface IAuthResponse {
 export interface ILogoutRequest extends Partial<IUser> {
   accessToken?: string;
 }
+
+export interface IPosition {
+  lat: number,
+  lng: number,
+}

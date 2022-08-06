@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { addPromotion } from "../../store";
 import { IPromotion } from "../../interfaces/promotion.interface";
 import { useAppDispatch } from "../../hooks/redux";
+import { TextField } from "@mui/material";
 
 const AddPromotions: FC = () => {
   const dispatch = useAppDispatch();
@@ -21,7 +22,13 @@ const AddPromotions: FC = () => {
           <input type="file" {...register("image")} />
         </div>
         <div>
-          <input type="text" placeholder={"descriptions"} {...register("descriptions")} />
+          <TextField
+            style={{margin:"10px"}}
+            id="outlined-multiline-static"
+            label="Текст Акції"
+            multiline
+            rows={4}
+          />
         </div>
         <button>Додати акцію</button>
       </form>

@@ -52,7 +52,12 @@ export class GoogleService {
           age: 18,
         };
         const savedUser = await this.userService.createUser(googleUser);
-        return this.tokenService.generateToken(savedUser);
+        const { tokenPair, user } = await this.tokenService.generateToken(
+          savedUser
+        );
+        if (!tokenPair)
+          return new HttpException("Bad GoogleLogin", HttpStatus.UNAUTHORIZED);
+        else return { user, tokenPair };
       }
     } catch (err) {
       return err;

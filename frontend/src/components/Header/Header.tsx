@@ -67,9 +67,20 @@ const HeaderComponent: FC = () => {
             />
           </a>
         </div>
+        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+          <Link to={'/promotions'}>
+            <img
+              src="/image-for-header/discount.svg"
+              width={'80px'}
+              height={'40px'}
+              alt="promotions"
+            />
+          </Link>
+          <div>Акції</div>
+        </div>
         {locality &&
           locality.map((value) => (
-            <div key={value.id}>
+            <div style={{display:'flex',flexDirection:"column",alignItems:"center"}} key={value.id}>
               <Link to={'/dish/' + value.id.toString()}>
                 {' '}
                 <img
@@ -139,6 +150,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
+      <hr/>
     </header>
   );
 };

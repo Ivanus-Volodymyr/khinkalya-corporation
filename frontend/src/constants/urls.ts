@@ -14,4 +14,5 @@ export const urls = {
   restaurants: '/restaurants',
   order: '/order',
   reviews: '/reviews',
+  promotions:'/promotions'
 };

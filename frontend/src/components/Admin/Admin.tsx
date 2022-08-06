@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getLocality, getUserById } from '../../store';
 import { AddLocality } from '../AddLocality/AddLocality';
 import { AddRestaurant } from '../AddRestautant/AddRestaurant';
+import { AddPromotions } from "../AddPromotions/AddPromotions";
 
 const Admin: FC = () => {
   const { user } = useAppSelector((state) => state.userReducer);
@@ -37,6 +38,7 @@ const Admin: FC = () => {
           <h2>{user.city}</h2>
         </div>
       )}
+      <AddPromotions/>
       <AddLocality />
       <AddRestaurant />
       <Link to={'addDish'}>

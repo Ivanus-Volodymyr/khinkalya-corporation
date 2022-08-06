@@ -18,4 +18,8 @@ export class AdminService {
   public async addDish(dish: Dish, file): Promise<Dish> {
     return this.dishService.createDish(dish, file);
   }
+
+  public async updateDish(file, dish: Partial<Dish>, id: string) {
+    return this.dishService.updateDishById(id, dish, file);
+  }
 }

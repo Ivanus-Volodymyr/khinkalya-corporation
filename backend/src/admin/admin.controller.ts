@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Param,
   Post,
   Put,
@@ -10,7 +11,7 @@ import {
 
 import { AdminService } from "./admin.service";
 import { FileInterceptor } from "@nestjs/platform-express";
-import { Dish } from "@prisma/client";
+import { Dish, Locality } from "@prisma/client";
 
 @Controller("admin")
 export class AdminController {
@@ -30,5 +31,26 @@ export class AdminController {
     @Param("id") id: string
   ) {
     return this.adminService.updateDish(file, dish, id);
+  }
+
+  @Post("locality")
+  @UseInterceptors(FileInterceptor("image"))
+  AddLocality(@Body() data: Locality, @UploadedFile() file) {
+    return this.adminService.addLocality(data, file);
+  }
+
+  @Put("locality/:id")
+  @UseInterceptors(FileInterceptor("image"))
+  updateLocality(
+    @Body() data: Locality,
+    @UploadedFile() file,
+    @Param("id") id: string
+  ) {
+    return this.adminService.updateLocality(id, data, file);
+  }
+
+  @Delete("locality/:id")
+  deleteLocality(@Param("id") id: string) {
+    return this.adminService.deleteLocality(id);
   }
 }

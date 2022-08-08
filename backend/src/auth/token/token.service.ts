@@ -43,6 +43,7 @@ export class TokenService {
         }),
       ]);
       const tokenPair = await this.saveToken({ access, refresh }, user.id);
+      console.log(tokenPair);
       return {
         user,
         tokenPair,

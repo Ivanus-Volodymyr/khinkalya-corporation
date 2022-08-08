@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Dish } from "@prisma/client";
+import { Dish, Locality } from "@prisma/client";
 
 import { PrismaService } from "../core/prisma.service";
 import { LocalityService } from "../locality/locality.service";
@@ -19,7 +19,27 @@ export class AdminService {
     return this.dishService.createDish(dish, file);
   }
 
-  public async updateDish(file, dish: Partial<Dish>, id: string) {
+  public async updateDish(
+    file,
+    dish: Partial<Dish>,
+    id: string
+  ): Promise<Dish> {
     return this.dishService.updateDishById(id, dish, file);
+  }
+
+  public async addLocality(data: Locality, file): Promise<Locality> {
+    return this.localityService.addLocality(data, file);
+  }
+
+  public async updateLocality(
+    id: string,
+    data: Partial<Locality>,
+    file
+  ): Promise<Locality> {
+    return this.localityService.updateLocalityById(data, id, file);
+  }
+
+  public async deleteLocality(id: string): Promise<Locality> {
+    return this.localityService.deleteById(id);
   }
 }

@@ -1,25 +1,23 @@
-import React, { FC, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { FC, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getLocality, getUserById } from '../../store';
-import { AddLocality } from '../AddLocality/AddLocality';
-import { AddRestaurant } from '../AddRestautant/AddRestaurant';
-import { AddPromotions } from "../AddPromotions/AddPromotions";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { getLocality, getUserById } from "../../store";
+import { Avatar } from "@mui/material";
+import { deepOrange } from "@mui/material/colors";
 
 const Admin: FC = () => {
   const { user } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
-
-  const role = localStorage.getItem('role');
+  const role = localStorage.getItem("role");
   useEffect(() => {
-    const id = localStorage.getItem('userId');
+    const id = localStorage.getItem("userId");
     dispatch(getLocality());
     if (id) dispatch(getUserById(id));
   }, []);
 
   const { locality } = useAppSelector((state) => state.adminReducer);
-  const array: any[] = [];
+  const array: number[] = [];
 
   for (let i = 0; i < locality.length; i++) {
     const datum = locality[i];
@@ -31,20 +29,25 @@ const Admin: FC = () => {
   console.log(array);
 
   return (
-    <div>
-      {role === 'admin' && (
+    <div style={{ display: "flex" }}>
+      {role === "user" && <h1>Тіки Адмін</h1>}
+      {role === "admin" && user && (
         <div>
+          <Avatar sx={{ background: deepOrange[500], width: 150, height: 150 }}>{user.name}</Avatar>
+          <img src={user.avatar} alt="" />
           <h1>{user.name}</h1>
-          <h2>{user.city}</h2>
+          <p> тел:{user.phone}</p>
+          <p> вік:{user.age}</p>
+          <p> email:{user.email}</p>
+          <p> місто:{user.city}</p>
+          <p> адреса:{user.address}</p>
         </div>
       )}
-      <AddPromotions/>
-      <AddLocality />
-      <AddRestaurant />
-      <Link to={'addDish'}>
-        <button>Добавити страву</button>
-      </Link>
-      {role === 'user' && <h1>Тіки Адмін</h1>}
+      <div>
+        <button>Users</button>
+        <button>Orders</button>
+        <button>Many</button>
+      </div>
     </div>
   );
 };

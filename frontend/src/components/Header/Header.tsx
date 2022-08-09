@@ -36,10 +36,9 @@ const HeaderComponent: FC = () => {
   const access = localStorage.getItem('access') as string;
   const request = { ...user, access };
   const navigate = useNavigate();
-  useEffect(() => {
+  useEffect( () => {
     dispatch(getRestaurants());
     dispatch(getLocality());
-
     access &&
       !currentUser.name &&
       !user.name &&
@@ -55,7 +54,7 @@ const HeaderComponent: FC = () => {
   };
 
   return (
-    <header>
+    <header style={{background:'white'}}>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -128,8 +127,8 @@ const HeaderComponent: FC = () => {
         </div>
         <div>
           <div>
-            {user && <div>{user.name}</div>}
-            {currentUser && <div>{currentUser.name}</div>}
+            {user && <Link to={'/users'}>{user.name}</Link>}
+            {currentUser && <Link to={'/admin'}>{currentUser.name}</Link>}
           </div>
           <button
             onClick={() => {

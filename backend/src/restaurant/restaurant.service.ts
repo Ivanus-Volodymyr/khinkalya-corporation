@@ -2,13 +2,24 @@ import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../core/prisma.service";
 import { Restaurant } from "@prisma/client";
 import { S3Service } from "../s3/s3.service";
+import { Restaurant } from "@prisma/client";
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../core/prisma.service";
 
 @Injectable()
 export class RestaurantService {
   constructor(private prismaService: PrismaService, private s3: S3Service) {}
 
-  public async getRestaurant(): Promise<Restaurant[]> {
+  public async getRestaurants(): Promise<Restaurant[]> {
     return this.prismaService.restaurant.findMany();
+  }
+
+  public async getRestaurantByID(restaurantId: string): Promise<Restaurant> {
+    return this.prismaService.restaurant.findUnique({
+      where: {
+        id: +restaurantId,
+      },
+    });
   }
 
   public async addRestaurant(data: Restaurant, file): Promise<Restaurant> {

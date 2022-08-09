@@ -6,7 +6,7 @@ const initialState = {
     result: [] as IDish[],
     status: 'Loading',
     dish: [] as IDish[],
-    item:1
+    item: 1
 }
 
 export const getAllDish = createAsyncThunk(
@@ -47,7 +47,6 @@ const dishSlice = createSlice({
         builder.addCase(getAllDishByLocalityId.fulfilled, (state, action) => {
             state.status = "fulfilled";
             const item = localStorage.getItem("restaurantId")|| 1;
-
             if (action.payload) {
                 state.result = action.payload.filter(value=>value.restaurantId===+item);
             }
@@ -61,6 +60,6 @@ const dishSlice = createSlice({
     }
 })
 const dishReducer = dishSlice.reducer;
-export default dishReducer;
+export {dishReducer};
 export const { } = dishSlice.actions;
 

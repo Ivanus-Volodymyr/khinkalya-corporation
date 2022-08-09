@@ -18,6 +18,8 @@ import { GoogleModule } from "./google/google.module";
 import { AdminMiddleware } from "./auth/middleware/admin_middleware";
 import { GoogleTokenMiddleware } from "./auth/middleware/google_middleware";
 import { OAuth2Client } from "google-auth-library";
+import { ReviewModule } from "./review/review.module";
+import { PromotionsModule } from './promotions/promotions.module';
 
 @Module({
   imports: [
@@ -31,6 +33,8 @@ import { OAuth2Client } from "google-auth-library";
     RestaurantModule,
     OrderModule,
     GoogleModule,
+    ReviewModule,
+    PromotionsModule,
   ],
   controllers: [AppController],
   providers: [

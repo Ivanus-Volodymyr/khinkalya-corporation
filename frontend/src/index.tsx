@@ -5,7 +5,6 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { setupStore } from './store';
-import axios from 'axios';
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(
@@ -19,7 +18,7 @@ root.render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Provider>,
+    </Provider>
   </GoogleOAuthProvider>
 
 );

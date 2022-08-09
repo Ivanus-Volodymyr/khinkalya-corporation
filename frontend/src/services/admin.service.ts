@@ -2,7 +2,6 @@ import { axiosService } from "./axios.service";
 import { urls } from "../constants";
 import { IDish, ILocality } from "../interfaces";
 import { IRestaurant } from "../interfaces/restaurant.interface";
-
 export const adminService = {
   addDish: (data: IDish) => axiosService.post<IDish>("admin" + urls.dish, data),
   updateDish:(data: Partial<IDish>)=> axiosService.put<IDish>("admin" + urls.dish, data),

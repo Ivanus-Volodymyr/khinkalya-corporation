@@ -1,6 +1,5 @@
 import { Injectable } from "@nestjs/common";
 import { Dish, Locality, Restaurant } from "@prisma/client";
-
 import { LocalityService } from "../locality/locality.service";
 import { RestaurantService } from "../restaurant/restaurant.service";
 import { DishService } from "../dish/dish.service";

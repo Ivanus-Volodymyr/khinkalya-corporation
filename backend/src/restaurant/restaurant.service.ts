@@ -1,6 +1,3 @@
-import { Injectable } from "@nestjs/common";
-import { PrismaService } from "../core/prisma.service";
-import { Restaurant } from "@prisma/client";
 import { S3Service } from "../s3/s3.service";
 import { Restaurant } from "@prisma/client";
 import { Injectable } from "@nestjs/common";

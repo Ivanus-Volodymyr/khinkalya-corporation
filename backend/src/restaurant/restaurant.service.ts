@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../core/prisma.service";
 import { Restaurant } from "@prisma/client";
-import { CreateRestaurantDto } from "./dto/create-restaurant.dto";
 import { S3Service } from "../s3/s3.service";
 
 @Injectable()
@@ -13,19 +12,34 @@ export class RestaurantService {
   }
 
   public async addRestaurant(data: Restaurant, file): Promise<Restaurant> {
-    const img = await this.s3.uploadFile(file);
-    return this.prismaService.restaurant.create({
-      data: {
-        ...data,
-        image: img.Location,
-      },
-    });
+    if (file) {
+      const img = await this.s3.uploadFile(file);
+      return this.prismaService.restaurant.create({
+        data: {
+          ...data,
+          image: img.Location,
+        },
+      });
+    }
+    return this.prismaService.restaurant.create({ data: data });
   }
 
   public async updateRestaurantById(
-    data: CreateRestaurantDto,
-    id: string
+    data: Partial<Restaurant>,
+    id: string,
+    file
   ): Promise<Restaurant> {
+    if (file) {
+      const img = await this.s3.uploadFile(file);
+      return this.prismaService.restaurant.update({
+        where: { id: Number(id) },
+        data: {
+          ...data,
+          image: img.Location,
+        },
+      });
+    }
+
     return this.prismaService.restaurant.update({
       where: { id: Number(id) },
       data: data,

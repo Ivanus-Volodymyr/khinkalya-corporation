@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { Dish, Locality } from "@prisma/client";
+import { Dish, Locality, Restaurant } from "@prisma/client";
 
-import { PrismaService } from "../core/prisma.service";
 import { LocalityService } from "../locality/locality.service";
 import { RestaurantService } from "../restaurant/restaurant.service";
 import { DishService } from "../dish/dish.service";
@@ -9,7 +8,6 @@ import { DishService } from "../dish/dish.service";
 @Injectable()
 export class AdminService {
   constructor(
-    private prismaService: PrismaService,
     private localityService: LocalityService,
     private restaurantService: RestaurantService,
     private dishService: DishService
@@ -27,6 +25,10 @@ export class AdminService {
     return this.dishService.updateDishById(id, dish, file);
   }
 
+  public async deleteDish(id: string) {
+    return this.dishService.deleteById(id);
+  }
+
   public async addLocality(data: Locality, file): Promise<Locality> {
     return this.localityService.addLocality(data, file);
   }
@@ -41,5 +43,21 @@ export class AdminService {
 
   public async deleteLocality(id: string): Promise<Locality> {
     return this.localityService.deleteById(id);
+  }
+
+  public async addRestaurant(data: Restaurant, file): Promise<Restaurant> {
+    return this.restaurantService.addRestaurant(data, file);
+  }
+
+  public async updateRestaurant(
+    data: Partial<Restaurant>,
+    id: string,
+    file
+  ): Promise<Restaurant> {
+    return this.restaurantService.updateRestaurantById(data, id, file);
+  }
+
+  public async deleteRestaurant(id: string): Promise<Restaurant> {
+    return this.restaurantService.deleteById(id);
   }
 }

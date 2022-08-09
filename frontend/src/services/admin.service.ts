@@ -2,6 +2,7 @@ import { axiosService } from "./axios.service";
 import { urls } from "../constants";
 import { IDish, ILocality } from "../interfaces";
 import { IRestaurant } from "../interfaces/restaurant.interface";
+import { IPromotion } from "../interfaces/promotion.interface";
 export const adminService = {
   addDish: (data: FormData) => axiosService.post<IDish>("admin" + urls.dish, data),
   updateDish:(data: Partial<IDish>)=> axiosService.put<IDish>("admin" + urls.dish, data),
@@ -12,5 +13,7 @@ export const adminService = {
   deleteLocality:(id: string)=> axiosService.delete<ILocality>("admin" + urls.locality + `${id}`),
   getRestaurants: () => axiosService.get<IRestaurant[]>(urls.restaurants),
   addRestaurant: (data: FormData) => axiosService.post<IRestaurant>("admin" + urls.restaurants, data),
+  addPromotion:(data:FormData)=>axiosService.post<FormData>(urls.promotions,data),
+  getPromotions:()=>axiosService.get<IPromotion[]>(urls.promotions),
   updateRestaurant:(id: string, data: Partial<IRestaurant>)=> axiosService.put<IRestaurant>("admin" + urls.restaurants + `${id}`, data)
 };

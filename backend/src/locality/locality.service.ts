@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Locality } from "@prisma/client";
 import { PrismaService } from "../core/prisma.service";
-import { CreateLocalityDto } from "./dto/create-locality.dto";
 import { S3Service } from "../s3/s3.service";
 
 @Injectable()
@@ -23,9 +22,17 @@ export class LocalityService {
   }
 
   public async updateLocalityById(
-    data: CreateLocalityDto,
-    id: string
+    data: Partial<Locality>,
+    id: string,
+    file
   ): Promise<Locality> {
+    if (file) {
+      const img = await this.s3.uploadFile(file);
+      return this.prismaService.locality.update({
+        where: { id: Number(id) },
+        data: { ...data, image: img.Location },
+      });
+    }
     return this.prismaService.locality.update({
       where: { id: Number(id) },
       data: data,

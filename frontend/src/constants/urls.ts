@@ -15,6 +15,7 @@ export const urls = {
   restaurants: '/restaurants',
   order: '/order',
   reviews: '/reviews',
+  promotions:'/promotions'
 };
 
 export const mapURL = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}`;

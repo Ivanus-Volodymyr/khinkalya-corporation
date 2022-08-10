@@ -37,7 +37,39 @@ export class DishService {
     return this.prismaService.dish.findMany();
   }
 
-  public async updateDishById(id: string, data: Partial<Dish>): Promise<Dish> {
+  public async updateDishById(
+    id: string,
+    data: Partial<Dish>,
+    file
+  ): Promise<Dish> {
+    if (file) {
+      const img = await this.s3.uploadFile(file);
+      return this.prismaService.dish.update({
+        where: { id: Number(id) },
+        data: {
+          ...data,
+          image: img.Location,
+          price: Number(data.price),
+          weight: Number(data.weight),
+          localityId: Number(data.localityId),
+          restaurantId: Number(data.restaurantId),
+        },
+      });
+    }
+
+    return this.prismaService.dish.update({
+      where: { id: Number(id) },
+      data: {
+        ...data,
+        weight: Number(data.weight),
+      },
+    });
+  }
+
+  public async updateDishByIdOnlyForCreateOrder(
+    id: string,
+    data: Partial<Dish>
+  ): Promise<Dish> {
     return this.prismaService.dish.update({
       where: { id: Number(id) },
       data: data,

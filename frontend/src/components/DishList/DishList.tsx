@@ -1,9 +1,11 @@
 import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { getAllDishByLocalityId } from '../../store';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { Dish } from '../Dish/Dish';
+import { getAllDishByLocalityId } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux";
+import { Dish } from "../Dish/Dish";
+import Loader from "../Loader/Loader";
+
 
 const DishList: FC = () => {
   const { result, status, item } = useAppSelector((state) => state.dishReducer);
@@ -16,11 +18,12 @@ const DishList: FC = () => {
   }, [id, item, dispatch]);
 
   return (
-    <div style={{ display: 'flex' }}>
-      {status === 'Loading' && <h1>Loading...</h1>}
-      {result &&
-        status === 'fulfilled' &&
-        result.map((results) => <Dish key={results.id} results={results} />)}
+    <div>
+      <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+        {status === "Loading" && <Loader />}
+      </div>
+      <div style={{display:'flex',flexDirection: "row"}}>{result && status === "fulfilled" &&
+        result.map(results => <Dish key={results.id} results={results} />)}</div>
     </div>
   );
 };

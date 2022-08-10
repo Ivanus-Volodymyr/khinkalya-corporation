@@ -20,27 +20,15 @@ const Dish: FC<{ results: IDish }> = ({ results }) => {
         <div>{results.weight}грам</div>
         <div>{results.price}грн</div>
       </div>
+            <div style={{display:'flex',flexDirection:'row'}}>
+                <button style={{height:"30px"}} onClick={() => setQuantity(quantity + 1)}>+</button>
+                <h1>{order.quantity>=1?order.quantity:1}</h1>
+                <button style={{height:"30px"}} onClick={() => setQuantity(quantity - 1)}>-</button>
+            </div>
+            <button onClick={() => dispatch(createOrder(order))}>Добавити в корзину</button>
 
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <button
-          style={{ height: '30px' }}
-          onClick={() => setQuantity(quantity + 1)}
-        >
-          +
-        </button>
-        <h1>{order.quantity}</h1>
-        <button
-          style={{ height: '30px' }}
-          onClick={() => setQuantity(quantity - 1)}
-        >
-          -
-        </button>
-      </div>
-      <button onClick={() => dispatch(createOrder(order))}>
-        Добавити в корзину
-      </button>
-    </div>
-  );
+        </div>
+    );
 };
 
 export { Dish };

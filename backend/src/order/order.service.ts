@@ -24,9 +24,12 @@ export class OrderService {
       const dishById = await this.dishService.getDishById(
         datum.dish.id.toString()
       );
-      await this.dishService.updateDishById(dishById.id.toString(), {
-        quantity_sold: dishById.quantity_sold + Number(datum.quantity),
-      });
+      await this.dishService.updateDishByIdOnlyForCreateOrder(
+        dishById.id.toString(),
+        {
+          quantity_sold: dishById.quantity_sold + Number(datum.quantity),
+        }
+      );
     }
 
     return this.prismaService.order.create({

@@ -37,10 +37,9 @@ const HeaderComponent: FC = () => {
   const access = localStorage.getItem('access') as string;
   const request = { ...user, access };
   const navigate = useNavigate();
-  useEffect(() => {
+  useEffect( () => {
     dispatch(getRestaurants());
     dispatch(getLocality());
-
     access &&
       !currentUser.name &&
       !user.name &&
@@ -56,10 +55,9 @@ const HeaderComponent: FC = () => {
 
     }
   }, [refresh, currentUser, user, access, dispatch]);
-  const [restaurantId, setRestaurantId] = React.useState('');
-
+      
+  const [restaurantId, setRestaurantId] = React.useState('');   
   const handleChange = (event: SelectChangeEvent) => {
-    setRestaurantId(event.target.value as string);
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
   };
@@ -67,7 +65,7 @@ const HeaderComponent: FC = () => {
 
 
   return (
-    <header>
+    <header style={{background:'white'}}>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -79,9 +77,20 @@ const HeaderComponent: FC = () => {
             />
           </a>
         </div>
+        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+          <Link to={'/promotions'}>
+            <img
+              src="/image-for-header/discount.svg"
+              width={'80px'}
+              height={'40px'}
+              alt="promotions"
+            />
+          </Link>
+          <div>Акції</div>
+        </div>
         {locality &&
           locality.map((value) => (
-            <div key={value.id}>
+            <div style={{display:'flex',flexDirection:"column",alignItems:"center"}} key={value.id}>
               <Link to={'/dish/' + value.id.toString()}>
                 {' '}
                 <img
@@ -94,15 +103,27 @@ const HeaderComponent: FC = () => {
               <div>{value.name}</div>
             </div>
           ))}
-        <FormControl style={{ width: '250px' }}>
-          <InputLabel>Виберіть ресторан</InputLabel>
-          <Select onChange={handleChange}>
-            {restaurant &&
-              restaurant.map((result) => (
-                <MenuItem key={result.id} value={result.id}>
-                  {result.name}
-                </MenuItem>
-              ))}
+
+        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+          <Link to={'/about'}>
+            <img
+              src="/image-for-header/information.svg"
+              width={'80px'}
+              height={'40px'}
+              alt="informations"
+            />
+          </Link>
+          <div>Інформація</div>
+        </div>
+        <FormControl style={{width:'250px'}} >
+        <InputLabel >Виберіть ресторан</InputLabel>
+        <Select
+          onChange={handleChange}
+          >
+            {restaurant && restaurant.map(result =>
+              <MenuItem key={result.id} value={result.id}>{result.name}
+              </MenuItem>)}
+
           </Select>
         </FormControl>
         <div>
@@ -139,6 +160,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
+      <hr/>
     </header>
   );
 };

@@ -4,10 +4,11 @@ import { decodeToken } from 'react-jwt';
 import {
   IAuthResponse,
   IAuthResponseApi,
-  ILogoutRequest, IPosition,
+  ILogoutRequest,
+  IPosition,
   ITokenData,
-  IUser
-} from "../../interfaces";
+  IUser,
+} from '../../interfaces';
 import { authService } from '../../services/auth.service';
 import { GoogleSignupRequest } from '../../interfaces/google-request.interface';
 
@@ -72,7 +73,6 @@ export const userGoogleLogin = createAsyncThunk<
   IAuthResponseApi | undefined,
   GoogleSignupRequest
 >('auth/google/login', async (response) => {
-
   if ('clientId' in response) {
     try {
       const apiToken = response.token || '';
@@ -88,15 +88,21 @@ export const userGoogleLogin = createAsyncThunk<
   }
 });
 
-export const getGeolocation = createAsyncThunk('auth/geolocation', async(position:IPosition) => {
-  try{
-    const res = await authService.getGeolocation(position.lat.toString(),position.lng.toString());
-    return res.data.plus_code.compound_code.replace(",", "").split(" ")[1];
-  } catch(e){
-    console.log(e);
-    return '';
-  }
-})
+export const getGeolocation = createAsyncThunk<string, IPosition>(
+  'auth/geolocation',
+  async (position: IPosition) => {
+    try {
+      const res = await authService.getGeolocation(
+        position.lat.toString(),
+        position.lng.toString(),
+      );
+      return res.data.plus_code.compound_code.replace(',', '').split(' ')[1];
+    } catch (e) {
+      console.log(e);
+      return '';
+    }
+  },
+);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -203,7 +209,7 @@ const authSlice = createSlice({
 
     builder.addCase(getGeolocation.fulfilled, (state, action) => {
       action.payload !== '' && localStorage.setItem('city', action.payload);
-    })
+    });
   },
 });
 

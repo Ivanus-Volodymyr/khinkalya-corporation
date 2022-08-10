@@ -11,6 +11,12 @@ export const authService = {
     axiosService.post<ITokensPair>(urls.refresh, { data: refresh }),
   logout: (accessToken: string) => axiosService.post(urls.logout, accessToken),
   googleLogin: (data: string, city: string) =>
-    axiosService.post<IAuthResponseApi>(urls.googleLogin, { token: data, city }),
-  getGeolocation:(latitude: string, longitude:string) => axiosService.get<any>(urls.geolocation + "?lat=" +`${latitude}` + "&lng=" + `${longitude}`)
+    axiosService.post<IAuthResponseApi>(urls.googleLogin, {
+      token: data,
+      city,
+    }),
+  getGeolocation: (latitude: string, longitude: string) =>
+    axiosService.get<any>(
+      urls.geolocation + '?lat=' + `${latitude}` + '&lng=' + `${longitude}`,
+    ),
 };

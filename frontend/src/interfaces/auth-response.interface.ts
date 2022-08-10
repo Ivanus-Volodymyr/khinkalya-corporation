@@ -17,6 +17,6 @@ export interface ILogoutRequest extends Partial<IUser> {
 }
 
 export interface IPosition {
-  lat: number,
-  lng: number,
+  lat: number;
+  lng: number;
 }

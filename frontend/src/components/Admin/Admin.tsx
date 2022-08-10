@@ -1,17 +1,17 @@
-import React, { FC, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { FC, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getLocality, getUserById } from "../../store";
-import { Avatar } from "@mui/material";
-import { deepOrange } from "@mui/material/colors";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getLocality, getUserById } from '../../store';
+import { Avatar } from '@mui/material';
+import { deepOrange } from '@mui/material/colors';
 
 const Admin: FC = () => {
   const { user } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
-  const role = localStorage.getItem("role");
+  const role = localStorage.getItem('role');
   useEffect(() => {
-    const id = localStorage.getItem("userId");
+    const id = localStorage.getItem('userId');
     dispatch(getLocality());
     if (id) dispatch(getUserById(id));
   }, []);
@@ -29,11 +29,13 @@ const Admin: FC = () => {
   console.log(array);
 
   return (
-    <div style={{ display: "flex" }}>
-      {role === "user" && <h1>Тіки Адмін</h1>}
-      {role === "admin" && user && (
+    <div style={{ display: 'flex' }}>
+      {role === 'user' && <h1>Тіки Адмін</h1>}
+      {role === 'admin' && user && (
         <div>
-          <Avatar sx={{ background: deepOrange[500], width: 150, height: 150 }}>{user.name}</Avatar>
+          <Avatar sx={{ background: deepOrange[500], width: 150, height: 150 }}>
+            {user.name}
+          </Avatar>
           <img src={user.avatar} alt="" />
           <h1>{user.name}</h1>
           <p> тел:{user.phone}</p>

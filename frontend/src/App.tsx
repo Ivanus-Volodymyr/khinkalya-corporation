@@ -18,7 +18,7 @@ import {
   DeliveryInfo,
   OrderDone,
 } from './components';
-import Promotions from "./components/Promotions/Promotions";
+import Promotions from './components/Promotions/Promotions';
 
 function App() {
   return (
@@ -38,10 +38,9 @@ function App() {
         <Route path={'/cart/orderDone'} element={<OrderDone />}></Route>
         <Route path={'/delivery'} element={<DeliveryInfo />}></Route>
         <Route path={'/about'} element={<About />}></Route>
-        <Route path={'/promotions'} element={<Promotions/>}></Route>
+        <Route path={'/promotions'} element={<Promotions />}></Route>
       </Route>
     </Routes>
   );
-
-
+}
 export default App;

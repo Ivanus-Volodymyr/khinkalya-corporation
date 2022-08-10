@@ -10,8 +10,8 @@ import {
   getLocality,
   getRestaurants,
   setLoginActive,
-  userLogout
-} from "../../store";
+  userLogout,
+} from '../../store';
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
@@ -37,7 +37,7 @@ const HeaderComponent: FC = () => {
   const access = localStorage.getItem('access') as string;
   const request = { ...user, access };
   const navigate = useNavigate();
-  useEffect( () => {
+  useEffect(() => {
     dispatch(getRestaurants());
     dispatch(getLocality());
     access &&
@@ -45,27 +45,24 @@ const HeaderComponent: FC = () => {
       !user.name &&
       dispatch(getCurrentUser(access));
 
-    if(!access && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
+    if (!access && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         console.log(lat, lng);
-        dispatch(getGeolocation({lat, lng}));
-      })
-
+        dispatch(getGeolocation({ lat, lng }));
+      });
     }
   }, [refresh, currentUser, user, access, dispatch]);
-      
-  const [restaurantId, setRestaurantId] = React.useState('');   
+
+  const [restaurantId, setRestaurantId] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
   };
 
-
-
   return (
-    <header style={{background:'white'}}>
+    <header style={{ background: 'white' }}>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -77,7 +74,13 @@ const HeaderComponent: FC = () => {
             />
           </a>
         </div>
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <Link to={'/promotions'}>
             <img
               src="/image-for-header/discount.svg"
@@ -90,7 +93,14 @@ const HeaderComponent: FC = () => {
         </div>
         {locality &&
           locality.map((value) => (
-            <div style={{display:'flex',flexDirection:"column",alignItems:"center"}} key={value.id}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+              key={value.id}
+            >
               <Link to={'/dish/' + value.id.toString()}>
                 {' '}
                 <img
@@ -104,7 +114,13 @@ const HeaderComponent: FC = () => {
             </div>
           ))}
 
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <Link to={'/about'}>
             <img
               src="/image-for-header/information.svg"
@@ -115,15 +131,15 @@ const HeaderComponent: FC = () => {
           </Link>
           <div>Інформація</div>
         </div>
-        <FormControl style={{width:'250px'}} >
-        <InputLabel >Виберіть ресторан</InputLabel>
-        <Select
-          onChange={handleChange}
-          >
-            {restaurant && restaurant.map(result =>
-              <MenuItem key={result.id} value={result.id}>{result.name}
-              </MenuItem>)}
-
+        <FormControl style={{ width: '250px' }}>
+          <InputLabel>Виберіть ресторан</InputLabel>
+          <Select onChange={handleChange}>
+            {restaurant &&
+              restaurant.map((result) => (
+                <MenuItem key={result.id} value={result.id}>
+                  {result.name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
         <div>
@@ -160,7 +176,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-      <hr/>
+      <hr />
     </header>
   );
 };

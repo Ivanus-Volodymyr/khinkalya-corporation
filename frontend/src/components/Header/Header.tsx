@@ -1,11 +1,12 @@
 import React, { FC, useEffect } from 'react';
-import { Link,  useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import './Header.css';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
+  getGeolocation,
   getLocality,
   getRestaurants,
   setLoginActive,
@@ -36,7 +37,7 @@ const HeaderComponent: FC = () => {
   const access = localStorage.getItem('access') as string;
   const request = { ...user, access };
   const navigate = useNavigate();
-  useEffect( () => {
+  useEffect(() => {
     dispatch(getRestaurants());
     dispatch(getLocality());
     access &&
@@ -44,17 +45,24 @@ const HeaderComponent: FC = () => {
       !user.name &&
       dispatch(getCurrentUser(access));
 
-  }, [refresh, currentUser, user, access,dispatch]);
+    if (!access && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        console.log(lat, lng);
+        dispatch(getGeolocation({ lat, lng }));
+      });
+    }
+  }, [refresh, currentUser, user, access, dispatch]);
 
-
-
+  const [restaurantId, setRestaurantId] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
   };
 
   return (
-    <header style={{background:'white'}}>
+    <header style={{ background: 'white' }}>
       <div className={'header_menu'}>
         <div>
           <a href="/">
@@ -66,7 +74,13 @@ const HeaderComponent: FC = () => {
             />
           </a>
         </div>
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <Link to={'/promotions'}>
             <img
               src="/image-for-header/discount.svg"
@@ -79,7 +93,14 @@ const HeaderComponent: FC = () => {
         </div>
         {locality &&
           locality.map((value) => (
-            <div style={{display:'flex',flexDirection:"column",alignItems:"center"}} key={value.id}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+              key={value.id}
+            >
               <Link to={'/dish/' + value.id.toString()}>
                 {' '}
                 <img
@@ -93,7 +114,13 @@ const HeaderComponent: FC = () => {
             </div>
           ))}
 
-        <div style={{display:'flex',flexDirection:"column",alignItems:"center"}}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <Link to={'/about'}>
             <img
               src="/image-for-header/information.svg"
@@ -104,15 +131,15 @@ const HeaderComponent: FC = () => {
           </Link>
           <div>Інформація</div>
         </div>
-        <FormControl style={{width:'250px'}} >
-        <InputLabel >Виберіть ресторан</InputLabel>
-        <Select
-          onChange={handleChange}
-          >
-            {restaurant && restaurant.map(result =>
-              <MenuItem key={result.id} value={result.id}>{result.name}
-              </MenuItem>)}
-
+        <FormControl style={{ width: '250px' }}>
+          <InputLabel>Виберіть ресторан</InputLabel>
+          <Select onChange={handleChange}>
+            {restaurant &&
+              restaurant.map((result) => (
+                <MenuItem key={result.id} value={result.id}>
+                  {result.name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
         <div>
@@ -127,12 +154,12 @@ const HeaderComponent: FC = () => {
         </div>
         <div>
           <div>
-            {user && <Link to={'/users'}>{user.name}</Link>}
-            {currentUser && <Link to={'/admin'}>{currentUser.name}</Link>}
+            {user && access && <div>{user.name}</div>}
+            {!user && currentUser && access && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {
-              dispatch(setLoginActive());
+              !access && dispatch(setLoginActive());
 
               if (access && request)
                 dispatch(userLogout({ accessToken: request.access }));
@@ -149,7 +176,7 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-      <hr/>
+      <hr />
     </header>
   );
 };

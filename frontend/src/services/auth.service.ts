@@ -1,7 +1,6 @@
 import { axiosService } from './axios.service';
 import { urls } from '../constants';
 import { IUser, IAuthResponseApi, ITokensPair } from '../interfaces';
-import { AxiosResponse } from "axios";
 
 export const authService = {
   registration: (data: IUser) =>
@@ -11,6 +10,13 @@ export const authService = {
   refresh: (refresh: string) =>
     axiosService.post<ITokensPair>(urls.refresh, { data: refresh }),
   logout: (accessToken: string) => axiosService.post(urls.logout, accessToken),
-  googleLogin: (data: string) =>
-    axiosService.post<IAuthResponseApi>(urls.googleLogin, { token: data }),
+  googleLogin: (data: string, city: string) =>
+    axiosService.post<IAuthResponseApi>(urls.googleLogin, {
+      token: data,
+      city,
+    }),
+  getGeolocation: (latitude: string, longitude: string) =>
+    axiosService.get<any>(
+      urls.geolocation + '?lat=' + `${latitude}` + '&lng=' + `${longitude}`,
+    ),
 };

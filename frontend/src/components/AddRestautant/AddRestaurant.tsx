@@ -1,13 +1,12 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { useForm } from 'react-hook-form';
-import { addRestaurant } from "../../store";
-import { IRestaurant } from "../../interfaces/restaurant.interface";
+import { addRestaurant } from '../../store';
+import { IRestaurant } from '../../interfaces/restaurant.interface';
 
 const AddRestaurant = () => {
   const dispatch = useAppDispatch();
   const { register, handleSubmit, reset } = useForm();
-
 
   const submit: any = async (data: IRestaurant) => {
     const formData = new FormData();

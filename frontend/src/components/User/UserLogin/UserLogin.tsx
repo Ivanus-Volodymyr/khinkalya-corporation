@@ -1,11 +1,11 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Input } from 'antd';
 
 import { IUser } from '../../../interfaces';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { setLoginActive, setRegisterActive, userLogin } from '../../../store';
 import './UserLogin.css';
 import { UserGoogleLogin } from '../UserGoogleLogin/UserGoogleLogin';
@@ -13,7 +13,7 @@ import { UserGoogleLogin } from '../UserGoogleLogin/UserGoogleLogin';
 const UserLogin: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
 
   const checkRole: any = async () => {
     const role = await localStorage.getItem('role');
@@ -29,8 +29,8 @@ const UserLogin: FC = () => {
   const { register, handleSubmit, reset } = useForm<Partial<IUser>>();
 
   const onSetPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-   setPassword(e.target.value);
-  }
+    setPassword(e.target.value);
+  };
 
   const onSubmitForm = async (data: Partial<IUser>) => {
     data.password = password;
@@ -52,8 +52,12 @@ const UserLogin: FC = () => {
 
         <div className={'logIn-content'}>
           <label>Пароль</label>
-          <Input.Password {...register('password')} onChange={onSetPassword}
-            iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+          <Input.Password
+            {...register('password')}
+            onChange={onSetPassword}
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+            }
           />
         </div>
 

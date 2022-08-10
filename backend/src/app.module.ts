@@ -49,6 +49,6 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): any {
     consumer.apply(AccessTokenMiddleware).forRoutes("users", "admin");
     consumer.apply(AdminMiddleware).forRoutes("admin");
-    consumer.apply(GoogleTokenMiddleware).forRoutes("auth/google");
+    consumer.apply(GoogleTokenMiddleware).forRoutes("auth/google/login");
   }
 }

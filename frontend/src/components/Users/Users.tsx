@@ -38,7 +38,9 @@ const Users: FC = () => {
   });
   res.forEach(function (e) {
     if (e.elems.length > 0) {
-      e.elems.forEach((n) => { console.log(e)});
+      e.elems.forEach((n) => {
+        console.log(e);
+      });
     }
   });
   const arrOfMonth = res.map((res) => res.month);

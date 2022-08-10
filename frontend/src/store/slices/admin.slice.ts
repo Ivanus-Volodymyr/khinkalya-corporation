@@ -1,20 +1,19 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { adminService } from "../../services/admin.service";
-import { IDish, ILocality } from "../../interfaces";
-import { IRestaurant } from "../../interfaces/restaurant.interface";
-import { IPromotion } from "../../interfaces/promotion.interface";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { adminService } from '../../services/admin.service';
+import { IDish, ILocality } from '../../interfaces';
+import { IPromotion } from '../../interfaces/promotion.interface';
 
 const initialState = {
   result: [],
-  accessToken: "",
+  accessToken: '',
   locality: [] as ILocality[],
   restaurant: [] as ILocality[],
   Dish: [] as IDish[],
-  status: "",
-  promotion:[] as IPromotion[]
+  status: '',
+  promotion: [] as IPromotion[],
 };
 export const getLocality = createAsyncThunk(
-  "admin/AddDish",
+  'admin/AddDish',
   async (_, { dispatch, getState }) => {
     try {
       const state = getState() as { adminReducer: { locality: ILocality[] } };
@@ -29,10 +28,10 @@ export const getLocality = createAsyncThunk(
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 );
 export const getRestaurants = createAsyncThunk(
-  "admin/AddDish",
+  'admin/AddDish',
   async (_, { dispatch }) => {
     try {
       const { data } = await adminService.getRestaurants();
@@ -42,64 +41,64 @@ export const getRestaurants = createAsyncThunk(
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 );
 
-export const getPromotions=createAsyncThunk(
+export const getPromotions = createAsyncThunk(
   'admin/getPromotion',
-  async (_void,{dispatch,rejectWithValue},)=>{
+  async (_void, { dispatch, rejectWithValue }) => {
     try {
-      const {data}=await adminService.getPromotions()
-      return data
-    }catch (e) {
-      rejectWithValue(e)
+      const { data } = await adminService.getPromotions();
+      return data;
+    } catch (e) {
+      rejectWithValue(e);
     }
-  }
-)
+  },
+);
 
 export const addRestaurant = createAsyncThunk(
-  "admin/addRestaurant",
+  'admin/addRestaurant',
   async (data: FormData, { dispatch }) => {
     try {
       await adminService.addRestaurant(data);
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 );
 export const addLocality = createAsyncThunk(
-  "admin/AddLocality",
+  'admin/AddLocality',
   async (data: FormData, { dispatch }) => {
     try {
       await adminService.addLocality(data);
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 );
 export const addDish = createAsyncThunk(
-  "admin/AddDish",
+  'admin/AddDish',
   async (data: FormData, { dispatch }) => {
     try {
       await adminService.addDish(data);
     } catch (e) {
       console.log(e);
     }
-  }
+  },
 );
 export const addPromotion = createAsyncThunk(
-  "admin/AddPromotion",
+  'admin/AddPromotion',
   async (data: FormData, { rejectWithValue }) => {
     try {
       await adminService.addPromotion(data);
     } catch (e) {
       rejectWithValue(e);
     }
-  }
+  },
 );
 
 const adminSlice = createSlice({
-  name: "admin",
+  name: 'admin',
   initialState,
   reducers: {
     setLocalityData: (state, action: PayloadAction<ILocality[]>) => {
@@ -107,23 +106,23 @@ const adminSlice = createSlice({
     },
     setRestaurantsData: (state, action: PayloadAction<ILocality[]>) => {
       state.restaurant = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getLocality.pending, (state, action) => {
-      state.status = "Loading";
+      state.status = 'Loading';
     });
     builder.addCase(getLocality.fulfilled, (state, action) => {
-      state.status = "fulfilled";
+      state.status = 'fulfilled';
     });
     builder.addCase(getPromotions.pending, (state, action) => {
-      state.status = "Loading";
+      state.status = 'Loading';
     });
     builder.addCase(getPromotions.fulfilled, (state, action) => {
-      state.status = "fulfilled";
-      state.promotion=action.payload as IPromotion[]
+      state.status = 'fulfilled';
+      state.promotion = action.payload as IPromotion[];
     });
-  }
+  },
 });
 const adminReducer = adminSlice.reducer;
 export { adminReducer };

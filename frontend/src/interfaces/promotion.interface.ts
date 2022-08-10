@@ -1,5 +1,5 @@
-export interface IPromotion{
-  id:number,
-  image?:any,
-  descriptions:string
+export interface IPromotion {
+  id: number;
+  image?: any;
+  descriptions: string;
 }

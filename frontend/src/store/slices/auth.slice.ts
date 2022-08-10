@@ -2,11 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { decodeToken } from 'react-jwt';
 
 import {
-  IAuthResponse, IAuthResponseApi,
+  IAuthResponse,
+  IAuthResponseApi,
   ILogoutRequest,
+  IPosition,
   ITokenData,
-  IUser
-} from "../../interfaces";
+  IUser,
+} from '../../interfaces';
 import { authService } from '../../services/auth.service';
 import { GoogleSignupRequest } from '../../interfaces/google-request.interface';
 
@@ -74,8 +76,8 @@ export const userGoogleLogin = createAsyncThunk<
   if ('clientId' in response) {
     try {
       const apiToken = response.token || '';
-
-      const { data } = await authService.googleLogin(apiToken);
+      const city = localStorage.getItem('city') as string;
+      const { data } = await authService.googleLogin(apiToken, city);
 
       return data;
     } catch (e) {
@@ -85,6 +87,22 @@ export const userGoogleLogin = createAsyncThunk<
     return undefined;
   }
 });
+
+export const getGeolocation = createAsyncThunk<string, IPosition>(
+  'auth/geolocation',
+  async (position: IPosition) => {
+    try {
+      const res = await authService.getGeolocation(
+        position.lat.toString(),
+        position.lng.toString(),
+      );
+      return res.data.plus_code.compound_code.replace(',', '').split(' ')[1];
+    } catch (e) {
+      console.log(e);
+      return '';
+    }
+  },
+);
 
 const authSlice = createSlice({
   name: 'auth',
@@ -156,39 +174,46 @@ const authSlice = createSlice({
       },
     );
 
-    builder.addCase(userLogout.fulfilled, (state, action: PayloadAction<void>) => {
-      state.accessToken = undefined;
-      state.refreshToken = undefined;
-      state.user = {};
-      state.status = undefined;
+    builder.addCase(
+      userLogout.fulfilled,
+      (state, action: PayloadAction<void>) => {
+        state.accessToken = undefined;
+        state.refreshToken = undefined;
+        state.user = {};
+        state.status = undefined;
 
-      state.isLoginActive = false;
-      state.isRegisterActive = false;
-      localStorage.clear();
+        localStorage.clear();
+      },
+    );
+
+    builder.addCase(
+      userGoogleLogin.fulfilled,
+      (state, action: PayloadAction<IAuthResponseApi | undefined>) => {
+        const access_token = action.payload?.tokenPair.accessToken;
+        const refresh_token = action.payload?.tokenPair.refreshToken;
+
+        state.user = { ...action.payload?.user };
+        state.accessToken = access_token;
+        state.refreshToken = refresh_token;
+
+        localStorage.setItem('access', access_token || '');
+        localStorage.setItem('refresh', refresh_token || '');
+
+        if (access_token != null) {
+          const { role, id } = decodeToken(access_token) as ITokenData;
+          localStorage.setItem('role', role);
+          localStorage.setItem('userId', id);
+        }
+      },
+    );
+
+    builder.addCase(getGeolocation.fulfilled, (state, action) => {
+      action.payload !== '' && localStorage.setItem('city', action.payload);
     });
-
-    builder.addCase(userGoogleLogin.fulfilled, (state, action: PayloadAction<IAuthResponseApi | undefined>) => {
-      const access_token = action.payload?.tokenPair.accessToken;
-      const refresh_token = action.payload?.tokenPair.refreshToken;
-
-      state.user = { ...action.payload?.user};
-      state.accessToken = access_token;
-      state.refreshToken = refresh_token;
-
-      localStorage.setItem('access', access_token || '');
-      localStorage.setItem('refresh', refresh_token || '');
-
-      if (access_token != null) {
-        const { role, id } = decodeToken(access_token) as ITokenData;
-        localStorage.setItem('role', role);
-        localStorage.setItem('userId', id);
-      }
-    });
-
   },
 });
 
 const authReducer = authSlice.reducer;
-export {authReducer};
+export { authReducer };
 export const { setModalActive, setLoginActive, setRegisterActive } =
   authSlice.actions;

@@ -5,5 +5,6 @@ import { urls } from '../constants';
 export const userService = {
   getAllUsers: () => axiosService.get<IUser[]>(urls.user),
   getUserById: (id: string) => axiosService.get<IUser>(urls.user + `/${id}`),
-  getUserByToken: (accessToken:string) => axiosService.get<IUser>(urls.user+ '/currentUser' + `/${accessToken}`),
+  getUserByToken: (accessToken: string) =>
+    axiosService.get<IUser>(urls.user + '/currentUser' + `/${accessToken}`),
 };

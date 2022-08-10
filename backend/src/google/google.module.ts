@@ -1,5 +1,6 @@
 import { Module } from "@nestjs/common";
 import { JwtModule, JwtService } from "@nestjs/jwt";
+import { HttpModule } from "@nestjs/axios";
 
 import { UserService } from "../user/user.service";
 import { PrismaService } from "../core/prisma.service";
@@ -19,7 +20,8 @@ import { S3Service } from "../s3/s3.service";
     S3Service,
   ],
   imports: [
-    JwtModule.register({ secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET }),
+    JwtModule.register({ secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET as string }),
+    HttpModule,
   ],
 })
 export class GoogleModule {}

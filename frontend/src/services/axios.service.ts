@@ -14,7 +14,7 @@ export const errorInterceptor = (axiosInstance: any) => {
       if (error.response.data.statusCode === 401) {
         originalConfig._retry = true;
         const refresh = (await localStorage.getItem('refresh')) as string;
-        const { data:tokenPair } = await authService.refresh(refresh);
+        const { data: tokenPair } = await authService.refresh(refresh);
         localStorage.setItem('access', tokenPair.accessToken);
         localStorage.setItem('refresh', tokenPair.refreshToken);
         return axiosService(originalConfig);

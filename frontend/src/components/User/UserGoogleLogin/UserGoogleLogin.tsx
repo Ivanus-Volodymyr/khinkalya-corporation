@@ -38,8 +38,11 @@ const UserGoogleLogin: FC = () => {
 
   return (
     <GoogleLogin
-      type="icon"
-      shape="circle"
+      type="standard"
+      shape="rectangular"
+      theme="filled_black"
+      width={"300"}
+      text="signin_with"
       onSuccess={onSuccess}
       onError={() => onFailure}
     />

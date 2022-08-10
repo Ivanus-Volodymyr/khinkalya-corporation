@@ -91,8 +91,7 @@ export const userGoogleLogin = createAsyncThunk<
 export const getGeolocation = createAsyncThunk('auth/geolocation', async(position:IPosition) => {
   try{
     const res = await authService.getGeolocation(position.lat.toString(),position.lng.toString());
-    console.log(res.data);
-    return res;
+    return res.data.plus_code.compound_code.replace(",", "").split(" ")[1];
   } catch(e){
     console.log(e);
     return '';
@@ -203,7 +202,7 @@ const authSlice = createSlice({
     );
 
     builder.addCase(getGeolocation.fulfilled, (state, action) => {
-      // action.payload !== '' && localStorage.setItem('city',action.payload.replace(',','').split(' ')[1] )
+      action.payload !== '' && localStorage.setItem('city', action.payload);
     })
   },
 });

@@ -1,8 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import generator from "generate-password";
-import { HttpModule } from "@nestjs/axios";
 import * as bcrypt from "bcrypt";
+import { HttpService } from "@nestjs/axios";
+import { map, Observable } from "rxjs";
+import { AxiosResponse } from "axios";
 
 import { UserService } from "../user/user.service";
 import { TokenService } from "../auth/token/token.service";
@@ -11,9 +12,6 @@ import {
   GoogleTokenInfo,
   LoginGoogleDto,
 } from "./dto/google.dto";
-import { HttpService } from "@nestjs/axios";
-import { firstValueFrom, lastValueFrom, map, Observable } from "rxjs";
-import { AxiosResponse } from "axios";
 
 @Injectable()
 export class GoogleService {
@@ -46,7 +44,7 @@ export class GoogleService {
           return new HttpException("Bad GoogleLogin", HttpStatus.UNAUTHORIZED);
         else return { user, tokenPair };
       } else {
-        const randomPassword = generator.generate({ length: 8, numbers: true });
+        const randomPassword = Math.random().toString(36).slice(-8);
         const hashPassword = await bcrypt.hash(randomPassword, 10);
         const googleUser = {
           email: tokenInfo.email,

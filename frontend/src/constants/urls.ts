@@ -6,6 +6,7 @@ export const urls = {
   registration: '/auth/registration',
   login: '/auth/login',
   googleLogin: '/auth/google/login',
+  geolocation: '/auth/google/geolocation',
   refresh: '/auth/refresh',
   user: '/user',
   logout: '/auth/logout',

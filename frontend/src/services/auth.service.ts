@@ -1,5 +1,5 @@
 import { axiosService } from './axios.service';
-import { mapURL, urls } from '../constants';
+import { urls } from '../constants';
 import { IUser, IAuthResponseApi, ITokensPair } from '../interfaces';
 
 export const authService = {
@@ -12,7 +12,5 @@ export const authService = {
   logout: (accessToken: string) => axiosService.post(urls.logout, accessToken),
   googleLogin: (data: string, city: string) =>
     axiosService.post<IAuthResponseApi>(urls.googleLogin, { token: data, city }),
-  // eslint-disable-next-line no-useless-concat
-  getGeolocation:(latitude: string, longitude:string) => axiosService.get(mapURL + "&latlng=" + `${latitude},${longitude}`)
-
+  getGeolocation:(latitude: string, longitude:string) => axiosService.get<any>(urls.geolocation + "?lat=" +`${latitude}` + "&lng=" + `${longitude}`)
 };

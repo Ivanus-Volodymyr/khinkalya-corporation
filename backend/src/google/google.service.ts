@@ -1,6 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import generator from "generate-password";
+import { HttpModule } from "@nestjs/axios";
+import * as bcrypt from "bcrypt";
 
 import { UserService } from "../user/user.service";
 import { TokenService } from "../auth/token/token.service";
@@ -9,14 +11,17 @@ import {
   GoogleTokenInfo,
   LoginGoogleDto,
 } from "./dto/google.dto";
-import * as bcrypt from "bcrypt";
+import { HttpService } from "@nestjs/axios";
+import { firstValueFrom, lastValueFrom, map, Observable } from "rxjs";
+import { AxiosResponse } from "axios";
 
 @Injectable()
 export class GoogleService {
   constructor(
     private jwtService: JwtService,
     private userService: UserService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private httpService: HttpService
   ) {}
 
   public async userGoogleLogin(
@@ -61,6 +66,20 @@ export class GoogleService {
       }
     } catch (err) {
       return err;
+    }
+  }
+
+  public userGoogleLocation(
+    lat: string,
+    lng: string
+  ): Observable<AxiosResponse<any>> {
+    try {
+      const mapURL = process.env.MAP_URL as string;
+      return this.httpService
+        .get(`${mapURL}&latlng=${lat},${lng}`)
+        .pipe(map((response) => response.data));
+    } catch (e) {
+      return undefined;
     }
   }
 }

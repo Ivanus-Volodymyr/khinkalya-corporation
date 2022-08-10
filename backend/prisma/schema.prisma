@@ -76,7 +76,7 @@ model Locality {
   createdAt DateTime @default(now())
 }
 
-model AddPromotions {
+model Promotions {
   id           Int      @id @default(autoincrement())
   image        String?
   descriptions String

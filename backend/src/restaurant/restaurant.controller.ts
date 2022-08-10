@@ -1,4 +1,3 @@
-
 import { Controller, Get, Param } from "@nestjs/common";
 import { RestaurantService } from "./restaurant.service";
 @Controller("restaurants")

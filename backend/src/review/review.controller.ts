@@ -1,12 +1,7 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body
-} from "@nestjs/common";
+import { Controller, Get, Post, Body } from "@nestjs/common";
 
 import { ReviewService } from "./review.service";
-import { CreateReview} from "./dto/review.dto";
+import { CreateReview } from "./dto/review.dto";
 
 @Controller("reviews")
 export class ReviewController {

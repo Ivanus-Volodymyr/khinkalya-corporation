@@ -14,7 +14,7 @@
     cursor: pointer;
 }
 
-.footer > div.footer-item > a {
+.footer > div.footer-item > a, .popover-btn {
     color: var(--secondary-color);
     letter-spacing: 2px;
     font-size: 1.1rem;
@@ -23,4 +23,16 @@
 }
 .icons-container > a{
     padding-right: 10px;
+}
+
+.ant-btn:hover{
+    background: none;
+    color: black;
+}
+
+.popover-btn{
+    background:none;
+    border: none;
+    margin-left: -10px;
+    padding-left: 10px;
 }

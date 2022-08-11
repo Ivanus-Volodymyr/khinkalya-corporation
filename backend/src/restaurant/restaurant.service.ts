@@ -14,7 +14,15 @@ export class RestaurantService {
   public async getRestaurantByID(restaurantId: string): Promise<Restaurant> {
     return this.prismaService.restaurant.findUnique({
       where: {
-        id: +restaurantId,
+        id: Number(restaurantId),
+      },
+    });
+  }
+
+  public async getRestaurantByCity(city: string): Promise<Restaurant[]> {
+    return this.prismaService.restaurant.findMany({
+      where: {
+        city: decodeURIComponent(city),
       },
     });
   }
@@ -56,5 +64,14 @@ export class RestaurantService {
 
   public async deleteById(id: string) {
     return this.prismaService.restaurant.delete({ where: { id: Number(id) } });
+  }
+
+  public async getAllCities(): Promise<{ city: string }[]> {
+    return this.prismaService.restaurant.findMany({
+      distinct: ["city"],
+      select: {
+        city: true,
+      },
+    });
   }
 }

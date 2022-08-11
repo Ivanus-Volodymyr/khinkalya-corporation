@@ -28,9 +28,10 @@ const HeaderComponent: FC = () => {
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
   );
-  const { locality, restaurant } = useAppSelector(
+  const { locality} = useAppSelector(
     (state) => state.adminReducer,
   );
+  const {restaurants} = useAppSelector((state) => state.restaurantReducer);
   const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
   const refresh = localStorage.getItem('refresh');
@@ -55,7 +56,6 @@ const HeaderComponent: FC = () => {
     }
   }, [refresh, currentUser, user, access, dispatch]);
 
-  const [restaurantId, setRestaurantId] = React.useState('');
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
     navigate('/main');
@@ -134,8 +134,8 @@ const HeaderComponent: FC = () => {
         <FormControl style={{ width: '250px' }}>
           <InputLabel>Виберіть ресторан</InputLabel>
           <Select onChange={handleChange}>
-            {restaurant &&
-              restaurant.map((result) => (
+            {restaurants &&
+              restaurants.map((result) => (
                 <MenuItem key={result.id} value={result.id}>
                   {result.name}
                 </MenuItem>

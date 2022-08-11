@@ -24,8 +24,8 @@ const FooterComponent: FC = () => {
   return (
     <Footer className={'footer'}>
       <div className={'footer-item'}>
-        <div>Наші ресторани</div>
-        <Link to={'about'}>Про нас</Link>
+        <div> <Link to={'restaurants'}>Наші ресторани</Link></div>
+        <div><Link to={'about'}>Про нас</Link></div>
       </div>
       <div className={'footer-item'}>
         <div>

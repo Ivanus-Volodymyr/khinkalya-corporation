@@ -19,3 +19,4 @@ export * from './DeliveryInfo/DeliveryInfo';
 export * from './About/About';
 export * from './FooterModal/FooterModal';
 export * from './ReviewForm/ReviewForm';
+export * from  './Restaurants/Restaurants';

@@ -1,7 +1,7 @@
 import { FacebookOutlined, InstagramOutlined } from '@ant-design/icons';
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout } from 'antd';
+import { Button, Layout, Popover } from "antd";
 
 import './Footer.css';
 import { FooterModal } from '../FooterModal/FooterModal';
@@ -13,6 +13,14 @@ const { Footer } = Layout;
 
 const FooterComponent: FC = () => {
   const dispatch = useAppDispatch();
+  const content =  (
+    <div>
+      <p><b>Address</b>: Stryiska St, 45, Lviv, Lviv Oblast, 79000</p>
+      <p><b>Phone</b>: 096 040 4007</p>
+      <p><b>Order:</b> glovoapp.com</p>
+    </div>
+  );
+
   return (
     <Footer className={'footer'}>
       <div className={'footer-item'}>
@@ -20,7 +28,11 @@ const FooterComponent: FC = () => {
         <Link to={'about'}>Про нас</Link>
       </div>
       <div className={'footer-item'}>
-        <div>Контакти</div>
+        <div>
+          <Popover content={content} title="Контакти">
+          <Button className="popover-btn">Контакти</Button>
+        </Popover>
+        </div>
         <div>Політика конфеденційності</div>
         <Link to={'delivery'}>Доставка і оплата</Link>
       </div>

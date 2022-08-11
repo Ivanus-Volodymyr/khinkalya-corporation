@@ -28,10 +28,8 @@ const HeaderComponent: FC = () => {
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
   );
-  const { locality} = useAppSelector(
-    (state) => state.adminReducer,
-  );
-  const {restaurants} = useAppSelector((state) => state.restaurantReducer);
+  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { restaurants } = useAppSelector((state) => state.restaurantReducer);
   const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
   const refresh = localStorage.getItem('refresh');

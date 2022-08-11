@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppDispatch } from "../../hooks/redux";
+import { useAppDispatch } from '../../hooks/redux';
 import { useForm } from 'react-hook-form';
 import { addRestaurant } from '../../store';
 import { IRestaurant } from '../../interfaces/restaurant.interface';

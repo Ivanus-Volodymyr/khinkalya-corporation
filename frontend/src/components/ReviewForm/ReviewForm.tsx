@@ -44,7 +44,7 @@ const ReviewForm: FC = () => {
       <h3>Залишити відгук</h3>
       <Select
         placeholder="ресторан"
-        style={{ width: 150 }}
+        style={{ width: 250 }}
         {...register('restaurantId')}
         onChange={onChange}
       >

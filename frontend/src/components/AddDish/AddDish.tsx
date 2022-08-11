@@ -3,16 +3,13 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { TextField } from '@mui/material';
 
-
 import { addDish, getLocality, getRestaurants } from '../../store';
 import { IDish } from '../../interfaces';
 import './AddDish.css';
 
 const AddDish: FC = () => {
-  const { locality} = useAppSelector(
-    (state) => state.adminReducer,
-  );
-  const {restaurants} = useAppSelector((state) => state.restaurantReducer);
+  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { restaurants } = useAppSelector((state) => state.restaurantReducer);
   const { register, handleSubmit } = useForm();
 
   const dispatch = useAppDispatch();

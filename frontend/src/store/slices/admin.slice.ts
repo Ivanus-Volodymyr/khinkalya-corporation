@@ -109,4 +109,4 @@ const adminSlice = createSlice({
 });
 const adminReducer = adminSlice.reducer;
 export { adminReducer };
-export const { setLocalityData} = adminSlice.actions;
+export const { setLocalityData } = adminSlice.actions;

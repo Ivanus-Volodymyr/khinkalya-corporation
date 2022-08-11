@@ -67,7 +67,7 @@ const Restaurants:FC = () => {
             avatar={<Avatar src={item.image} />}
             description={item.name}
           />
-          <h4><mark>м.{item.city} {item.address}</mark></h4>
+          <h4>м.{item.city} {item.address}</h4>
         </List.Item>
       )}
     />

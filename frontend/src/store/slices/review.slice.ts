@@ -44,10 +44,7 @@ const reviewSlice = createSlice({
   reducers: {
     setReviewActive: (state) => {
       state.isReviewActive = !state.isReviewActive;
-    },
-    // setReviewBody: (state, action:PayloadAction<string>) => {
-    //   state.reviewBody += action.payload;
-    // }
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(

@@ -2,10 +2,17 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { userService } from '../../services/user.service';
 import { IUser } from '../../interfaces';
 
-const initialState = {
+interface IInitialState {
+  status: string;
+  user: IUser,
+  allUser: IUser[],
+  isOfferPopupActive: boolean,
+}
+const initialState:IInitialState = {
   status: '',
   user: {} as IUser,
-  allUser: [] as IUser[],
+  allUser: [],
+  isOfferPopupActive: false,
 };
 
 export const getAll = createAsyncThunk<IUser[] | undefined, void>(
@@ -49,7 +56,11 @@ export const getCurrentUser = createAsyncThunk<IUser | undefined, string>(
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setOfferPopupActive: (state) => {
+      state.isOfferPopupActive = !state.isOfferPopupActive;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(getUserById.pending, (state, action) => {
       state.status = 'Loading';
@@ -84,3 +95,4 @@ const userSlice = createSlice({
 });
 const userReducer = userSlice.reducer;
 export { userReducer };
+export const { setOfferPopupActive} = userSlice.actions;

@@ -3,5 +3,5 @@ export interface IRestaurant {
   name: string;
   city: string;
   address: string;
-  image?: any;
+  image?: string;
 }

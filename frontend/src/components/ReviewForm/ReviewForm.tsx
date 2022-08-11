@@ -12,7 +12,7 @@ const { Option } = Select;
 
 const ReviewForm: FC = () => {
   const dispatch = useAppDispatch();
-  const { restaurant } = useAppSelector((state) => state.adminReducer);
+  const { restaurants } = useAppSelector((state) => state.restaurantReducer);
   const { register, handleSubmit } = useForm<Partial<IReview>>();
   const defaultRestaurantId = localStorage.getItem('restaurantId') as string;
   const userId = localStorage.getItem('userId') as string;
@@ -44,12 +44,12 @@ const ReviewForm: FC = () => {
       <h3>Залишити відгук</h3>
       <Select
         placeholder="ресторан"
-        style={{ width: 150 }}
+        style={{ width: 250 }}
         {...register('restaurantId')}
         onChange={onChange}
       >
-        {restaurant &&
-          restaurant.map((result) => (
+        {restaurants &&
+          restaurants.map((result) => (
             <Option key={result.id} value={result.id}>
               {result.name}
             </Option>

@@ -17,6 +17,7 @@ import {
   DishList,
   DeliveryInfo,
   OrderDone,
+  Restaurants,
 } from './components';
 import Promotions from './components/Promotions/Promotions';
 
@@ -39,6 +40,7 @@ function App() {
         <Route path={'/delivery'} element={<DeliveryInfo />}></Route>
         <Route path={'/about'} element={<About />}></Route>
         <Route path={'/promotions'} element={<Promotions />}></Route>
+        <Route path={'/restaurants'} element={<Restaurants />}></Route>
       </Route>
     </Routes>
   );

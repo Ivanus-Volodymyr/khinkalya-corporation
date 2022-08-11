@@ -6,11 +6,11 @@ import { IRestaurant } from '../../interfaces/restaurant.interface';
 
 const AddRestaurant = () => {
   const dispatch = useAppDispatch();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const submit: any = async (data: IRestaurant) => {
     const formData = new FormData();
-    formData.append('image', data.image[0]);
+    data.image && formData.append('image', data.image[0]);
     formData.append('name', data.name);
     formData.append('city', data.name);
     formData.append('address', data.name);
@@ -18,7 +18,7 @@ const AddRestaurant = () => {
   };
   return (
     <div>
-      Add Restaurant
+      Додати ресторан
       <form onSubmit={handleSubmit(submit)}>
         <div>
           <input type="file" {...register('image')} />
@@ -32,7 +32,7 @@ const AddRestaurant = () => {
         <div>
           <input type="text" placeholder={'address'} {...register('address')} />
         </div>
-        <button> Add Restaurant</button>
+        <button> Додати страву</button>
       </form>
     </div>
   );

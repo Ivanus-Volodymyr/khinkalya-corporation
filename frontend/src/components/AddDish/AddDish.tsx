@@ -2,19 +2,15 @@ import React, { FC, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { TextField } from '@mui/material';
-import Upload from 'antd/es/upload/Upload';
-import { Button } from 'antd';
-import UploadOutlined from '@ant-design/icons/lib/icons/UploadOutlined';
 
 import { addDish, getLocality, getRestaurants } from '../../store';
 import { IDish } from '../../interfaces';
 import './AddDish.css';
 
 const AddDish: FC = () => {
-  const { locality, restaurant } = useAppSelector(
-    (state) => state.adminReducer,
-  );
-  const { register, handleSubmit, reset } = useForm();
+  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { restaurants } = useAppSelector((state) => state.restaurantReducer);
+  const { register, handleSubmit } = useForm();
 
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -46,7 +42,7 @@ const AddDish: FC = () => {
         }}
         onSubmit={handleSubmit(submit)}
       >
-        <h3>Добавити Страву</h3>
+        <h3>Додати Страву</h3>
         <div
           style={{
             display: 'flex',
@@ -110,8 +106,8 @@ const AddDish: FC = () => {
 
           <select style={{ margin: '10px' }} {...register('restaurantId')}>
             <option value="">Виберіть ресторан</option>
-            {restaurant &&
-              restaurant.map((result) => (
+            {restaurants &&
+              restaurants.map((result) => (
                 <option key={result.id} value={result.id}>
                   {result.name}
                 </option>

@@ -22,7 +22,6 @@ export const adminService = {
     axiosService.put<ILocality>('admin' + urls.locality + `${id}`, data),
   deleteLocality: (id: string) =>
     axiosService.delete<ILocality>('admin' + urls.locality + `${id}`),
-  getRestaurants: () => axiosService.get<IRestaurant[]>(urls.restaurants),
   addRestaurant: (data: FormData) =>
     axiosService.post<IRestaurant>('admin' + urls.restaurants, data),
   addPromotion: (data: FormData) =>

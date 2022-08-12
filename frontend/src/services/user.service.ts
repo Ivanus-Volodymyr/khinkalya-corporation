@@ -7,4 +7,5 @@ export const userService = {
   getUserById: (id: string) => axiosService.get<IUser>(urls.user + `/${id}`),
   getUserByToken: (accessToken: string) =>
     axiosService.get<IUser>(urls.user + '/currentUser' + `/${accessToken}`),
+  getFrequentOrderByUserId: (userId: string) => axiosService.get<number[]>(urls.frequentOrder + `/${userId}`)
 };

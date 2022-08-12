@@ -57,7 +57,7 @@ const HeaderComponent: FC = () => {
 
       currentUser.name && user.name && setTimeout(() => {
         dispatch(setOfferPopupActive());
-      }, 10000);
+      }, 500);
 
     },
     [refresh, currentUser, user, access, dispatch]);

@@ -16,7 +16,7 @@ const initialState:IInitialState = {
 };
 
 export const getAll = createAsyncThunk<IUser[] | undefined, void>(
-  'auth/user',
+  'user/getAll',
   async (_, { dispatch, getState }) => {
     try {
       const { data } = await userService.getAllUsers();
@@ -29,7 +29,7 @@ export const getAll = createAsyncThunk<IUser[] | undefined, void>(
 );
 
 export const getUserById = createAsyncThunk<IUser | undefined, string>(
-  'userById',
+  'user/getUserById',
   async (id, { dispatch, getState }) => {
     try {
       const { data } = await userService.getUserById(id);
@@ -42,7 +42,7 @@ export const getUserById = createAsyncThunk<IUser | undefined, string>(
 );
 
 export const getCurrentUser = createAsyncThunk<IUser | undefined, string>(
-  'auth/currentUser',
+  'user/getCurrentUser',
   async (accessToken) => {
     try {
       const { data } = await userService.getUserByToken(accessToken);
@@ -52,6 +52,18 @@ export const getCurrentUser = createAsyncThunk<IUser | undefined, string>(
     }
   },
 );
+
+export const getFrequentOrder = createAsyncThunk(
+  'user/getFrequentOrder',
+  async(userId: string) => {
+    try {
+      const {data} = await userService.getFrequentOrderByUserId(userId);
+      console.log(data);
+    } catch(e) {
+      return undefined;
+    }
+  }
+)
 
 const userSlice = createSlice({
   name: 'user',

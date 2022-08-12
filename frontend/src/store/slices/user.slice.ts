@@ -53,12 +53,12 @@ export const getCurrentUser = createAsyncThunk<IUser | undefined, string>(
   },
 );
 
-export const getFrequentOrder = createAsyncThunk(
+export const getFrequentOrder = createAsyncThunk<number[] | undefined, string>(
   'user/getFrequentOrder',
   async(userId: string) => {
     try {
       const {data} = await userService.getFrequentOrderByUserId(userId);
-      console.log(data);
+      return data;
     } catch(e) {
       return undefined;
     }
@@ -103,7 +103,16 @@ const userSlice = createSlice({
         }
       },
     );
-  },
+
+    builder.addCase(getFrequentOrder.fulfilled, (state, action: PayloadAction<number[] | undefined>) => {
+      state.status = 'fulfilled';
+      if(action.payload) {
+        action.payload = action.payload.slice().sort((x, y) => x - y);
+      }
+
+     },
+    )
+  }
 });
 const userReducer = userSlice.reducer;
 export { userReducer };

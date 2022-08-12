@@ -1,7 +1,7 @@
 .offer-modal {
     height: 100vh;
     width: 100vw;
-    background-color: var(--modal-background-color);
+    background-color: rgba(51, 49, 49, 0.56);
     position: fixed;
     left: 0;
     top: 0;

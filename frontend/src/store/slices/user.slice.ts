@@ -4,12 +4,12 @@ import { IUser } from '../../interfaces';
 
 interface IInitialState {
   status: string;
-  user: IUser,
-  allUser: IUser[],
-  isOfferPopupActive: boolean,
+  user: IUser;
+  allUser: IUser[];
+  isOfferPopupActive: boolean;
   frequentOrderId: number;
 }
-const initialState:IInitialState = {
+const initialState: IInitialState = {
   status: '',
   user: {} as IUser,
   allUser: [],
@@ -57,15 +57,15 @@ export const getCurrentUser = createAsyncThunk<IUser | undefined, string>(
 
 export const getFrequentOrder = createAsyncThunk<number[] | undefined, string>(
   'user/getFrequentOrder',
-  async(userId: string) => {
+  async (userId: string) => {
     try {
-      const {data} = await userService.getFrequentOrderByUserId(userId);
+      const { data } = await userService.getFrequentOrderByUserId(userId);
       return data;
-    } catch(e) {
+    } catch (e) {
       return undefined;
     }
-  }
-)
+  },
+);
 
 const userSlice = createSlice({
   name: 'user',
@@ -73,7 +73,7 @@ const userSlice = createSlice({
   reducers: {
     setOfferPopupActive: (state) => {
       state.isOfferPopupActive = !state.isOfferPopupActive;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getUserById.pending, (state, action) => {
@@ -106,35 +106,35 @@ const userSlice = createSlice({
       },
     );
 
-    builder.addCase(getFrequentOrder.fulfilled, (state, action:PayloadAction<number[] | undefined>) => {
-      state.status = 'fulfilled';
-      let max_count = 1, res = 0;
-      let curr_count = 1;
+    builder.addCase(
+      getFrequentOrder.fulfilled,
+      (state, action: PayloadAction<number[] | undefined>) => {
+        state.status = 'fulfilled';
+        let max_count = 1,
+          res = 0;
+        let curr_count = 1;
 
-      if(action.payload) {
-        action.payload = action.payload.slice().sort((x, y) => x - y);
+        if (action.payload) {
+          action.payload = action.payload.slice().sort((x, y) => x - y);
 
-        action.payload.forEach((item,index, array) => {
-         res = array[0];
-          if (array[index] === array[index- 1])
-            curr_count++;
-          else
-            curr_count = 1;
+          action.payload.forEach((item, index, array) => {
+            res = array[0];
+            if (array[index] === array[index - 1]) curr_count++;
+            else curr_count = 1;
 
-          if (curr_count > max_count)
-          {
-            max_count = curr_count;
-            res = array[index - 1];
-          }
-          return res;
-        });
-        state.frequentOrderId = res;
-        localStorage.setItem('frequentOrderId', res.toString());
-      }
-     },
-    )
-  }
+            if (curr_count > max_count) {
+              max_count = curr_count;
+              res = array[index - 1];
+            }
+            return res;
+          });
+          state.frequentOrderId = res;
+          localStorage.setItem('frequentOrderId', res.toString());
+        }
+      },
+    );
+  },
 });
 const userReducer = userSlice.reducer;
 export { userReducer };
-export const { setOfferPopupActive} = userSlice.actions;
+export const { setOfferPopupActive } = userSlice.actions;

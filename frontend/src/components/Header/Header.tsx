@@ -9,12 +9,12 @@ import {
   getRestaurants,
   setLoginActive,
   setOfferPopupActive,
-  userLogout
-} from "../../store";
+  userLogout,
+} from '../../store';
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
-import { OfferPopup } from "../OfferPopup/OfferPopup";
+import { OfferPopup } from '../OfferPopup/OfferPopup';
 import {
   FormControl,
   InputLabel,
@@ -23,7 +23,6 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import './Header.css';
-
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,28 +39,27 @@ const HeaderComponent: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      dispatch(getRestaurants());
-      dispatch(getLocality());
+    dispatch(getRestaurants());
+    dispatch(getLocality());
 
-      access &&
+    access &&
       !currentUser.name &&
       !user.name &&
       dispatch(getCurrentUser(access));
 
-      if (!access && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          dispatch(getGeolocation({ lat, lng }));
-        });
-      }
+    if (!access && navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        dispatch(getGeolocation({ lat, lng }));
+      });
+    }
 
-       user.name && setTimeout(() => {
+    user.name &&
+      setTimeout(() => {
         dispatch(setOfferPopupActive());
       }, 10000);
-
-    },
-    [refresh, currentUser, user, access, dispatch, user.name]);
+  }, [refresh, currentUser, user, access, dispatch, user.name]);
 
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
@@ -184,7 +182,7 @@ const HeaderComponent: FC = () => {
         ) : null}
       </AuthModal>
       <hr />
-      <OfferPopup/>
+      <OfferPopup />
     </header>
   );
 };

@@ -19,4 +19,3 @@ export const urls = {
   promotions: '/promotions',
   frequentOrder: 'user/frequentOrder',
 };
-

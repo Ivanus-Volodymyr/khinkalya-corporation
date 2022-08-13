@@ -1,14 +1,22 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect } from 'react';
 import * as React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import "./OfferPopup.css";
-import { getDishById, getFrequentOrder, setOfferPopupActive } from "../../store";
+import './OfferPopup.css';
+import {
+  getDishById,
+  getFrequentOrder,
+  setOfferPopupActive,
+} from '../../store';
 
 const OfferPopup: FC = () => {
   const { user } = useAppSelector((state) => state.authReducer);
-  const {  isOfferPopupActive, user:currentUser, frequentOrderId } = useAppSelector((state) => state.userReducer);
+  const {
+    isOfferPopupActive,
+    user: currentUser,
+    frequentOrderId,
+  } = useAppSelector((state) => state.userReducer);
   const { popularDish } = useAppSelector((state) => state.dishReducer);
   const dispatch = useAppDispatch();
   const userId = localStorage.getItem('userId') as string;
@@ -16,15 +24,16 @@ const OfferPopup: FC = () => {
 
   useEffect(() => {
     userId && dispatch(getFrequentOrder(userId));
-    frequentOrderId && dispatch(getDishById(frequentOrderId ));
+    frequentOrderId && dispatch(getDishById(frequentOrderId));
     !frequentOrderId && frqtOrderIdLS && dispatch(getDishById(+frqtOrderIdLS));
-
-  },[userId,  frequentOrderId, frqtOrderIdLS])
+  }, [userId, frequentOrderId, frqtOrderIdLS]);
 
   return (
     <div
       className={isOfferPopupActive ? 'offer-modal active' : 'offer-modal'}
-      onClick={() => {dispatch(setOfferPopupActive())}}
+      onClick={() => {
+        dispatch(setOfferPopupActive());
+      }}
     >
       <div
         className={
@@ -34,11 +43,26 @@ const OfferPopup: FC = () => {
         }
         onClick={(event) => event.stopPropagation()}
       >
-        {user && <p>Доброго дня, <span>{user.name}!</span></p>}
-        {!user && currentUser && <p>Доброго дня, <span>{currentUser.name}!</span></p>}
+        {user && (
+          <p>
+            Доброго дня, <span>{user.name}!</span>
+          </p>
+        )}
+        {!user && currentUser && (
+          <p>
+            Доброго дня, <span>{currentUser.name}!</span>
+          </p>
+        )}
         <p>Вітаємо вас у нашому ресторані!</p>
-        <p>Бажаєте замовити свої улюблені <Link to={`dish/${popularDish.localityId}`}>{popularDish.name}?</Link></p>
-        <img src={popularDish.image} alt={popularDish.name} className={"popularDish-img"}/>
+        <p>
+          Бажаєте замовити свої улюблені{' '}
+          <Link to={`dish/${popularDish.localityId}`}>{popularDish.name}?</Link>
+        </p>
+        <img
+          src={popularDish.image}
+          alt={popularDish.name}
+          className={'popularDish-img'}
+        />
       </div>
     </div>
   );

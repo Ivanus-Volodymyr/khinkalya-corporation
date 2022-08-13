@@ -1,19 +1,28 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { dishService } from '../../services/dish.service';
 import { IDish } from '../../interfaces';
 
-const initialState = {
-  result: [] as IDish[],
+interface IInitialState{
+  result: IDish[],
+  status: string,
+  dish: IDish[],
+  item: number,
+  popularDish: IDish,
+}
+
+const initialState:IInitialState = {
+  result: [],
   status: 'Loading',
-  dish: [] as IDish[],
+  dish: [],
   item: 1,
+  popularDish: {} as IDish,
 };
 
 export const getAllDish = createAsyncThunk(
-  'dish/all',
+  'dish/getAllDish',
   async (_, { dispatch, getState }) => {
     try {
-      const { data } = await dishService.getDish();
+      const { data } = await dishService.getAllDishes();
       return data;
     } catch (e) {
       console.log(e);
@@ -21,11 +30,20 @@ export const getAllDish = createAsyncThunk(
   },
 );
 
+export const getDishById = createAsyncThunk<any, number>('dish/getDishById', async(dishId)=>{
+  try{
+    const { data} = await dishService.getDishById(dishId)
+    return data;
+  }catch (e) {
+    console.log(e);
+  }
+})
+
 export const getAllDishByLocalityId = createAsyncThunk(
-  'auth/user',
+  'dish/getAllDishByLocalityId',
   async (id: string, { dispatch, getState }) => {
     try {
-      const { data } = await dishService.getDish();
+      const { data } = await dishService.getAllDishes();
       return data.filter((value) => value.localityId === Number(id));
     } catch (e) {
       console.log(e);
@@ -38,10 +56,10 @@ const dishSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllDishByLocalityId.pending, (state, action) => {
+    builder.addCase(getAllDishByLocalityId.pending, (state) => {
       state.status = 'Loading';
     });
-    builder.addCase(getAllDishByLocalityId.fulfilled, (state, action) => {
+    builder.addCase(getAllDishByLocalityId.fulfilled, (state, action:PayloadAction<IDish[] | undefined>) => {
       state.status = 'fulfilled';
       const item = localStorage.getItem('restaurantId') || 1;
       if (action.payload) {
@@ -50,9 +68,15 @@ const dishSlice = createSlice({
         );
       }
     });
-    builder.addCase(getAllDish.fulfilled, (state, action) => {
+    builder.addCase(getAllDish.fulfilled, (state, action:PayloadAction<IDish[] | undefined>) => {
       if (action.payload) {
         state.dish = action.payload;
+      }
+    });
+
+    builder.addCase(getDishById.fulfilled, (state, action:PayloadAction<IDish>) => {
+      if (action.payload) {
+        state.popularDish = action.payload;
       }
     });
   },

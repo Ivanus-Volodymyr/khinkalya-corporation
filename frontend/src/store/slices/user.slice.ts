@@ -7,12 +7,14 @@ interface IInitialState {
   user: IUser,
   allUser: IUser[],
   isOfferPopupActive: boolean,
+  frequentOrderId: number;
 }
 const initialState:IInitialState = {
   status: '',
   user: {} as IUser,
   allUser: [],
   isOfferPopupActive: false,
+  frequentOrderId: 0,
 };
 
 export const getAll = createAsyncThunk<IUser[] | undefined, void>(
@@ -104,10 +106,30 @@ const userSlice = createSlice({
       },
     );
 
-    builder.addCase(getFrequentOrder.fulfilled, (state, action: PayloadAction<number[] | undefined>) => {
+    builder.addCase(getFrequentOrder.fulfilled, (state, action) => {
       state.status = 'fulfilled';
+      let max_count = 1, res = 0;
+      let curr_count = 1;
+
       if(action.payload) {
         action.payload = action.payload.slice().sort((x, y) => x - y);
+
+        action.payload.forEach((item,index, array) => {
+         res = array[0];
+          if (array[index] === array[index- 1])
+            curr_count++;
+          else
+            curr_count = 1;
+
+          if (curr_count > max_count)
+          {
+            max_count = curr_count;
+            res = array[index - 1];
+          }
+          return res;
+        });
+        state.frequentOrderId = res;
+        localStorage.setItem('frequentOrderId', res.toString());
       }
 
      },

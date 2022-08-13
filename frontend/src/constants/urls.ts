@@ -11,6 +11,7 @@ export const urls = {
   user: '/user',
   logout: '/auth/logout',
   dish: '/dish',
+  popularDish: '/dish/popular',
   locality: '/locality',
   restaurants: '/restaurants',
   order: '/order',

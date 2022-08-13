@@ -42,6 +42,7 @@ const HeaderComponent: FC = () => {
   useEffect(() => {
       dispatch(getRestaurants());
       dispatch(getLocality());
+
       access &&
       !currentUser.name &&
       !user.name &&
@@ -60,7 +61,7 @@ const HeaderComponent: FC = () => {
       }, 10000);
 
     },
-    [refresh, currentUser, user, access, dispatch]);
+    [refresh, currentUser, user, access, dispatch, user.name]);
 
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
@@ -161,7 +162,7 @@ const HeaderComponent: FC = () => {
         <div>
           <div>
             {user && access && <div>{user.name}</div>}
-            {!user && currentUser && access && <div>{currentUser.name}</div>}
+            {currentUser && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {

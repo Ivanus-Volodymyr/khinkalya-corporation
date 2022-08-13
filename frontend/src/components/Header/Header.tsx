@@ -162,7 +162,7 @@ const HeaderComponent: FC = () => {
         <div>
           <div>
             {user && access && <div>{user.name}</div>}
-            {currentUser && <div>{currentUser.name}</div>}
+            {currentUser && access && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {

@@ -34,9 +34,10 @@ const OfferPopup: FC = () => {
         }
         onClick={(event) => event.stopPropagation()}
       >
-        {user && <p>Доброго дня, {user.name}</p>}
-        {!user && currentUser && <p>Доброго дня, {currentUser.name}</p>}
-        <p>Вітаємо вас у нашому ресторані. Бажаєте замовити свої улюблені <Link to={`dish/${popularDish.localityId}`}>{popularDish.name}</Link></p>
+        {user && <p>Доброго дня, <span>{user.name}!</span></p>}
+        {!user && currentUser && <p>Доброго дня, <span>{currentUser.name}!</span></p>}
+        <p>Вітаємо вас у нашому ресторані!</p>
+        <p>Бажаєте замовити свої улюблені <Link to={`dish/${popularDish.localityId}`}>{popularDish.name}?</Link></p>
         <img src={popularDish.image} alt={popularDish.name} className={"popularDish-img"}/>
       </div>
     </div>

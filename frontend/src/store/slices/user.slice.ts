@@ -106,7 +106,7 @@ const userSlice = createSlice({
       },
     );
 
-    builder.addCase(getFrequentOrder.fulfilled, (state, action) => {
+    builder.addCase(getFrequentOrder.fulfilled, (state, action:PayloadAction<number[] | undefined>) => {
       state.status = 'fulfilled';
       let max_count = 1, res = 0;
       let curr_count = 1;
@@ -131,7 +131,6 @@ const userSlice = createSlice({
         state.frequentOrderId = res;
         localStorage.setItem('frequentOrderId', res.toString());
       }
-
      },
     )
   }

@@ -55,9 +55,9 @@ const HeaderComponent: FC = () => {
         });
       }
 
-      currentUser.name && user.name && setTimeout(() => {
+       user.name && setTimeout(() => {
         dispatch(setOfferPopupActive());
-      }, 500);
+      }, 10000);
 
     },
     [refresh, currentUser, user, access, dispatch]);
@@ -183,7 +183,7 @@ const HeaderComponent: FC = () => {
         ) : null}
       </AuthModal>
       <hr />
-      {(user || currentUser) && <OfferPopup/> }
+      <OfferPopup/>
     </header>
   );
 };

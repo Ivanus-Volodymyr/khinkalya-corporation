@@ -11,11 +11,11 @@ export const urls = {
   user: '/user',
   logout: '/auth/logout',
   dish: '/dish',
-  popularDish: '/dish/popular',
   locality: '/locality',
   restaurants: '/restaurants',
   order: '/order',
   reviews: '/reviews',
   promotions: '/promotions',
-  frequentOrder: 'user/frequentOrder',
 };
+
+export const mapURL = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?key=${process.env.REACT_APP_GOOGLE_MAP_KEY}`;

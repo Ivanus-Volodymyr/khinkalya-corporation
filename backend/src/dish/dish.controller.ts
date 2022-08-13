@@ -10,14 +10,8 @@ export class DishController {
     return this.dishService.getAllDishes();
   }
 
-  @Get("popular/:dishId")
-  GetDishById(@Param("dishId") dishId: string) {
-    return this.dishService.getDishById(dishId);
-  }
-
   @Get("locality/:id")
   getDishByLocality(@Param("id") id: string) {
     return this.dishService.dishByLocalityId(id);
   }
-
 }

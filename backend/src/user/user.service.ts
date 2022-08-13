@@ -77,18 +77,4 @@ export class UserService {
   deleteUserById(id: string): void {
     this.prismaService.user.delete({ where: { id: Number(id) } });
   }
-
-  public async getOrdersArrayByUserId(userId: string): Promise<number[]> {
-    try {
-      const dishArrayDB = await this.prismaService.order.findMany({
-        where: { userId: Number(userId) },
-        select: { dish: true },
-      });
-      const dishIds = dishArrayDB.flatMap((obj) => obj.dish);
-      console.log(dishIds);
-      return dishIds;
-    } catch (e) {
-      throw new HttpException(e.message, 404);
-    }
-  }
 }

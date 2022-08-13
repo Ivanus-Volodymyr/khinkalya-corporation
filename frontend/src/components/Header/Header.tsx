@@ -1,8 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import './Header.css';
-
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
@@ -10,11 +8,13 @@ import {
   getLocality,
   getRestaurants,
   setLoginActive,
+  setOfferPopupActive,
   userLogout,
 } from '../../store';
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
+import { OfferPopup } from '../OfferPopup/OfferPopup';
 import {
   FormControl,
   InputLabel,
@@ -22,6 +22,7 @@ import {
   Select,
   SelectChangeEvent,
 } from '@mui/material';
+import './Header.css';
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
@@ -36,9 +37,11 @@ const HeaderComponent: FC = () => {
   const access = localStorage.getItem('access') as string;
   const request = { ...user, access };
   const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(getRestaurants());
     dispatch(getLocality());
+
     access &&
       !currentUser.name &&
       !user.name &&
@@ -48,11 +51,15 @@ const HeaderComponent: FC = () => {
       navigator.geolocation.getCurrentPosition(function (position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        console.log(lat, lng);
         dispatch(getGeolocation({ lat, lng }));
       });
     }
-  }, [refresh, currentUser, user, access, dispatch]);
+
+    user.name &&
+      setTimeout(() => {
+        dispatch(setOfferPopupActive());
+      }, 10000);
+  }, [refresh, currentUser, user, access, dispatch, user.name]);
 
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
@@ -153,7 +160,7 @@ const HeaderComponent: FC = () => {
         <div>
           <div>
             {user && access && <div>{user.name}</div>}
-            {!user && currentUser && access && <div>{currentUser.name}</div>}
+            {currentUser && access && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {
@@ -175,6 +182,7 @@ const HeaderComponent: FC = () => {
         ) : null}
       </AuthModal>
       <hr />
+      <OfferPopup />
     </header>
   );
 };

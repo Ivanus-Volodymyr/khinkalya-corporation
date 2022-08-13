@@ -20,3 +20,4 @@ export * from './About/About';
 export * from './FooterModal/FooterModal';
 export * from './ReviewForm/ReviewForm';
 export * from './Restaurants/Restaurants';
+export * from './OfferPopup/OfferPopup';

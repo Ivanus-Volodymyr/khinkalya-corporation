@@ -41,4 +41,9 @@ export class UserController {
   ) {
     return this.userService.updateUserById(file, user, id);
   }
+
+  @Get("frequentOrder/:userId")
+  getFrequentOrder(@Param("userId") userId: string): Promise<number[]> {
+    return this.userService.getOrdersArrayByUserId(userId);
+  }
 }

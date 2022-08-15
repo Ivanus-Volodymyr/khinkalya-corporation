@@ -8,7 +8,7 @@ import { Main } from "../Main/Main";
 const LayoutComponent: FC = () => {
   return (
     <section>
-      <Main />
+      {/*<Main />*/}
       <HeaderComponent />
       <Outlet />
       <FooterComponent />

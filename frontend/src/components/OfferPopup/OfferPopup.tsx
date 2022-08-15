@@ -43,12 +43,12 @@ const OfferPopup: FC = () => {
         }
         onClick={(event) => event.stopPropagation()}
       >
-        {user && (
+        {user.name && (
           <p>
             Доброго дня, <span>{user.name}!</span>
           </p>
         )}
-        {!user && currentUser && (
+        {!user.name && currentUser.name && (
           <p>
             Доброго дня, <span>{currentUser.name}!</span>
           </p>

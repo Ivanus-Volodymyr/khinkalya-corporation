@@ -22,20 +22,28 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import './Header.css';
+import { IUser } from "../../interfaces";
 
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
-  const { user, isLoginActive, isRegisterActive } = useAppSelector(
+  let currentUser: Partial<IUser>;
+  const authStore = useAppSelector(
     (state) => state.authReducer,
   );
+  const { isLoginActive, isRegisterActive } = authStore;
+  currentUser = authStore.user;
+
   const { locality } = useAppSelector((state) => state.localityReducer);
   const { restaurants } = useAppSelector((state) => state.restaurantReducer);
-  const { user: currentUser } = useAppSelector((state) => state.userReducer);
+  const userStore = useAppSelector((state) => state.userReducer);
 
-  const refresh = localStorage.getItem('refresh');
+  const refresh = localStorage.getItem('refresh') as string;
   const access = localStorage.getItem('access') as string;
-  const request = { ...user, access };
+  const frequentOrderId = localStorage.getItem('frequentOrderId') as string;
+
+  if(!currentUser.email) currentUser = userStore.user;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,7 +52,6 @@ const HeaderComponent: FC = () => {
 
     access &&
       !currentUser.name &&
-      !user.name &&
       dispatch(getCurrentUser(access));
 
     if (!access && navigator.geolocation) {
@@ -55,11 +62,11 @@ const HeaderComponent: FC = () => {
       });
     }
 
-    user.name &&
+    currentUser.name && Number(frequentOrderId) > 0 &&
       setTimeout(() => {
         dispatch(setOfferPopupActive());
-      }, 10000);
-  }, [refresh, currentUser, user, access, dispatch, user.name]);
+      }, 5000);
+  }, [refresh, currentUser, access, dispatch, currentUser.email, Number(frequentOrderId)]);
 
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
@@ -159,15 +166,14 @@ const HeaderComponent: FC = () => {
         </div>
         <div>
           <div>
-            {user && access && <div>{user.name}</div>}
             {currentUser && access && <div>{currentUser.name}</div>}
           </div>
           <button
             onClick={() => {
               !access && dispatch(setLoginActive());
 
-              if (access && request)
-                dispatch(userLogout({ accessToken: request.access }));
+              if (access)
+                dispatch(userLogout({ accessToken: access }));
             }}
           >
             {!access ? 'Увійти' : 'Вийти'}

@@ -44,6 +44,8 @@ const HeaderComponent: FC = () => {
 
   if(!currentUser.email) currentUser = userStore.user;
 
+  let popupTimeout: any = undefined;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,21 +53,23 @@ const HeaderComponent: FC = () => {
     dispatch(getLocality());
 
     access &&
-      !currentUser.name &&
-      dispatch(getCurrentUser(access));
+    !currentUser.name &&
+    dispatch(getCurrentUser(access));
 
     if (!access && navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (position) {
+      navigator.geolocation.getCurrentPosition(function(position) {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         dispatch(getGeolocation({ lat, lng }));
       });
     }
 
-    currentUser.name && Number(frequentOrderId) > 0 &&
-      setTimeout(() => {
+    if(currentUser.name && Number(frequentOrderId) > 0 ){
+      popupTimeout = setTimeout(() => {
         dispatch(setOfferPopupActive());
       }, 5000);
+    }
+
   }, [refresh, currentUser, access, dispatch, currentUser.email, Number(frequentOrderId)]);
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -172,8 +176,10 @@ const HeaderComponent: FC = () => {
             onClick={() => {
               !access && dispatch(setLoginActive());
 
-              if (access)
+              if (access) {
                 dispatch(userLogout({ accessToken: access }));
+                clearTimeout(popupTimeout);
+              }
             }}
           >
             {!access ? 'Увійти' : 'Вийти'}

@@ -7,7 +7,7 @@ import { useAppSelector } from '../../hooks/redux';
 Chart.register(CategoryScale);
 
 const BarChart = () => {
-  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { locality } = useAppSelector((state) => state.localityReducer);
   const arrayOfLocalityDish = [];
   for (let i = 0; i < locality.length; i++) {
     const datum = locality[i];

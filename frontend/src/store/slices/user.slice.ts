@@ -19,7 +19,7 @@ const initialState: IInitialState = {
 
 export const getAll = createAsyncThunk<IUser[] | undefined, void>(
   'user/getAll',
-  async (_, { dispatch, getState }) => {
+  async (_) => {
     try {
       const { data } = await userService.getAllUsers();
       return data;
@@ -32,7 +32,7 @@ export const getAll = createAsyncThunk<IUser[] | undefined, void>(
 
 export const getUserById = createAsyncThunk<IUser | undefined, string>(
   'user/getUserById',
-  async (id, { dispatch, getState }) => {
+  async (id) => {
     try {
       const { data } = await userService.getUserById(id);
       return data;
@@ -76,7 +76,7 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getUserById.pending, (state, action) => {
+    builder.addCase(getUserById.pending, (state) => {
       state.status = 'Loading';
     });
     builder.addCase(
@@ -86,7 +86,7 @@ const userSlice = createSlice({
         if (action.payload) state.user = action.payload;
       },
     );
-    builder.addCase(getAll.pending, (state, action) => {
+    builder.addCase(getAll.pending, (state) => {
       state.status = 'Loading';
     });
     builder.addCase(

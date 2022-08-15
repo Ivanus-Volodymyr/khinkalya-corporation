@@ -4,13 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
-  getGeolocation,
-  getLocality,
+  getGeolocation, getLocality,
   getRestaurants,
   setLoginActive,
   setOfferPopupActive,
-  userLogout,
-} from '../../store';
+  userLogout
+} from "../../store";
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
@@ -24,12 +23,13 @@ import {
 } from '@mui/material';
 import './Header.css';
 
+
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
   );
-  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { locality } = useAppSelector((state) => state.localityReducer);
   const { restaurants } = useAppSelector((state) => state.restaurantReducer);
   const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
@@ -138,7 +138,7 @@ const HeaderComponent: FC = () => {
         </div>
         <FormControl style={{ width: '250px' }}>
           <InputLabel>Виберіть ресторан</InputLabel>
-          <Select onChange={handleChange}>
+          <Select defaultValue={''} onChange={handleChange}>
             {restaurants &&
               restaurants.map((result) => (
                 <MenuItem key={result.id} value={result.id}>
@@ -181,7 +181,6 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-      <hr />
       <OfferPopup />
     </header>
   );

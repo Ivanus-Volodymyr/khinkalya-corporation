@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getAllOrders } from '../../store/slices/order.slice';
-import { getAllDish } from '../../store';
+
+import { getAllDish, getAllOrders } from "../../store";
 import { IDish } from '../../interfaces';
 
 const OrderDone = () => {
   const { orderFromDb } = useAppSelector((state) => state.orderReducer);
   const { dish } = useAppSelector((state) => state.dishReducer);
   const dispatch = useAppDispatch();
-  const [total] = useState(0);
+  let [total] = useState(0);
   useEffect(() => {
     dispatch(getAllOrders());
     dispatch(getAllDish());
   }, [dispatch]);
 
   const arrayOrder: { productId: number; quantity: number }[] = [];
-  const count = {} as any;
+  const count = {} as number[];
   if (orderFromDb.dish) {
     for (const elem of orderFromDb.dish) {
       if (count[elem] === undefined) {
@@ -42,6 +42,7 @@ const OrderDone = () => {
         const product = PRODUCTS_MAP[value.productId];
         const price = product?.price || 0;
         const number = value.quantity * price;
+        total+=number
         return (
           <div key={value.productId}>
             <div>{product?.name}</div>

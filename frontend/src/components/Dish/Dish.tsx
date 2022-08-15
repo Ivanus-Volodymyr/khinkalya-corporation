@@ -2,7 +2,8 @@ import React, { FC, useState } from 'react';
 
 import { IDish } from '../../interfaces';
 import { useAppDispatch } from '../../hooks/redux';
-import { createOrder } from '../../store/slices/order.slice';
+import { createOrder } from '../../store';
+
 
 const Dish: FC<{ results: IDish }> = ({ results }) => {
   const dispatch = useAppDispatch();

@@ -8,6 +8,8 @@ import {
   userReducer,
   restaurantReducer,
 } from './slices';
+import { localityReducer } from "./slices/locality.slice";
+import { promotionsReducer } from "./slices/promotions.slice";
 
 const rootReducer = combineReducers({
   authReducer,
@@ -17,6 +19,8 @@ const rootReducer = combineReducers({
   orderReducer,
   reviewReducer,
   restaurantReducer,
+  localityReducer,
+  promotionsReducer
 });
 export const setupStore = () =>
   configureStore({

@@ -2,9 +2,10 @@ import React, { FC, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { getLocality, getUserById } from '../../store';
+import {  getUserById } from '../../store';
 import { Avatar } from '@mui/material';
 import { deepOrange } from '@mui/material/colors';
+import { getLocality } from "../../store/slices/locality.slice";
 
 const Admin: FC = () => {
   const { user } = useAppSelector((state) => state.userReducer);
@@ -16,7 +17,7 @@ const Admin: FC = () => {
     if (id) dispatch(getUserById(id));
   }, []);
 
-  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { locality } = useAppSelector((state) => state.localityReducer);
   const array: number[] = [];
 
   for (let i = 0; i < locality.length; i++) {

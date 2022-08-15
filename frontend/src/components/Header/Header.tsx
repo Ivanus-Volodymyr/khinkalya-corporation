@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
   getGeolocation,
-  getLocality,
   getRestaurants,
   setLoginActive,
   setOfferPopupActive,
@@ -23,13 +22,14 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import './Header.css';
+import { getLocality } from "../../store/slices/locality.slice";
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
   const { user, isLoginActive, isRegisterActive } = useAppSelector(
     (state) => state.authReducer,
   );
-  const { locality } = useAppSelector((state) => state.adminReducer);
+  const { locality } = useAppSelector((state) => state.localityReducer);
   const { restaurants } = useAppSelector((state) => state.restaurantReducer);
   const { user: currentUser } = useAppSelector((state) => state.userReducer);
 
@@ -138,7 +138,7 @@ const HeaderComponent: FC = () => {
         </div>
         <FormControl style={{ width: '250px' }}>
           <InputLabel>Виберіть ресторан</InputLabel>
-          <Select onChange={handleChange}>
+          <Select  onChange={handleChange}>
             {restaurants &&
               restaurants.map((result) => (
                 <MenuItem key={result.id} value={result.id}>

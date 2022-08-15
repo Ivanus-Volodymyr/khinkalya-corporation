@@ -2,7 +2,7 @@ import { Button, Input, Select, Rate } from 'antd';
 import React, { FC, useState } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { CreateReview } from '../../store';
+import { createReview } from '../../store';
 import { IReview } from '../../interfaces';
 import { useForm } from 'react-hook-form';
 import './ReviewForm.css';
@@ -36,7 +36,7 @@ const ReviewForm: FC = () => {
     data.userId = +userId;
     data.rating = rate;
 
-    dispatch(CreateReview(data as IReview));
+    dispatch(createReview(data as IReview));
   };
 
   return (

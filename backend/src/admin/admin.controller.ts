@@ -20,6 +20,7 @@ export class AdminController {
   @Post("dish")
   @UseInterceptors(FileInterceptor("image"))
   public async addDish(@UploadedFile() file, @Body() dish: Dish) {
+    console.log(dish);
     return this.adminService.addDish(dish, file);
   }
 

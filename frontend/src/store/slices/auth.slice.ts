@@ -147,7 +147,7 @@ const authSlice = createSlice({
       },
     );
 
-    builder.addCase(userLogin.pending, (state, action) => {
+    builder.addCase(userLogin.pending, (state) => {
       state.status = 'Loading';
     });
 
@@ -176,7 +176,7 @@ const authSlice = createSlice({
 
     builder.addCase(
       userLogout.fulfilled,
-      (state, action: PayloadAction<void>) => {
+      (state) => {
         state.accessToken = undefined;
         state.refreshToken = undefined;
         state.user = {};

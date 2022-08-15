@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { dishService } from '../../services/dish.service';
-import { IDish } from '../../interfaces';
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { dishService } from "../../services/dish.service";
+import { IDish } from "../../interfaces";
 
 interface IInitialState {
   result: IDish[];
@@ -12,67 +12,67 @@ interface IInitialState {
 
 const initialState: IInitialState = {
   result: [],
-  status: 'Loading',
+  status: "Loading",
   dish: [],
   item: 1,
-  popularDish: {} as IDish,
+  popularDish: {} as IDish
 };
 
 export const getAllDish = createAsyncThunk(
-  'dish/getAllDish',
-  async (_, { dispatch, getState }) => {
+  "dish/getAllDish",
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await dishService.getAllDishes();
       return data;
     } catch (e) {
-      console.log(e);
+      rejectWithValue(e);
     }
-  },
+  }
 );
 
-export const getDishById = createAsyncThunk<any, number>(
-  'dish/getDishById',
-  async (dishId) => {
+export const getDishById = createAsyncThunk<IDish | undefined, number>(
+  "dish/getDishById",
+  async (dishId, { rejectWithValue }) => {
     try {
       const { data } = await dishService.getDishById(dishId);
       return data;
     } catch (e) {
-      console.log(e);
+      rejectWithValue(e);
     }
-  },
+  }
 );
 
 export const getAllDishByLocalityId = createAsyncThunk(
-  'dish/getAllDishByLocalityId',
-  async (id: string, { dispatch, getState }) => {
+  "dish/getAllDishByLocalityId",
+  async (id: string) => {
     try {
       const { data } = await dishService.getAllDishes();
       return data.filter((value) => value.localityId === Number(id));
     } catch (e) {
       console.log(e);
     }
-  },
+  }
 );
 
 const dishSlice = createSlice({
-  name: 'dish',
+  name: "dish",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAllDishByLocalityId.pending, (state) => {
-      state.status = 'Loading';
+      state.status = "Loading";
     });
     builder.addCase(
       getAllDishByLocalityId.fulfilled,
       (state, action: PayloadAction<IDish[] | undefined>) => {
-        state.status = 'fulfilled';
-        const item = localStorage.getItem('restaurantId') || 1;
+        state.status = "fulfilled";
+        const item = localStorage.getItem("restaurantId") || 1;
         if (action.payload) {
           state.result = action.payload.filter(
-            (value) => value.restaurantId === +item,
+            (value) => value.restaurantId === +item
           );
         }
-      },
+      }
     );
     builder.addCase(
       getAllDish.fulfilled,
@@ -80,19 +80,19 @@ const dishSlice = createSlice({
         if (action.payload) {
           state.dish = action.payload;
         }
-      },
+      }
     );
 
     builder.addCase(
       getDishById.fulfilled,
-      (state, action: PayloadAction<IDish>) => {
+      (state, action: PayloadAction<IDish | undefined>) => {
         if (action.payload) {
           state.popularDish = action.payload;
         }
-      },
+      }
     );
-  },
+  }
 });
 const dishReducer = dishSlice.reducer;
 export { dishReducer };
-// export const { } = dishSlice.actions;
+

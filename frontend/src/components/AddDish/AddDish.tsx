@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { TextField } from '@mui/material';
 
-import { addDish, getRestaurants } from '../../store';
+import { addDish, getLocality, getRestaurants } from "../../store";
 import { IDish } from '../../interfaces';
 import './AddDish.css';
-import { getLocality } from "../../store/slices/locality.slice";
+
 
 const AddDish: FC = () => {
   const { locality } = useAppSelector((state) => state.localityReducer);
@@ -53,7 +53,7 @@ const AddDish: FC = () => {
           }}
         >
           <div>
-            <div id="image">Фото Страви</div>
+            <div>Фото Страви</div>
             <input
               style={{ margin: '10px' }}
               className={'file'}

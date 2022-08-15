@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { ReviewsList } from "../ReviewsList/ReviewsList";
 
 const Main: FC = () => {
   return (
@@ -13,6 +14,8 @@ const Main: FC = () => {
         className="video"
         src={'/video/video.mp4'}
       />
+
+      <ReviewsList/>
     </div>
   );
 };

@@ -36,6 +36,12 @@
     color: black;
 }
 
+.ant-btn:focus{
+    color: black;
+    background-color:transparent;
+    border: none;
+}
+
 .popover-btn{
     background:none;
     border: none;

@@ -1,4 +1,4 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import {
   adminReducer,
   authReducer,
@@ -8,9 +8,8 @@ import {
   userReducer,
   restaurantReducer,
   localityReducer,
-  promotionsReducer
-} from "./slices";
-
+  promotionsReducer,
+} from './slices';
 
 const rootReducer = combineReducers({
   authReducer,
@@ -21,12 +20,12 @@ const rootReducer = combineReducers({
   reviewReducer,
   restaurantReducer,
   localityReducer,
-  promotionsReducer
+  promotionsReducer,
 });
 export const setupStore = () =>
   configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
   });
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore["dispatch"];
+export type AppDispatch = AppStore['dispatch'];

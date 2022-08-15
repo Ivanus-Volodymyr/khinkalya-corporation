@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import 'antd/dist/antd.css';
 import { Carousel } from 'antd';
 import { PromotionItem } from "../PromotionItem/PromotionItem";
-import { getPromotions } from "../../store/slices/promotions.slice";
+import { getPromotions } from "../../store";
 
 const Promotions: FC = () => {
   const { promotion } = useAppSelector((state) => state.promotionsReducer);

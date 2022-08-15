@@ -1,16 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { adminService } from "../../services/admin.service";
-import { IDish } from "../../interfaces";
 
-const initialState = {
-  result: [],
-  Dish: [] as IDish[],
-};
+const initialState = {};
 
 
 export const addRestaurant = createAsyncThunk(
   "admin/addRestaurant",
-  async (data: FormData, { dispatch }) => {
+  async (data: FormData) => {
     try {
       await adminService.addRestaurant(data);
     } catch (e) {
@@ -20,7 +16,7 @@ export const addRestaurant = createAsyncThunk(
 );
 export const addLocality = createAsyncThunk(
   "admin/AddLocality",
-  async (data: FormData, { dispatch }) => {
+  async (data: FormData) => {
     try {
       await adminService.addLocality(data);
     } catch (e) {
@@ -30,7 +26,7 @@ export const addLocality = createAsyncThunk(
 );
 export const addDish = createAsyncThunk(
   "admin/AddDish",
-  async (data: FormData, { dispatch }) => {
+  async (data: FormData) => {
     try {
       await adminService.addDish(data);
     } catch (e) {

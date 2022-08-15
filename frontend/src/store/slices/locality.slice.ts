@@ -11,12 +11,12 @@ const initialState:IInitialState = {
 };
 export const getLocality = createAsyncThunk<ILocality[] | undefined, void>(
   "locality/getLocality",
-  async () => {
+  async (_,{rejectWithValue}) => {
     try {
       const { data } = await localityService.getLocality();
       return data;
     } catch (e) {
-      console.log(e);
+      rejectWithValue(e)
       return undefined;
     }
   }

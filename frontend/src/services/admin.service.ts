@@ -10,7 +10,6 @@ export const adminService = {
     axiosService.put<IDish>("admin" + urls.dish, data),
   deleteDish: (id: string) =>
     axiosService.delete<IDish>("admin" + urls.dish + `${id}`),
-  // getLocality: () => axiosService.get<ILocality[]>(urls.locality),
   getRestaurantByID: (id: string) =>
     axiosService.get<IRestaurant>(urls.restaurants + id),
   addLocality: (data: FormData) =>

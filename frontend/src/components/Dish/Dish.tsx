@@ -14,7 +14,7 @@ const Dish: FC<{ results: IDish }> = ({ results }) => {
   };
 
   return (
-    <div>
+    <div >
       <img width={'220px'} src={`${results.image}`} alt="dish" />
       <div>{results.name}</div>
       <div style={{ display: 'flex' }}>

@@ -67,10 +67,10 @@ const HeaderComponent: FC = () => {
   };
 
   return (
-    <header style={{ background: 'white' }}>
+    <header style={{ background: 'white',position:'fixed',width:'100%',top:0,left:0,right:0,zIndex:'100'}}>
       <div className={'header_menu'}>
         <div>
-          <a href="/">
+          <a href="/main">
             {' '}
             <img
               src="/image-for-header/logoKhinkalnya.jpg"

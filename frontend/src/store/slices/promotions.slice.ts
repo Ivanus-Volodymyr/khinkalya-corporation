@@ -1,17 +1,17 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPromotion } from "../../interfaces/promotion.interface";
-import { promotionsService } from "../../services/promotions.service";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IPromotion } from '../../interfaces/promotion.interface';
+import { promotionsService } from '../../services/promotions.service';
 
 interface IInitialState {
   promotion: IPromotion[];
 }
 
 const initialState: IInitialState = {
-  promotion: []
+  promotion: [],
 };
 
 export const getPromotions = createAsyncThunk<IPromotion[] | undefined, void>(
-  "promotions/getPromotions",
+  'promotions/getPromotions',
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await promotionsService.getPromotions();
@@ -20,18 +20,21 @@ export const getPromotions = createAsyncThunk<IPromotion[] | undefined, void>(
       rejectWithValue(e);
       return undefined;
     }
-  }
+  },
 );
 
 const promotionsSlice = createSlice({
-  name: "promotion",
+  name: 'promotion',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPromotions.fulfilled, (state, action: PayloadAction<IPromotion[] | undefined>) => {
-      state.promotion = action.payload ?? [];
-    });
-  }
+    builder.addCase(
+      getPromotions.fulfilled,
+      (state, action: PayloadAction<IPromotion[] | undefined>) => {
+        state.promotion = action.payload ?? [];
+      },
+    );
+  },
 });
 const promotionsReducer = promotionsSlice.reducer;
 export { promotionsReducer };

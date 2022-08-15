@@ -1,12 +1,11 @@
-import React, { FC, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { TextField } from "@mui/material";
+import React, { FC, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { TextField } from '@mui/material';
 
-import { addDish, getLocality, getRestaurants } from "../../store";
-import { IDish } from "../../interfaces";
-import "./AddDish.css";
-
+import { addDish, getLocality, getRestaurants } from '../../store';
+import { IDish } from '../../interfaces';
+import './AddDish.css';
 
 const AddDish: FC = () => {
   const { locality } = useAppSelector((state) => state.localityReducer);
@@ -21,13 +20,13 @@ const AddDish: FC = () => {
 
   const submit: any = async (data: IDish) => {
     const formData = new FormData();
-    formData.append("image", data.image[0]);
-    formData.append("name", data.name);
-    formData.append("price", data.price.toString());
-    formData.append("weight", data.weight.toString());
-    formData.append("description", data.description);
-    formData.append("localityId", data.localityId);
-    formData.append("restaurantId", data.restaurantId);
+    formData.append('image', data.image[0]);
+    formData.append('name', data.name);
+    formData.append('price', data.price.toString());
+    formData.append('weight', data.weight.toString());
+    formData.append('description', data.description);
+    formData.append('localityId', data.localityId);
+    formData.append('restaurantId', data.restaurantId);
     await dispatch(addDish(formData));
   };
 
@@ -35,67 +34,67 @@ const AddDish: FC = () => {
     <div>
       <form
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          margin: "10px"
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '10px',
         }}
         onSubmit={handleSubmit(submit)}
       >
         <h3>Додати Страву</h3>
         <div
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center"
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
           <div>
             <div>Фото Страви</div>
             <input
-              style={{ margin: "10px" }}
-              className={"file"}
+              style={{ margin: '10px' }}
+              className={'file'}
               type="file"
-              {...register("image")}
+              {...register('image')}
             />
           </div>
           <div>
             <input
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               type="text"
-              placeholder={"name"}
-              {...register("name")}
+              placeholder={'name'}
+              {...register('name')}
             />
           </div>
           <div>
             <input
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               type="number"
-              placeholder={"price"}
-              {...register("price")}
+              placeholder={'price'}
+              {...register('price')}
             />
           </div>
           <div>
             <input
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               type="number"
-              placeholder={"weight"}
-              {...register("weight")}
+              placeholder={'weight'}
+              {...register('weight')}
             />
           </div>
           <div>
             <TextField
-              style={{ margin: "10px" }}
+              style={{ margin: '10px' }}
               id="outlined-multiline-static"
               label="Текст Опису"
               multiline
               rows={4}
-              {...register("description")}
+              {...register('description')}
             />
           </div>
-          <select style={{ margin: "10px" }} {...register("localityId")}>
+          <select style={{ margin: '10px' }} {...register('localityId')}>
             <option value="">Виберіть цех приготування</option>
             {locality &&
               locality.map((result) => (
@@ -105,7 +104,7 @@ const AddDish: FC = () => {
               ))}
           </select>
 
-          <select style={{ margin: "10px" }} {...register("restaurantId")}>
+          <select style={{ margin: '10px' }} {...register('restaurantId')}>
             <option value="">Виберіть ресторан</option>
             {restaurants &&
               restaurants.map((result) => (

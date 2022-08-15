@@ -4,7 +4,6 @@ import { IDish } from '../../interfaces';
 import { useAppDispatch } from '../../hooks/redux';
 import { createOrder } from '../../store';
 
-
 const Dish: FC<{ results: IDish }> = ({ results }) => {
   const dispatch = useAppDispatch();
   const [quantity, setQuantity] = useState(1);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { getAllDish, getAllOrders } from "../../store";
+import { getAllDish, getAllOrders } from '../../store';
 import { IDish } from '../../interfaces';
 
 const OrderDone = () => {
@@ -42,7 +42,7 @@ const OrderDone = () => {
         const product = PRODUCTS_MAP[value.productId];
         const price = product?.price || 0;
         const number = value.quantity * price;
-        total+=number
+        total += number;
         return (
           <div key={value.productId}>
             <div>{product?.name}</div>

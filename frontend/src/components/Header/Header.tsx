@@ -4,12 +4,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
-  getGeolocation,
+  getGeolocation, getLocality,
   getRestaurants,
   setLoginActive,
   setOfferPopupActive,
-  userLogout,
-} from '../../store';
+  userLogout
+} from "../../store";
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
@@ -22,7 +22,7 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import './Header.css';
-import { getLocality } from "../../store/slices/locality.slice";
+
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
@@ -138,7 +138,7 @@ const HeaderComponent: FC = () => {
         </div>
         <FormControl style={{ width: '250px' }}>
           <InputLabel>Виберіть ресторан</InputLabel>
-          <Select  onChange={handleChange}>
+          <Select defaultValue={''} onChange={handleChange}>
             {restaurants &&
               restaurants.map((result) => (
                 <MenuItem key={result.id} value={result.id}>
@@ -181,7 +181,6 @@ const HeaderComponent: FC = () => {
           <UserRegistration />
         ) : null}
       </AuthModal>
-      <hr />
       <OfferPopup />
     </header>
   );

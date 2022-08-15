@@ -16,7 +16,7 @@ const initialState: IInitialState = {
   orderFromDb: {} as IOrderFromDbInterface
 };
 
-export const getAllOrders = createAsyncThunk(
+export const getAllOrders = createAsyncThunk<IOrderFromDbInterface[]|undefined>(
   "order/getAll",
   async (_, { rejectWithValue }) => {
     try {

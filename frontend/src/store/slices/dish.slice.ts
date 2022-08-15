@@ -18,7 +18,7 @@ const initialState: IInitialState = {
   popularDish: {} as IDish
 };
 
-export const getAllDish = createAsyncThunk(
+export const getAllDish = createAsyncThunk<IDish[] | undefined>(
   "dish/getAllDish",
   async (_, { rejectWithValue }) => {
     try {
@@ -44,12 +44,12 @@ export const getDishById = createAsyncThunk<IDish | undefined, number>(
 
 export const getAllDishByLocalityId = createAsyncThunk(
   "dish/getAllDishByLocalityId",
-  async (id: string) => {
+  async (id: string, { rejectWithValue }) => {
     try {
       const { data } = await dishService.getAllDishes();
       return data.filter((value) => value.localityId === Number(id));
     } catch (e) {
-      console.log(e);
+      rejectWithValue(e);
     }
   }
 );

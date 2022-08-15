@@ -21,3 +21,5 @@ export * from './FooterModal/FooterModal';
 export * from './ReviewForm/ReviewForm';
 export * from './Restaurants/Restaurants';
 export * from './OfferPopup/OfferPopup';
+export * from './Promotions/Promotions'
+export * from './PromotionItem/PromotionItem'

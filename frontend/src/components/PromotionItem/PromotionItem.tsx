@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { IPromotion } from '../../interfaces/promotion.interface';
-import { Carousel } from 'antd';
 import 'antd/dist/antd.css';
 
 const PromotionItem: FC<{ promotion: IPromotion }> = ({ promotion }) => {
@@ -29,4 +28,4 @@ const PromotionItem: FC<{ promotion: IPromotion }> = ({ promotion }) => {
   );
 };
 
-export default PromotionItem;
+export { PromotionItem };

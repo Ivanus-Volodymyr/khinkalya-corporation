@@ -19,7 +19,7 @@ import { AdminMiddleware } from "./auth/middleware/admin_middleware";
 import { GoogleTokenMiddleware } from "./auth/middleware/google_middleware";
 import { OAuth2Client } from "google-auth-library";
 import { ReviewModule } from "./review/review.module";
-import { PromotionsModule } from './promotions/promotions.module';
+import { PromotionsModule } from "./promotions/promotions.module";
 
 @Module({
   imports: [

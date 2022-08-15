@@ -20,7 +20,9 @@ import { S3Service } from "../s3/s3.service";
     S3Service,
   ],
   imports: [
-    JwtModule.register({ secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET as string }),
+    JwtModule.register({
+      secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET as string,
+    }),
     HttpModule,
   ],
 })

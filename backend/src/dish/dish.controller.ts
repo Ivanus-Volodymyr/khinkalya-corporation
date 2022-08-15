@@ -19,5 +19,4 @@ export class DishController {
   getDishByLocality(@Param("id") id: string) {
     return this.dishService.dishByLocalityId(id);
   }
-
 }

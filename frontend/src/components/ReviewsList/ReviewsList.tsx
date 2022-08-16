@@ -47,8 +47,10 @@ const ReviewsList:FC = () => {
               avatar={'https://joeschmoe.io/api/v1/random'}
               content={<div className={"comment-content-wrapper"}>
                 <p>{item.body}</p>
-                <b>{item.restaurant?.name}</b>
-                <Rate disabled defaultValue={item.rating} />
+                <div>
+                  <b>{item.restaurant?.name}</b>
+                  <Rate disabled defaultValue={item.rating} />
+                </div>
               </div>}
               datetime={`${new Date(item.createdAt).toLocaleDateString(
                 'uk-UA',

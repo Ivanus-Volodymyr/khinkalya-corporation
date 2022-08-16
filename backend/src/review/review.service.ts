@@ -12,6 +12,7 @@ export class ReviewService {
     return this.prismaService.review.findMany({
       include: {
         user: true,
+        restaurant: true,
       },
     });
   }

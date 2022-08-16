@@ -100,13 +100,14 @@ hr {
 }
 
 .header_promotion{
-    font-size: 70px;
+    font-size: 60px;
+    letter-spacing: 3px;
+    font-family: cursive;
+    color: var(--primary-color);
     align-items: center;
     display: flex;
     align-content: center;
     justify-content: center;
-    font-family: cursive;
-    color: red;
 }
 
 

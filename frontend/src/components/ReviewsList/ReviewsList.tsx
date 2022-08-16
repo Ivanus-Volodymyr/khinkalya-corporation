@@ -1,8 +1,9 @@
 import React, { FC, useEffect } from "react";
-import { Comment, List, Tooltip } from 'antd';
+import { Comment, List, Rate, Tooltip } from "antd";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getAllReviews } from "../../store";
-
+import "./ReviewsList.css";
 
 const ReviewsList:FC = () => {
   const {reviews} = useAppSelector(state => state.reviewReducer);
@@ -35,7 +36,7 @@ const ReviewsList:FC = () => {
   return (
       <List
         className="comment-list"
-        header={`${reviews?.length} replies`}
+        header={"Відгуки"}
         itemLayout="horizontal"
         dataSource={reviews}
         renderItem={item => (
@@ -44,8 +45,15 @@ const ReviewsList:FC = () => {
               // actions={<span key="comment-list-reply-to-0">Reply to</span>}
               author={item?.user?.name}
               avatar={'https://joeschmoe.io/api/v1/random'}
-              content={<p>`${item.body}`</p>}
-              datetime={item.createdAt}
+              content={<div className={"comment-content-wrapper"}>
+                <p>{item.body}</p>
+                <b>{item.restaurant?.name}</b>
+                <Rate disabled defaultValue={item.rating} />
+              </div>}
+              datetime={`${new Date(item.createdAt).toLocaleDateString(
+                'uk-UA',
+                { year: 'numeric', month: 'long', day: 'numeric' },
+              )}` + " " +`${new Date(item.createdAt).toLocaleTimeString()}`}
             />
           </li>
         )}

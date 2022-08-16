@@ -57,9 +57,9 @@ const Main: FC = () => {
             ))}
           </Carousel>
         </div>
-       <ReviewsList/>
+        <hr />
       </div>
-
+      <ReviewsList/>
     </div>
   );
 };

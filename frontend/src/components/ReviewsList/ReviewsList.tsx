@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { Comment, List, Rate, Tooltip } from 'antd';
+import { Comment, List, Rate,} from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllReviews } from '../../store';
@@ -11,27 +11,7 @@ const ReviewsList: FC = () => {
 
   useEffect(() => {
     dispatch(getAllReviews());
-  }, []);
-
-  // const data = [
-  //   {
-  //     actions: [<span key="comment-list-reply-to-0">Reply to</span>],
-  //     author: 'Han Solo',
-  //     avatar: 'https://joeschmoe.io/api/v1/random',
-  //     content: (
-  //       <p>
-  //         We supply a series of design principles, practical patterns and high quality design
-  //         resources (Sketch and Axure), to help people create their product prototypes beautifully and
-  //         efficiently.
-  //       </p>
-  //     ),
-  //     datetime: (
-  //       <Tooltip title={moment().subtract(1, 'days').format('YYYY-MM-DD HH:mm:ss')}>
-  //         <span>{moment().subtract(1, 'days').fromNow()}</span>
-  //       </Tooltip>
-  //     ),
-  //   },
-  // ];
+  }, [dispatch]);
 
   return (
     <List
@@ -42,7 +22,6 @@ const ReviewsList: FC = () => {
       renderItem={(item) => (
         <li>
           <Comment
-            // actions={<span key="comment-list-reply-to-0">Reply to</span>}
             author={item?.user?.name}
             avatar={'https://joeschmoe.io/api/v1/random'}
             content={

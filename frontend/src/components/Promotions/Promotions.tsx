@@ -2,9 +2,11 @@ import React, { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import 'antd/dist/antd.css';
 import { Carousel } from 'antd';
+
 import { PromotionItem } from "../PromotionItem/PromotionItem";
 import { getPromotions } from "../../store";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+
 
 const Promotions: FC = () => {
   const { promotion } = useAppSelector((state) => state.promotionsReducer);
@@ -31,4 +33,4 @@ const Promotions: FC = () => {
   );
 };
 
-export  { Promotions };
+export { Promotions };

@@ -1,10 +1,10 @@
+
 import React, { FC, useEffect } from "react";
 import "./Main.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getPromotions } from "../../store";
 import { Carousel } from "antd";
 import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-
 
 const Main: FC = () => {
 
@@ -14,6 +14,7 @@ const Main: FC = () => {
     dispatch(getPromotions());
   }, [dispatch]);
   return (
+
     <div>
       <div>
         <video style={{ margin: 0, height: "initial" }}

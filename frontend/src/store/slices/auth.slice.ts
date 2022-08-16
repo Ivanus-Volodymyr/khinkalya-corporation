@@ -174,17 +174,14 @@ const authSlice = createSlice({
       },
     );
 
-    builder.addCase(
-      userLogout.fulfilled,
-      (state) => {
-        state.accessToken = undefined;
-        state.refreshToken = undefined;
-        state.user = {};
-        state.status = undefined;
+    builder.addCase(userLogout.fulfilled, (state) => {
+      state.accessToken = undefined;
+      state.refreshToken = undefined;
+      state.user = {};
+      state.status = undefined;
 
-        localStorage.clear();
-      },
-    );
+      localStorage.clear();
+    });
 
     builder.addCase(
       userGoogleLogin.fulfilled,

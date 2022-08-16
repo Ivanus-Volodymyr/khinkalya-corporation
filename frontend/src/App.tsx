@@ -17,8 +17,9 @@ import {
   DishList,
   DeliveryInfo,
   OrderDone,
-  Restaurants, Promotions
-} from "./components";
+  Restaurants,
+  Promotions,
+} from './components';
 
 function App() {
   return (

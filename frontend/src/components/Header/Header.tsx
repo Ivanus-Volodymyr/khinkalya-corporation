@@ -4,12 +4,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   getCurrentUser,
-  getGeolocation, getLocality,
+  getGeolocation,
+  getLocality,
   getRestaurants,
   setLoginActive,
   setOfferPopupActive,
-  userLogout
-} from "../../store";
+  userLogout,
+} from '../../store';
 import { AuthModal } from '../AuthModal/AuthModal';
 import { UserLogin } from '../User/UserLogin/UserLogin';
 import { UserRegistration } from '../User/UserRegistration/UserRegistration';
@@ -22,30 +23,34 @@ import {
   SelectChangeEvent,
 } from '@mui/material';
 import './Header.css';
-
+import { IUser } from '../../interfaces';
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
-  const { user, isLoginActive, isRegisterActive } = useAppSelector(
-    (state) => state.authReducer,
-  );
+  let currentUser: Partial<IUser>;
+  const authStore = useAppSelector((state) => state.authReducer);
+  const { isLoginActive, isRegisterActive } = authStore;
+  currentUser = authStore.user;
+
   const { locality } = useAppSelector((state) => state.localityReducer);
   const { restaurants } = useAppSelector((state) => state.restaurantReducer);
-  const { user: currentUser } = useAppSelector((state) => state.userReducer);
+  const userStore = useAppSelector((state) => state.userReducer);
 
-  const refresh = localStorage.getItem('refresh');
+  const refresh = localStorage.getItem('refresh') as string;
   const access = localStorage.getItem('access') as string;
-  const request = { ...user, access };
+  const frequentOrderId = localStorage.getItem('frequentOrderId') as string;
+
+  if (!currentUser.email) currentUser = userStore.user;
+
+  let popupTimeout: any = undefined;
+
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getRestaurants());
     dispatch(getLocality());
 
-    access &&
-      !currentUser.name &&
-      !user.name &&
-      dispatch(getCurrentUser(access));
+    access && !currentUser.name && dispatch(getCurrentUser(access));
 
     if (!access && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function (position) {
@@ -55,11 +60,19 @@ const HeaderComponent: FC = () => {
       });
     }
 
-    user.name &&
-      setTimeout(() => {
+    if (currentUser.name && Number(frequentOrderId) > 0) {
+      popupTimeout = setTimeout(() => {
         dispatch(setOfferPopupActive());
-      }, 10000);
-  }, [refresh, currentUser, user, access, dispatch, user.name]);
+      }, 5000);
+    }
+  }, [
+    refresh,
+    currentUser,
+    access,
+    dispatch,
+    currentUser.email,
+    Number(frequentOrderId),
+  ]);
 
   const handleChange = (event: SelectChangeEvent) => {
     localStorage.setItem('restaurantId', event.target.value as string);
@@ -158,16 +171,15 @@ const HeaderComponent: FC = () => {
           </Link>
         </div>
         <div>
-          <div>
-            {user && access && <div>{user.name}</div>}
-            {currentUser && access && <div>{currentUser.name}</div>}
-          </div>
+          <div>{currentUser && access && <div>{currentUser.name}</div>}</div>
           <button
             onClick={() => {
               !access && dispatch(setLoginActive());
 
-              if (access && request)
-                dispatch(userLogout({ accessToken: request.access }));
+              if (access) {
+                dispatch(userLogout({ accessToken: access }));
+                clearTimeout(popupTimeout);
+              }
             }}
           >
             {!access ? 'Увійти' : 'Вийти'}

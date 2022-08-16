@@ -14,7 +14,7 @@ const initialState: IInitialState = {
   isReviewActive: false,
 };
 
-export const GetAllReviews = createAsyncThunk<IReview[] | undefined, void>(
+export const getAllReviews = createAsyncThunk<IReview[] | undefined, void>(
   'reviewSlice/GetAllReviews',
   async () => {
     try {
@@ -26,7 +26,7 @@ export const GetAllReviews = createAsyncThunk<IReview[] | undefined, void>(
   },
 );
 
-export const CreateReview = createAsyncThunk(
+export const createReview = createAsyncThunk(
   'reviewSlice/CreateReview',
   async (review: Partial<IReview>) => {
     try {
@@ -48,12 +48,12 @@ const reviewSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(
-      GetAllReviews.fulfilled,
+      getAllReviews.fulfilled,
       (state, action: PayloadAction<IReview[] | undefined>) => {
         state.reviews = action.payload;
       },
     );
-    builder.addCase(CreateReview.fulfilled, (state, action) => {
+    builder.addCase(createReview.fulfilled, (state, action) => {
       const review = action.payload;
       review && state.reviews && state.reviews.push(review);
       state.status = 'created';

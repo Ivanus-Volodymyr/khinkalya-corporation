@@ -21,26 +21,28 @@ body
     height: 100vh;
     position: absolute;
     z-index: 1;
-    top: 25%;
+    top: 35%;
     right: 10%;
 }
 
 a.btn_main {
     font-size: 1.5rem;
     padding: 1rem 3rem;
-    color: #e8ef17;
+    color: #ff0e0e;
     text-transform: uppercase;
+    font-weight: bold;
+
 }
 
 .btn_main {
     text-decoration: none;
-    border: 1px solid rgb(126, 2, 2);
+    border: 5px solid rgb(126, 2, 2);
     position: relative;
     overflow: hidden;
 }
 
 .btn_main:hover {
-    box-shadow: 1px 1px 25px 10px rgba(238, 13, 13, 0.4);
+    box-shadow: 1px 1px 35px 20px rgba(238, 13, 13, 0.4);
 }
 
 .btn_main:before {
@@ -62,3 +64,50 @@ a.btn_main {
 .btn_main:hover:before {
     left: 100%;
 }
+
+hr {
+    border: none;
+    margin: 30px 0;
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='rgb(231, 12, 52)' stroke-width='1' class='squiggle' d='M0,3.5 c 5,0,5,-2,10,-2 s 5,2,10,2 c 5,0,5,-2,10,-2 s 5,2,10,2'/%3E%3C/svg%3E");
+    background-position: 0 100%;
+    background-repeat: repeat-x;
+    padding-bottom: 4px;
+    background-size: auto 4px;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover {
+    color: currentColor;
+    top:40%;
+    font-size: 7em;
+    opacity: 60%
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-prev:hover {
+    left: 20px;
+    z-index: 2;
+    color: rgb(255, 0, 0);
+}
+
+.ant-carousel .slick-next,
+.ant-carousel .slick-next:hover {
+    right: 70px;
+    z-index: 2;
+    color: rgb(255, 0, 0);
+}
+
+.header_promotion{
+    font-size: 70px;
+    align-items: center;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-family: cursive;
+    color: red;
+}
+
+
+

@@ -3,9 +3,11 @@ import "./Main.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { getPromotions } from "../../store";
 import { Carousel } from "antd";
-import { PromotionItem } from "../PromotionItem/PromotionItem";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
+
 
 const Main: FC = () => {
+
   const { promotion } = useAppSelector(state => state.promotionsReducer);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -17,6 +19,7 @@ const Main: FC = () => {
         <video style={{ margin: 0, height: "initial" }}
                width={"100%"}
                autoPlay
+               loop
                muted
                className="video"
                src={
@@ -28,28 +31,31 @@ const Main: FC = () => {
           <a href="#" className="btn_main">Замовити</a>
         </div>
       </div>
-
       <div>
-        <Carousel
-          autoplay={true}
-          arrows={true}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center"
-          }}
-        >
-          {promotion.map((value) => (
-            <div>
-              <div style={{display:'flex',alignItems:"center",justifyContent:"space-evenly",padding:'10px'}}>
-                <img width={"300px"} height={"300px"} src={value.image} alt="" />
-                <div>{value.descriptions}</div>
+        <h1 className={"header_promotion"}>Акції</h1>
+        <hr />
+        <div>
+          <Carousel arrows prevArrow={<LeftOutlined />} nextArrow={<RightOutlined />}
+                    slidesPerRow={2}
+                    autoplay={true}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      textAlign: "center"
+                    }}
+          >
+            {promotion.map((value) => (
+              <div key={value.id}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <img width={"300px"} height={"300px"} src={value.image} alt="" />
+                  <div>{value.descriptions}</div>
+                </div>
               </div>
-            </div>
-            // <PromotionItem key={value.id} promotion={value} />
-          ))}
-        </Carousel>
+            ))}
+          </Carousel>
+        </div>
+        <hr />
       </div>
     </div>
   );

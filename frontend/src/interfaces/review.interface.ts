@@ -1,5 +1,5 @@
-import { IUser } from "./user.interface";
-import { IRestaurant } from "./restaurant.interface";
+import { IUser } from './user.interface';
+import { IRestaurant } from './restaurant.interface';
 
 export interface IReview {
   id: number;

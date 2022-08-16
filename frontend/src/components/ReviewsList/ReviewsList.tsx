@@ -1,17 +1,17 @@
-import React, { FC, useEffect } from "react";
-import { Comment, List, Rate, Tooltip } from "antd";
+import React, { FC, useEffect } from 'react';
+import { Comment, List, Rate, Tooltip } from 'antd';
 
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { getAllReviews } from "../../store";
-import "./ReviewsList.css";
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getAllReviews } from '../../store';
+import './ReviewsList.css';
 
-const ReviewsList:FC = () => {
-  const {reviews} = useAppSelector(state => state.reviewReducer);
+const ReviewsList: FC = () => {
+  const { reviews } = useAppSelector((state) => state.reviewReducer);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllReviews());
-  },[])
+  }, []);
 
   // const data = [
   //   {
@@ -34,33 +34,39 @@ const ReviewsList:FC = () => {
   // ];
 
   return (
-      <List
-        className="comment-list"
-        header={"Відгуки"}
-        itemLayout="horizontal"
-        dataSource={reviews}
-        renderItem={item => (
-          <li>
-            <Comment
-              // actions={<span key="comment-list-reply-to-0">Reply to</span>}
-              author={item?.user?.name}
-              avatar={'https://joeschmoe.io/api/v1/random'}
-              content={<div className={"comment-content-wrapper"}>
+    <List
+      className="comment-list"
+      header={'Відгуки'}
+      itemLayout="horizontal"
+      dataSource={reviews}
+      renderItem={(item) => (
+        <li>
+          <Comment
+            // actions={<span key="comment-list-reply-to-0">Reply to</span>}
+            author={item?.user?.name}
+            avatar={'https://joeschmoe.io/api/v1/random'}
+            content={
+              <div className={'comment-content-wrapper'}>
                 <p>{item.body}</p>
                 <div>
                   <b>{item.restaurant?.name}</b>
                   <Rate disabled defaultValue={item.rating} />
                 </div>
-              </div>}
-              datetime={`${new Date(item.createdAt).toLocaleDateString(
-                'uk-UA',
-                { year: 'numeric', month: 'long', day: 'numeric' },
-              )}` + " " +`${new Date(item.createdAt).toLocaleTimeString()}`}
-            />
-          </li>
-        )}
-      />
-
+              </div>
+            }
+            datetime={
+              `${new Date(item.createdAt).toLocaleDateString('uk-UA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}` +
+              ' ' +
+              `${new Date(item.createdAt).toLocaleTimeString()}`
+            }
+          />
+        </li>
+      )}
+    />
   );
 };
 

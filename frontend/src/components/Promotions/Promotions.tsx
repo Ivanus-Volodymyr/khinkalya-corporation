@@ -3,10 +3,9 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import 'antd/dist/antd.css';
 import { Carousel } from 'antd';
 
-import { PromotionItem } from "../PromotionItem/PromotionItem";
-import { getPromotions } from "../../store";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-
+import { PromotionItem } from '../PromotionItem/PromotionItem';
+import { getPromotions } from '../../store';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 
 const Promotions: FC = () => {
@@ -17,7 +16,10 @@ const Promotions: FC = () => {
   }, [dispatch]);
   return (
     <div>
-      <Carousel arrows prevArrow={<LeftOutlined />} nextArrow={<RightOutlined />}
+      <Carousel
+        arrows
+        prevArrow={<LeftOutlined />}
+        nextArrow={<RightOutlined />}
         autoplay
         style={{
           display: 'flex',

@@ -1,7 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { NavHashLink } from 'react-router-hash-link';
 import {
   getCurrentUser,
   getGeolocation,
@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 import './Header.css';
 import { IUser } from '../../interfaces';
+
 
 const HeaderComponent: FC = () => {
   const dispatch = useAppDispatch();
@@ -139,14 +140,16 @@ const HeaderComponent: FC = () => {
             alignItems: 'center',
           }}
         >
-          <Link to={'/about'}>
+          <NavHashLink
+            scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+            to={'/main#prom'}>
             <img
               src="/image-for-header/information.svg"
               width={'80px'}
               height={'40px'}
-              alt="informations"
+              alt="information's"
             />
-          </Link>
+          </NavHashLink>
           <div>Інформація</div>
         </div>
         <FormControl style={{ width: '250px' }}>

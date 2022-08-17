@@ -33,10 +33,10 @@ const Main: FC = () => {
         </div>
       </div>
       <div>
-        <h1 className={"header_promotion"}>Акції</h1>
+        <h1 id='prom'  className={"header_promotion"}>Акції</h1>
         <hr />
-        <div>
-          <Carousel arrows prevArrow={<LeftOutlined />} nextArrow={<RightOutlined />}
+        <div >
+          <Carousel  arrows prevArrow={<LeftOutlined />} nextArrow={<RightOutlined />}
                     slidesPerRow={2}
                     autoplay={true}
                     style={{
@@ -48,7 +48,7 @@ const Main: FC = () => {
           >
             {promotion.map((value) => (
               <div key={value.id}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div  style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <img width={"300px"} height={"300px"} src={value.image} alt="" />
                   <div>{value.descriptions}</div>
                 </div>
@@ -56,7 +56,7 @@ const Main: FC = () => {
             ))}
           </Carousel>
         </div>
-        <hr />
+        <hr  />
       </div>
     </div>
   );

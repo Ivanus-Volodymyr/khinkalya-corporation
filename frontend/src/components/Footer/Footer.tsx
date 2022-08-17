@@ -29,7 +29,7 @@ const FooterComponent: FC = () => {
 
   return (
     <Footer className={'footer'}>
-      <div className={'footer-item'}>
+      <div className={'footer-item-1'}>
         <div>
           {' '}
           <Link to={'restaurants'}>Наші ресторани</Link>
@@ -38,24 +38,26 @@ const FooterComponent: FC = () => {
           <Link to={'about'}>Про нас</Link>
         </div>
       </div>
-      <div className={'footer-item'}>
+      <div className={'footer-item-2'}>
         <div>
           <Popover content={content} title="Контакти">
             <Button className="popover-btn">Контакти</Button>
           </Popover>
         </div>
         <div>Політика конфеденційності</div>
-        <Link to={'delivery'}>Доставка і оплата</Link>
+        <Link to={'delivery'} className={"delivery-btn"}>Доставка і оплата</Link>
       </div>
-      <div className={'footer-item'}>
+      <div className={'footer-item-3'}>
         <div onClick={() => dispatch(setReviewActive())}>Залишити відгук</div>
         <div>Ви можете знайти нас:</div>
         <div className={'icons-container'}>
-          <a href={'https://www.facebook.com/khinkalnya'}>
-            <InstagramOutlined style={{ fontSize: '32px', color: 'white' }} />
+          <a href={'https://www.facebook.com/khinkalnya'} className="icon instagram">
+            <span className="tooltip">Instagram</span>
+            <InstagramOutlined style={{ fontSize: '32px' }} />
           </a>
-          <a href={'https://www.instagram.com/khinkalnya_fedorova/'}>
-            <FacebookOutlined style={{ fontSize: '32px', color: 'white' }} />
+          <a href={'https://www.instagram.com/khinkalnya_fedorova/'} className="icon facebook">
+            <span className="tooltip">Facebook</span>
+            <FacebookOutlined style={{ fontSize: '32px'}} />
           </a>
         </div>
         <div className="payment">

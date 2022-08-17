@@ -2,6 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { NavHashLink } from 'react-router-hash-link';
+
 import {
   getCurrentUser,
   getGeolocation,
@@ -100,14 +101,17 @@ const HeaderComponent: FC = () => {
             alignItems: 'center',
           }}
         >
-          <Link to={'/promotions'}>
+          <NavHashLink
+            scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+            to={'/main#prom'}>
+
             <img
               src="/image-for-header/discount.svg"
               width={'80px'}
               height={'40px'}
               alt="promotions"
             />
-          </Link>
+          </NavHashLink>
           <div>Акції</div>
         </div>
         {locality &&
@@ -140,16 +144,16 @@ const HeaderComponent: FC = () => {
             alignItems: 'center',
           }}
         >
-          <NavHashLink
-            scroll={(el) => el.scrollIntoView({ behavior: 'smooth', block: 'center' })}
-            to={'/main#prom'}>
+          <Link
+
+            to={'/about'}>
             <img
               src="/image-for-header/information.svg"
               width={'80px'}
               height={'40px'}
               alt="information's"
             />
-          </NavHashLink>
+          </Link>
           <div>Інформація</div>
         </div>
         <FormControl style={{ width: '250px' }}>

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { Comment, List, Rate,} from 'antd';
+import { Comment, List, Rate } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllReviews } from '../../store';

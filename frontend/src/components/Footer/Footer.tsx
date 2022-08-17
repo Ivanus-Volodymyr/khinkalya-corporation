@@ -45,19 +45,27 @@ const FooterComponent: FC = () => {
           </Popover>
         </div>
         <div>Політика конфеденційності</div>
-        <Link to={'delivery'} className={"delivery-btn"}>Доставка і оплата</Link>
+        <Link to={'delivery'} className={'delivery-btn'}>
+          Доставка і оплата
+        </Link>
       </div>
       <div className={'footer-item-3'}>
         <div onClick={() => dispatch(setReviewActive())}>Залишити відгук</div>
         <div>Ви можете знайти нас:</div>
         <div className={'icons-container'}>
-          <a href={'https://www.facebook.com/khinkalnya'} className="icon instagram">
+          <a
+            href={'https://www.facebook.com/khinkalnya'}
+            className="icon instagram"
+          >
             <span className="tooltip">Instagram</span>
             <InstagramOutlined style={{ fontSize: '32px' }} />
           </a>
-          <a href={'https://www.instagram.com/khinkalnya_fedorova/'} className="icon facebook">
+          <a
+            href={'https://www.instagram.com/khinkalnya_fedorova/'}
+            className="icon facebook"
+          >
             <span className="tooltip">Facebook</span>
-            <FacebookOutlined style={{ fontSize: '32px'}} />
+            <FacebookOutlined style={{ fontSize: '32px' }} />
           </a>
         </div>
         <div className="payment">

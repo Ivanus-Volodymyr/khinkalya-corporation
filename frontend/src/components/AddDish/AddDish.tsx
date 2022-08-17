@@ -6,6 +6,9 @@ import { TextField } from '@mui/material';
 import { addDish, getLocality, getRestaurants } from '../../store';
 import { IDish } from '../../interfaces';
 import './AddDish.css';
+import { AddLocality } from "../AddLocality/AddLocality";
+import { AddRestaurant } from "../AddRestautant/AddRestaurant";
+import { AddPromotions } from "../AddPromotions/AddPromotions";
 
 const AddDish: FC = () => {
   const { locality } = useAppSelector((state) => state.localityReducer);
@@ -118,6 +121,12 @@ const AddDish: FC = () => {
           </div>
         </div>
       </form>
+      <h1>Додати цех приготування</h1>
+      <AddLocality/>
+      <h1>Додати Ресторан</h1>
+      <AddRestaurant/>
+      <h1>Додати Акцію</h1>
+      <AddPromotions/>
     </div>
   );
 };

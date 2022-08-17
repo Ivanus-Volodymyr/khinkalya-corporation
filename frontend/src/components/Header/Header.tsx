@@ -152,7 +152,6 @@ const HeaderComponent: FC = () => {
           }}
         >
           <Link
-
             to={"/about"}>
             <img
               src="/image-for-header/information.svg"

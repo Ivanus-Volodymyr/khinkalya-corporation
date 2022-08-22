@@ -24,4 +24,5 @@ export * from './OfferPopup/OfferPopup';
 export * from './Promotions/Promotions';
 export * from './PromotionItem/PromotionItem';
 export * from './ReviewsList/ReviewsList';
-export * from './DishesCards/DishesCards';
+export * from './DishesCardsList/DishesCardsList';
+export * from './DishCard/DishCard';

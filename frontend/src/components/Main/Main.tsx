@@ -6,7 +6,7 @@ import './Main.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getPromotions } from '../../store';
 import { ReviewsList } from '../ReviewsList/ReviewsList';
-import { DishesCards } from '../DishesCards/DishesCards';
+import { DishesCardsList } from '../DishesCardsList/DishesCardsList';
 
 const Main: FC = () => {
   const { promotion } = useAppSelector((state) => state.promotionsReducer);
@@ -75,7 +75,7 @@ const Main: FC = () => {
         </div>
         <hr />
       </div>
-      <DishesCards />
+      <DishesCardsList />
       <ReviewsList />
     </div>
   );

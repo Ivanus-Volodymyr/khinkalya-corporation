@@ -5,7 +5,7 @@ import { IDish } from '../../interfaces';
 interface IInitialState {
   result: IDish[];
   status: string;
-  dish: IDish[];
+  dishes: IDish[];
   item: number;
   popularDish: IDish;
 }
@@ -13,13 +13,13 @@ interface IInitialState {
 const initialState: IInitialState = {
   result: [],
   status: 'Loading',
-  dish: [],
+  dishes: [],
   item: 1,
   popularDish: {} as IDish,
 };
 
-export const getAllDish = createAsyncThunk<IDish[] | undefined>(
-  'dish/getAllDish',
+export const getAllDishes = createAsyncThunk<IDish[] | undefined>(
+  'dish/getAllDishes',
   async (_, { rejectWithValue }) => {
     try {
       const { data } = await dishService.getAllDishes();
@@ -75,10 +75,10 @@ const dishSlice = createSlice({
       },
     );
     builder.addCase(
-      getAllDish.fulfilled,
+      getAllDishes.fulfilled,
       (state, action: PayloadAction<IDish[] | undefined>) => {
         if (action.payload) {
-          state.dish = action.payload;
+          state.dishes = action.payload;
         }
       },
     );

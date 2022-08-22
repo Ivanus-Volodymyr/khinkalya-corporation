@@ -51,7 +51,6 @@ const Admin: FC = () => {
         <button>Orders</button>
         <button>Many</button>
       </div>
-
     </div>
   );
 };

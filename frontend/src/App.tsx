@@ -24,7 +24,7 @@ import {
 function App() {
   return (
     <Routes>
-      <Route path={'/'} element={<LayoutComponent />} >
+      <Route path={'/'} element={<LayoutComponent />}>
         <Route path={'*'} element={<Main />}></Route>
         <Route path={'/main'} element={<Main />}></Route>
         <Route

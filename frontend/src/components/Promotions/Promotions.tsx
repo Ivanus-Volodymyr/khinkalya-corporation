@@ -7,7 +7,6 @@ import { PromotionItem } from '../PromotionItem/PromotionItem';
 import { getPromotions } from '../../store';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
-
 const Promotions: FC = () => {
   const { promotion } = useAppSelector((state) => state.promotionsReducer);
   const dispatch = useAppDispatch();

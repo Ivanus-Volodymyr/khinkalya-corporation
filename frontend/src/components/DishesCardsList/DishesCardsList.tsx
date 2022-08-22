@@ -3,15 +3,14 @@ import { Avatar, Card } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllDishes } from '../../store';
-import './DishesCardsList.css';
 import { DishCard } from "../DishCard/DishCard";
+import './DishesCardsList.css';
 
 const { Meta } = Card;
 
 const DishesCardsList: FC = () => {
   const { dishes } = useAppSelector((state) => state.dishReducer);
   const dispatch = useAppDispatch();
-
 
   useEffect(() => {
     dispatch(getAllDishes());

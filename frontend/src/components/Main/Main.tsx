@@ -6,6 +6,7 @@ import './Main.css';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getPromotions } from '../../store';
 import { ReviewsList } from '../ReviewsList/ReviewsList';
+import { DishesCardsList } from '../DishesCardsList/DishesCardsList';
 
 const Main: FC = () => {
   const { promotion } = useAppSelector((state) => state.promotionsReducer);
@@ -27,38 +28,54 @@ const Main: FC = () => {
         />
 
         <div className="container_button_main">
-          <a href="#" className="btn_main">
+          <a href="#dishes" className="btn_main">
             Замовити
           </a>
         </div>
       </div>
       <div>
-
-        <h1 id='prom'  className={"header_promotion"}>Акції</h1>
+        <h1 id="prom" className={'header_promotion'}>
+          Акції
+        </h1>
         <hr />
-        <div >
-          <Carousel  arrows prevArrow={<LeftOutlined />} nextArrow={<RightOutlined />}
-                    slidesPerRow={2}
-                    autoplay={true}
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      textAlign: "center"
-                    }}
+        <div>
+          <Carousel
+            arrows
+            prevArrow={<LeftOutlined />}
+            nextArrow={<RightOutlined />}
+            slidesPerRow={2}
+            autoplay={true}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+            }}
           >
             {promotion.map((value) => (
               <div key={value.id}>
-                <div  style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <img width={"300px"} height={"300px"} src={value.image} alt="" />
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <img
+                    width={'300px'}
+                    height={'300px'}
+                    src={value.image}
+                    alt=""
+                  />
                   <div>{value.descriptions}</div>
                 </div>
               </div>
             ))}
           </Carousel>
         </div>
-        <hr  />
+        <hr />
       </div>
+      <DishesCardsList />
       <ReviewsList />
     </div>
   );

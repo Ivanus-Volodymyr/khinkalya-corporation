@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
-import { getAllDish, getAllOrders } from '../../store';
+import { getAllDishes, getAllOrders } from '../../store';
 import { IDish } from '../../interfaces';
 
 const OrderDone = () => {
   const { orderFromDb } = useAppSelector((state) => state.orderReducer);
-  const { dish } = useAppSelector((state) => state.dishReducer);
+  const { dishes } = useAppSelector((state) => state.dishReducer);
   const dispatch = useAppDispatch();
   let [total] = useState(0);
   useEffect(() => {
     dispatch(getAllOrders());
-    dispatch(getAllDish());
+    dispatch(getAllDishes());
   }, [dispatch]);
 
   const arrayOrder: { productId: number; quantity: number }[] = [];
@@ -32,10 +32,13 @@ const OrderDone = () => {
     };
     arrayOrder.push(order);
   }
-  const PRODUCTS_MAP = dish.reduce((acc: { [key: string]: IDish }, product) => {
-    acc[product.id] = product;
-    return acc;
-  }, {});
+  const PRODUCTS_MAP = dishes.reduce(
+    (acc: { [key: string]: IDish }, product) => {
+      acc[product.id] = product;
+      return acc;
+    },
+    {},
+  );
   return (
     <div>
       {arrayOrder.map((value) => {

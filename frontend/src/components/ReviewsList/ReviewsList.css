@@ -28,7 +28,7 @@
     margin: 30px;
 }
 
-.ant-list-items{
+.comment-list > div:nth-child(2) > div > ul{
     display: grid;
     overflow: hidden;
     grid-template-columns: repeat(3, 1fr);

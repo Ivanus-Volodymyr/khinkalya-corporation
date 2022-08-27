@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from 'react';
 import { Avatar, Card } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllDishes } from '../../store';
-import { DishCard } from "../DishCard/DishCard";
+import { DishCard } from '../DishCard/DishCard';
 import './DishesCardsList.css';
 
 const { Meta } = Card;
@@ -19,7 +19,7 @@ const DishesCardsList: FC = () => {
   return (
     <div className={'dishes-container'}>
       {dishes.map((dish) => (
-       <DishCard key={dish.id} dish={dish}/>
+        <DishCard key={dish.id} dish={dish} />
       ))}
     </div>
   );

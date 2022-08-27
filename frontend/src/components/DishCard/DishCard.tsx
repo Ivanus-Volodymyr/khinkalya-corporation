@@ -19,7 +19,6 @@ const DishCard: FC<{ dish: IDish }> = ({ dish }) => {
 
   return (
     <Card
-      id={'dishes'}
       key={dish.id}
       style={{ width: 300 }}
       cover={<img alt="example" src={dish.image} />}

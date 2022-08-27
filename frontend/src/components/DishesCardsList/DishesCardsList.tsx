@@ -1,12 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Avatar, Card } from 'antd';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getAllDishes } from '../../store';
 import { DishCard } from '../DishCard/DishCard';
 import './DishesCardsList.css';
-
-const { Meta } = Card;
 
 const DishesCardsList: FC = () => {
   const { dishes } = useAppSelector((state) => state.dishReducer);
@@ -14,14 +11,18 @@ const DishesCardsList: FC = () => {
 
   useEffect(() => {
     dispatch(getAllDishes());
-  }, []);
+  }, [dispatch]);
 
   return (
-    <div className={'dishes-container'}>
-      {dishes.map((dish) => (
-        <DishCard key={dish.id} dish={dish} />
-      ))}
-    </div>
+    <>
+      <h1 className={"ant-list-header"}  id={'dishes'}>Зробити замовлення?</h1>
+      <div className={'dishes-container'}>
+        {dishes.map((dish) => (
+          <DishCard key={dish.id} dish={dish} />
+        ))}
+      </div>
+    </>
+
   );
 };
 

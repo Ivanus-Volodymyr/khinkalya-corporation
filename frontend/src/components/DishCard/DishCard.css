@@ -35,13 +35,20 @@
     margin-left: 10px;
 }
 
+.ant-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 .ant-card-actions >li > span > button {
     background-color: var(--primary-color);
     color: var(--secondary-color);
-    font-size: .9rem;
-    letter-spacing: 2px;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    line-height: 1.6rem;
     text-transform: uppercase;
-    padding: 5px;
+    padding: 4px;
     outline: none;
     border: none;
 }

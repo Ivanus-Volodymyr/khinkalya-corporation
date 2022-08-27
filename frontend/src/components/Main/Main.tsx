@@ -28,7 +28,7 @@ const Main: FC = () => {
         />
 
         <div className="container_button_main">
-          <a href="#" className="btn_main">
+          <a href="#dishes" className="btn_main">
             Замовити
           </a>
         </div>

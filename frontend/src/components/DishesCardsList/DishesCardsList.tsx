@@ -15,14 +15,15 @@ const DishesCardsList: FC = () => {
 
   return (
     <>
-      <h1 className={"ant-list-header"}  id={'dishes'}>Зробити замовлення?</h1>
+      <h1 className={'ant-list-header'} id={'dishes'}>
+        Зробити замовлення?
+      </h1>
       <div className={'dishes-container'}>
         {dishes.map((dish) => (
           <DishCard key={dish.id} dish={dish} />
         ))}
       </div>
     </>
-
   );
 };
 

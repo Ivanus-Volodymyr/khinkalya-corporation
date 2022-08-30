@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../core/prisma.service";
-import { Promotions } from "@prisma/client";
 import { CreatePromotionDto } from "./dto/create-promotion.dto";
 import { S3Service } from "../s3/s3.service";
+import { Promotions } from "@prisma/client";
 
 @Injectable()
 export class PromotionsService {
@@ -17,6 +17,7 @@ export class PromotionsService {
       data: {
         ...promotion,
         image: img.Location,
+
         descriptions: promotion.descriptions,
       },
     });

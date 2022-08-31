@@ -20,6 +20,7 @@ import { GoogleTokenMiddleware } from "./auth/middleware/google_middleware";
 import { OAuth2Client } from "google-auth-library";
 import { ReviewModule } from "./review/review.module";
 import { PromotionsModule } from "./promotions/promotions.module";
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { PromotionsModule } from "./promotions/promotions.module";
     GoogleModule,
     ReviewModule,
     PromotionsModule,
+    MailModule,
   ],
   controllers: [AppController],
   providers: [

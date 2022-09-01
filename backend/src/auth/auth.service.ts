@@ -1,20 +1,17 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnauthorizedException,
-} from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserService } from "../user/user.service";
 import * as bcrypt from "bcrypt";
 import { TokenService } from "./token/token.service";
 import { LoginUserDto } from "./dto/login-user.dto";
+import { MailService } from "../mail/mail.service";
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private mailService: MailService,
   ) {}
 
   //registration user
@@ -60,6 +57,8 @@ export class AuthService {
         if (tokenPairFromDb) {
           await this.tokenService.deleteTokenPair(userFromDb.id);
         }
+        await this.mailService.sendMail(userFromDb);
+
         return this.tokenService.generateToken(userFromDb);
       }
     } catch (e) {

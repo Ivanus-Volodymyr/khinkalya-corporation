@@ -8,9 +8,11 @@ import { TokenModule } from "./token/token.module";
 import { TokenService } from "./token/token.service";
 import { JwtService } from "@nestjs/jwt";
 import { S3Service } from "src/s3/s3.service";
+import { MailModule } from "../mail/mail.module";
+import { MailService } from "../mail/mail.service";
 
 @Module({
-  imports: [UserModule, TokenModule],
+  imports: [UserModule, TokenModule, MailModule],
   controllers: [AuthController],
   providers: [
     AuthService,
@@ -19,6 +21,7 @@ import { S3Service } from "src/s3/s3.service";
     TokenService,
     JwtService,
     S3Service,
+    MailService,
   ],
 })
 export class AuthModule {}

@@ -1,7 +1,13 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from "@nestjs/common";
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
+import * as bcrypt from "bcrypt";
+
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserService } from "../user/user.service";
-import * as bcrypt from "bcrypt";
 import { TokenService } from "./token/token.service";
 import { LoginUserDto } from "./dto/login-user.dto";
 import { MailService } from "../mail/mail.service";
@@ -11,7 +17,7 @@ export class AuthService {
   constructor(
     private userService: UserService,
     private tokenService: TokenService,
-    private mailService: MailService,
+    private mailService: MailService
   ) {}
 
   //registration user
@@ -34,8 +40,7 @@ export class AuthService {
 
       return this.tokenService.generateToken(savedUser);
     } catch (e) {
-      console.log(e.message);
-      return e.message[0];
+      throw new HttpException(e.message, 404);
     }
   }
 

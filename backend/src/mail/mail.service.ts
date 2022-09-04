@@ -16,4 +16,15 @@ export class MailService {
       },
     });
   }
+
+  public async sendOrderMail(user: User) {
+    await this.mailService.sendMail({
+      to: user.email,
+      subject: "Welcome to Nice App!",
+      template: "./welcome.pug",
+      context: {
+        name: user.name,
+      },
+    });
+  }
 }

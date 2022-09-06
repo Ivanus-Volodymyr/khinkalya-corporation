@@ -21,7 +21,7 @@ export class MailService {
     await this.mailService.sendMail({
       to: user.email,
       subject: "Welcome to Nice App!",
-      template: "./welcome.pug",
+      template: "./order.pug",
       context: {
         name: user.name,
       },

@@ -20,7 +20,7 @@ export class MailService {
   public async sendOrderMail(user: User) {
     await this.mailService.sendMail({
       to: user.email,
-      subject: "Welcome to Nice App!",
+      subject: `${user.name}, you order`,
       template: "./order.pug",
       context: {
         name: user.name,

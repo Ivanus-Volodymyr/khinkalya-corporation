@@ -7,7 +7,6 @@ import {
   UseInterceptors,
 } from "@nestjs/common";
 import { PromotionsService } from "./promotions.service";
-import { CreatePromotionDto } from "./dto/create-promotion.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { Promotions } from "@prisma/client";
 

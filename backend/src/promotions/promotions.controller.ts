@@ -21,7 +21,6 @@ export class PromotionsController {
   @Post()
   @UseInterceptors(FileInterceptor("image"))
   CreatePromotion(@Body() data: Promotions, @UploadedFile() file) {
-    console.log(data);
     return this.promotionService.createPromotion(data, file);
   }
 }

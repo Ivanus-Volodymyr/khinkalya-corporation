@@ -19,7 +19,7 @@ export class AdminController {
 
   @Post("dish")
   @UseInterceptors(FileInterceptor("image"))
-  public async addDish(@UploadedFile() file, @Body() dish: Dish) {
+  public async addDish(@UploadedFile() file: unknown, @Body() dish: Dish) {
     console.log(dish);
     return this.adminService.addDish(dish, file);
   }
@@ -27,7 +27,7 @@ export class AdminController {
   @Put("dish/:id")
   @UseInterceptors(FileInterceptor("image"))
   public async updateDish(
-    @UploadedFile() file,
+    @UploadedFile() file: unknown,
     @Body() dish: Partial<Dish>,
     @Param("id") id: string
   ) {
@@ -41,7 +41,7 @@ export class AdminController {
 
   @Post("locality")
   @UseInterceptors(FileInterceptor("image"))
-  AddLocality(@Body() data: Locality, @UploadedFile() file) {
+  AddLocality(@Body() data: Locality, @UploadedFile() file: unknown) {
     return this.adminService.addLocality(data, file);
   }
 
@@ -49,7 +49,7 @@ export class AdminController {
   @UseInterceptors(FileInterceptor("image"))
   updateLocality(
     @Body() data: Locality,
-    @UploadedFile() file,
+    @UploadedFile() file: unknown,
     @Param("id") id: string
   ) {
     return this.adminService.updateLocality(id, data, file);
@@ -62,7 +62,7 @@ export class AdminController {
 
   @Post("restaurant")
   @UseInterceptors(FileInterceptor("image"))
-  AddRestaurant(@Body() data: Restaurant, @UploadedFile() file) {
+  AddRestaurant(@Body() data: Restaurant, @UploadedFile() file: unknown) {
     return this.adminService.addRestaurant(data, file);
   }
 
@@ -71,7 +71,7 @@ export class AdminController {
   updateById(
     @Param("id") id: string,
     @Body() data: Restaurant,
-    @UploadedFile() file
+    @UploadedFile() file: unknown
   ) {
     return this.adminService.updateRestaurant(data, id, file);
   }

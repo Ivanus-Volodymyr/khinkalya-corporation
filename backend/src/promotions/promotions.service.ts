@@ -9,14 +9,13 @@ export class PromotionsService {
 
   public async createPromotion(
     promotion: Promotions,
-    file
+    file: unknown
   ): Promise<Promotions> {
     const img = await this.s3.uploadFile(file);
     return this.prismaService.promotions.create({
       data: {
         ...promotion,
         image: img.Location,
-
         descriptions: promotion.descriptions,
       },
     });

@@ -36,7 +36,7 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post("refresh")
-  refresh(@Body() body: {data: string}) {
+  refresh(@Body() body: { data: string }) {
     return this.authService.refresh(body.data);
   }
 }

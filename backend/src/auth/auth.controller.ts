@@ -14,12 +14,14 @@ import { User } from "@prisma/client";
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @HttpCode(HttpStatus.CREATED)
   @Post("registration")
   registration(@Body() user: User) {
     console.log(user);
     return this.authService.registration(user);
   }
 
+  @HttpCode(HttpStatus.OK)
   @Post("login")
   login(@Body() user: LoginUserDto) {
     return this.authService.login(user);

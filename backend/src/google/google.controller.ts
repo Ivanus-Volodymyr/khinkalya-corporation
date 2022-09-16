@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Post, Query } from "@nestjs/common";
 
 import { LoginGoogleDto } from "./dto/google.dto";
 import { GoogleService } from "./google.service";

@@ -7,8 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   const config = new DocumentBuilder()
-    .setTitle("My Api AddDish")
-    .setDescription("The AddDish API description")
+    .setTitle("Khinkalnya")
+    .setDescription("Khinkalnya Restaurant")
     .setVersion("1.0")
     .build();
   const document = SwaggerModule.createDocument(app, config);
@@ -16,4 +16,5 @@ async function bootstrap() {
   app.enableCors();
   await app.listen(3001);
 }
+
 bootstrap();

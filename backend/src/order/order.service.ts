@@ -3,12 +3,14 @@ import { PrismaService } from "../core/prisma.service";
 import { Order } from "@prisma/client";
 import { DishService } from "../dish/dish.service";
 import { CreateOrderDto } from "./dto/create-order.dto";
+import { MailService } from "../mail/mail.service";
 
 @Injectable()
 export class OrderService {
   constructor(
     private prismaService: PrismaService,
-    private dishService: DishService
+    private dishService: DishService,
+    private mailService: MailService
   ) {}
 
   getAll(): Promise<Order[]> {
@@ -32,7 +34,7 @@ export class OrderService {
       );
     }
 
-    return this.prismaService.order.create({
+    const order = await this.prismaService.order.create({
       data: {
         ...data,
         userId: data.userId,
@@ -40,5 +42,9 @@ export class OrderService {
         dish: arrDishId,
       },
     });
+
+    await this.mailService.sendOrderMail(order);
+
+    return order;
   }
 }

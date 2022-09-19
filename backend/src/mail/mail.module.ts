@@ -5,10 +5,13 @@ import { ConfigModule } from "@nestjs/config";
 import { MailerModule } from "@nestjs-modules/mailer";
 import { join } from "path";
 import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter";
+import { UserModule } from "../user/user.module";
+import { UserService } from "../user/user.service";
 
 @Module({
-  providers: [MailService],
+  providers: [MailService, UserService],
   imports: [
+    UserModule,
     ConfigModule.forRoot({
       envFilePath: ".backend/.env",
     }),

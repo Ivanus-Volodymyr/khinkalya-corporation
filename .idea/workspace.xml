@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eefefc4e-fb46-4259-8c68-f25cd1d3881b" name="Changes" comment="mail.service">
+    <list default="true" id="eefefc4e-fb46-4259-8c68-f25cd1d3881b" name="Changes" comment="mail">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/mail/mail.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/mail/mail.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/mail/mail.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/mail/mail.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/order/order.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/order/order.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/order/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/order/order.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +155,7 @@
       <workItem from="1662123288876" duration="4317000" />
       <workItem from="1662721487114" duration="1292000" />
       <workItem from="1662724276291" duration="475000" />
-      <workItem from="1663337969145" duration="3396000" />
+      <workItem from="1663337969145" duration="5525000" />
     </task>
     <task id="LOCAL-00001" summary="add user update">
       <created>1658339754084</created>
@@ -330,7 +325,14 @@
       <option name="project" value="LOCAL" />
       <updated>1662460430090</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="mail">
+      <created>1663601407131</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1663601407131</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +391,8 @@
     <MESSAGE value="mailer" />
     <MESSAGE value="mailer templates" />
     <MESSAGE value="mail.service" />
-    <option name="LAST_COMMIT_MESSAGE" value="mail.service" />
+    <MESSAGE value="mail" />
+    <option name="LAST_COMMIT_MESSAGE" value="mail" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

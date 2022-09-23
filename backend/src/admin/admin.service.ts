@@ -12,12 +12,12 @@ export class AdminService {
     private dishService: DishService
   ) {}
 
-  public async addDish(dish: Dish, file): Promise<Dish> {
+  public async addDish(dish: Dish, file: unknown): Promise<Dish> {
     return this.dishService.createDish(dish, file);
   }
 
   public async updateDish(
-    file,
+    file: unknown,
     dish: Partial<Dish>,
     id: string
   ): Promise<Dish> {
@@ -28,14 +28,14 @@ export class AdminService {
     return this.dishService.deleteById(id);
   }
 
-  public async addLocality(data: Locality, file): Promise<Locality> {
+  public async addLocality(data: Locality, file: unknown): Promise<Locality> {
     return this.localityService.addLocality(data, file);
   }
 
   public async updateLocality(
     id: string,
     data: Partial<Locality>,
-    file
+    file: unknown
   ): Promise<Locality> {
     return this.localityService.updateLocalityById(data, id, file);
   }
@@ -44,14 +44,14 @@ export class AdminService {
     return this.localityService.deleteById(id);
   }
 
-  public async addRestaurant(data: Restaurant, file): Promise<Restaurant> {
+  public async addRestaurant(data: Restaurant, file: unknown): Promise<Restaurant> {
     return this.restaurantService.addRestaurant(data, file);
   }
 
   public async updateRestaurant(
     data: Partial<Restaurant>,
     id: string,
-    file
+    file: unknown
   ): Promise<Restaurant> {
     return this.restaurantService.updateRestaurantById(data, id, file);
   }

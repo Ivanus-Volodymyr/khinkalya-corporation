@@ -7,11 +7,15 @@ import { join } from "path";
 import { PugAdapter } from "@nestjs-modules/mailer/dist/adapters/pug.adapter";
 import { UserModule } from "../user/user.module";
 import { UserService } from "../user/user.service";
+import { PrismaService } from "src/core/prisma.service";
+import { S3Service } from "src/s3/s3.service";
+import { JwtModule } from "@nestjs/jwt";
 
 @Module({
-  providers: [MailService, UserService],
+  providers: [MailService, UserService, PrismaService, S3Service],
   imports: [
     UserModule,
+    JwtModule,
     ConfigModule.forRoot({
       envFilePath: ".backend/.env",
     }),

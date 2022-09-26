@@ -11,7 +11,15 @@ import { UserService } from "src/user/user.service";
 import { JwtModule, JwtService } from "@nestjs/jwt";
 
 @Module({
-  providers: [OrderService, PrismaService, DishService, S3Service, MailService, UserService, JwtService],
+  providers: [
+    OrderService,
+    PrismaService,
+    DishService,
+    S3Service,
+    MailService,
+    UserService,
+    JwtService,
+  ],
   controllers: [OrderController],
   imports: [MailModule, UserModule, JwtModule],
 })

@@ -44,7 +44,10 @@ export class AdminService {
     return this.localityService.deleteById(id);
   }
 
-  public async addRestaurant(data: Restaurant, file: unknown): Promise<Restaurant> {
+  public async addRestaurant(
+    data: Restaurant,
+    file: unknown
+  ): Promise<Restaurant> {
     return this.restaurantService.addRestaurant(data, file);
   }
 

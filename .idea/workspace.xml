@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="eefefc4e-fb46-4259-8c68-f25cd1d3881b" name="Changes" comment="mail">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/OrderDone/OrderDone.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/20220802084628_init/migration.sql" beforeDir="false" afterPath="$PROJECT_DIR$/backend/prisma/migrations/20230509121349_change_post_table/migration.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/20220802105712_init/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/20220803153611_init/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/20220804193640_init/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/prisma/migrations/20220805144942_init/migration.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Dish/Dish.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Dish/Dish.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DishCard/DishCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DishCard/DishCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DishList/DishList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DishList/DishList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DishesCardsList/DishesCardsList.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DishesCardsList/DishesCardsList.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/OrderDone/OrderDone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/OrderDone/OrderDone.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,11 +29,15 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
   <component name="FormatOnSaveOptions">
-    <option name="myRunOnSave" value="true" />
+    <option name="myAllFileTypesSelected" value="true" />
+    <option name="mySelectedFileTypes">
+      <set />
+    </option>
   </component>
   <component name="Git.Settings">
     <excluded-from-favorite>
@@ -85,17 +105,26 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
     &quot;js.linters.configure.manually.selectedeslint&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/admin/WebstormProjects/khinkalya-corporation&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/developer/WebstormProjects/khinkalya-corporation/backend&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;/Users/admin/WebstormProjects/khinkalya-corporation/backend/node_modules/eslint&quot;,
     &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/developer/WebstormProjects/khinkalya-corporation/backend/node_modules/prettier&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/admin/WebstormProjects/khinkalya-corporation/backend/node_modules/typescript/lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/developer/WebstormProjects/khinkalya-corporation/frontend/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Unnamed" type="ChromiumRemoteDebugType" factoryName="Chromium Remote" nameIsGenerated="true" port="9229">
       <method v="2" />
@@ -156,6 +185,9 @@
       <workItem from="1662721487114" duration="1292000" />
       <workItem from="1662724276291" duration="475000" />
       <workItem from="1663337969145" duration="5525000" />
+      <workItem from="1683631724529" duration="11980000" />
+      <workItem from="1683705693449" duration="2095000" />
+      <workItem from="1683743737020" duration="141000" />
     </task>
     <task id="LOCAL-00001" summary="add user update">
       <created>1658339754084</created>
@@ -339,6 +371,21 @@
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/12_add_admin_funtionality" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -357,21 +404,6 @@
                 </map>
               </option>
             </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="feature/12_add_admin_funtionality" />
-                </option>
-              </RecentGroup>
-            </list>
           </value>
         </entry>
       </map>

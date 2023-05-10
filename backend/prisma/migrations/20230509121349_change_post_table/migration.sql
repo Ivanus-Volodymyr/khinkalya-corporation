@@ -18,7 +18,11 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Restaurant" (
     "id" SERIAL NOT NULL,
+    "image" TEXT,
     "name" TEXT NOT NULL,
+    "city" TEXT,
+    "address" TEXT,
+    "raiting" INTEGER DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Restaurant_pkey" PRIMARY KEY ("id")
@@ -62,6 +66,16 @@ CREATE TABLE "Locality" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Locality_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Promotions" (
+    "id" SERIAL NOT NULL,
+    "image" TEXT,
+    "descriptions" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Promotions_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable

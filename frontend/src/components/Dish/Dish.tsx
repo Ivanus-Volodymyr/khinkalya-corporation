@@ -60,7 +60,7 @@ const styles: Styles = {
         display: 'flex',
         alignItems: 'center',
         width: '300px',
-        height: '400px',
+        height: '450px',
         padding: '10px',
         border: '1px solid #ddd',
         borderRadius: '5px',
@@ -70,9 +70,10 @@ const styles: Styles = {
         boxShadow: '0px 3px 6px rgba(0,0,0,0.16)',
     },
     image: {
-        width: '100%',
         marginBottom: '10px',
         borderRadius: 10,
+        width: '280px',
+        height: '200px'
     },
     name: {
         fontSize: '18px',

@@ -1,12 +1,13 @@
 import React from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
-import {dec, inc, removeItem, saveOrderInDb} from '../../store';
+import {dec, inc, removeItem, saveOrderInDb, setLoaderFalse} from '../../store';
 import {IOrder} from '../../interfaces/order.interface';
 import {useNavigate} from 'react-router-dom';
 import {Button, ButtonGroup} from '@mui/material';
+import Loader from "../Loader/Loader";
 
 const Cart = () => {
-    const {orders} = useAppSelector((state) => state.orderReducer);
+    const {orders, loading} = useAppSelector((state) => state.orderReducer);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     let totalPrice = 0;
@@ -22,6 +23,8 @@ const Cart = () => {
                 dish: arrDishId,
             }),
         );
+        dispatch(setLoaderFalse)
+        localStorage.removeItem('order')
         navigate('/cart/orderDone');
     };
 
@@ -82,7 +85,7 @@ const Cart = () => {
             ))}
 
             <h4 style={{marginTop: '20px'}}>Total: {totalPrice} UAH</h4>
-
+            {loading && <Loader/>}
             <Button
                 variant="contained"
                 size="large"
@@ -94,7 +97,7 @@ const Cart = () => {
                     boxShadow: 'none',
                 }}
                 onClick={() => submit()}>
-                Submit Order
+                Оформити Замовлення
             </Button>
         </div>
     );

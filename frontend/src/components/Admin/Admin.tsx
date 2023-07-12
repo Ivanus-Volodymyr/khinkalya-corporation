@@ -30,11 +30,28 @@ const Admin: FC = () => {
             array.push(a);
         }
     }
-    console.log(array);
 
     return (
         <div className="admin-container">
-            {role === 'user' && <h1>Тіки Адмін</h1>}
+            {role === 'user' && user && (
+                <div className="user-info">
+                    {!user.avatar && <Avatar className="avatar" sx={{background: deepOrange[500]}}>
+                        {user.name}
+                    </Avatar>}
+                    <img src={user.avatar} alt=""/>
+                    <h1>{user.name}</h1>
+                    <div style={{margin: 30}}>
+                        {user.phone && <h3 className="info-item">тел: {user.phone}</h3>}
+                        <h3 className="info-item">Вік: {user.age}</h3>
+                        <h3 className="info-item">Email: {user.email}</h3>
+                        <h3 className="info-item">Місто: {user.city}</h3>
+                        {user.address && <h3 className="info-item">адреса: {user.address}</h3>}
+                    </div>
+                    <div className="button-container">
+                        <button onClick={() => navigate('/users')}>Статистика</button>
+                    </div>
+                </div>
+            )}
             {role === 'admin' && user && (
                 <div className="user-info">
                     {!user.avatar && <Avatar className="avatar" sx={{background: deepOrange[500]}}>
@@ -42,22 +59,27 @@ const Admin: FC = () => {
                     </Avatar>}
                     <img src={user.avatar} alt=""/>
                     <h1>{user.name}</h1>
-                    {user.phone && <p className="info-item">тел:{user.phone}</p>}
-                    <p className="info-item">вік:{user.age}</p>
-                    <p className="info-item">email:{user.email}</p>
-                    <p className="info-item">місто:{user.city}</p>
-                    {user.address && <p className="info-item">адреса:{user.address}</p>}
+                    <div style={{margin: 30}}>
+                        {user.phone && <p className="info-item">тел: {user.phone}</p>}
+                        <h3 className="info-item">Вік: {user.age}</h3>
+                        <h3 className="info-item">Email: {user.email}</h3>
+                        <h3 className="info-item">Місто: {user.city}</h3>
+                        {user.address && <p className="info-item">адреса: {user.address}</p>}
+
+                    </div>
+
+                    <div className="button-container">
+                        <button onClick={() => navigate('' +
+                            'addRestaurant')}>Добавити Ресторан
+                        </button>
+                        <button onClick={() => navigate('addDish')}>Добавити Страву</button>
+                        <button onClick={() => navigate('addLocality')}>Добавити новий цех</button>
+                        <button onClick={() => navigate('AddPromotions')}>Добавити Акцію</button>
+                        <button onClick={() => navigate('/users')}>Статистика</button>
+                    </div>
                 </div>
             )}
-            <div className="button-container">
-                <button onClick={() => navigate('' +
-                    'addRestaurant')}>Добавити Ресторан
-                </button>
-                <button onClick={() => navigate('addDish')}>Добавити Страву</button>
-                <button onClick={() => navigate('addLocality')}>Добавити новий цех</button>
-                <button onClick={() => navigate('AddPromotions')}>Добавити Акцію</button>
-                <button onClick={() => navigate('/users')}>Статистика</button>
-            </div>
+
         </div>
     );
 };

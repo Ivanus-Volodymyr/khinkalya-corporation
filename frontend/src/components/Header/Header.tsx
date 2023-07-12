@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../hooks/redux';
-import {NavHashLink} from 'react-router-hash-link';
+import {HashLink} from 'react-router-hash-link';
 import {
     getCurrentUser,
     getGeolocation,
@@ -119,7 +119,7 @@ const HeaderComponent: FC = () => {
                         alignItems: 'center',
                     }}
                 >
-                    <NavHashLink
+                    <HashLink
                         to={'/main#prom'}
                         scroll={(el) =>
                             el.scrollIntoView({behavior: 'smooth', block: 'center'})
@@ -131,7 +131,7 @@ const HeaderComponent: FC = () => {
                             height={'40px'}
                             alt="promotions"
                         />
-                    </NavHashLink>
+                    </HashLink>
                     <div>Акції</div>
                 </div>
                 {locality &&

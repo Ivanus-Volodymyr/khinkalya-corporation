@@ -3,6 +3,7 @@ import React, {FC, useState} from 'react';
 import {IDish} from '../../interfaces';
 import {useAppDispatch} from '../../hooks/redux';
 import {createOrder} from '../../store';
+import {useNavigate} from "react-router-dom";
 
 interface Styles {
     container: React.CSSProperties;
@@ -16,6 +17,7 @@ interface Styles {
 }
 
 const Dish: FC<{ results: IDish }> = ({results}) => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [quantity, setQuantity] = useState(1);
     const order = {
@@ -51,6 +53,9 @@ const Dish: FC<{ results: IDish }> = ({results}) => {
             <button style={styles.addButton} onClick={() => dispatch(createOrder(order))}>
                 Добавити в корзину
             </button>
+            {/*<button style={styles.addButton} onClick={() => navigate(`/dish/update/${results.id}`)}>*/}
+            {/*    Редагувати страву*/}
+            {/*</button>*/}
         </div>
     );
 };

@@ -5,25 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eefefc4e-fb46-4259-8c68-f25cd1d3881b" name="Changes" comment="fix : style">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/AddRestautant/AddRestaurant.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Admin/Admin.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/Dish/UpdateDish.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/admin/admin.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/admin/admin.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth/auth.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/auth/auth.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/auth/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/dish/dish.controller.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/dish/dish.controller.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/dish/dish.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/dish/dish.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/user/user.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddDish/AddDish.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddDish/AddDish.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddDish/AddDish.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddDish/AddDish.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddLocality/AddLocality.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddLocality/AddLocality.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddPromotions/AddPromotions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddPromotions/AddPromotions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddRestautant/AddRestaurant.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddRestautant/AddRestaurant.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/Admin/Admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Admin/Admin.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Admin/Admin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Admin/Admin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Cart/Cart.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Dish/Dish.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Dish/Dish.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Header/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Main/Main.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Main/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Main/Main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Main/Main.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/order.slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/order.slice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/dish.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/dish.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/user.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/dish.slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/dish.slice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/restaurant.slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/restaurant.slice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/store/slices/review.slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/store/slices/review.slice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +35,7 @@
       <list>
         <option value="TypeScript File" />
         <option value="CSS File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -103,31 +104,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Project.color&quot;: &quot;600a09&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feat/fix__style&quot;,
-    &quot;js.last.introduce.type&quot;: &quot;CONST&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/developer/WebstormProjects/khinkalya-corporation/backend&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;/Users/admin/WebstormProjects/khinkalya-corporation/backend/node_modules/eslint&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/developer/WebstormProjects/khinkalya-corporation/backend/node_modules/prettier&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/developer/WebstormProjects/khinkalya-corporation/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Project.color": "600a09",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feat/fix__style",
+    "js.last.introduce.type": "CONST",
+    "last_opened_file_path": "/home/developer/WebstormProjects/khinkalya-corporation/backend",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "/Users/admin/WebstormProjects/khinkalya-corporation/backend/node_modules/eslint",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "prettierjs.PrettierConfiguration.Package": "/home/developer/WebstormProjects/khinkalya-corporation/backend/node_modules/prettier",
+    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
+    "ts.external.directory.path": "/home/developer/WebstormProjects/khinkalya-corporation/frontend/node_modules/typescript/lib",
+    "vcs.patch.path": "/home/developer/Downloads",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/backend" />
@@ -198,7 +200,17 @@
       <workItem from="1683743737020" duration="141000" />
       <workItem from="1683758709413" duration="973000" />
       <workItem from="1683795577467" duration="11183000" />
-      <workItem from="1683814102755" duration="300000" />
+      <workItem from="1683814102755" duration="342000" />
+      <workItem from="1683815120857" duration="249000" />
+      <workItem from="1683823862373" duration="418000" />
+      <workItem from="1684007658500" duration="404000" />
+      <workItem from="1684156624223" duration="14927000" />
+      <workItem from="1684222367099" duration="905000" />
+      <workItem from="1684316936448" duration="396000" />
+      <workItem from="1685014776329" duration="34000" />
+      <workItem from="1685035837047" duration="178000" />
+      <workItem from="1687951112011" duration="812000" />
+      <workItem from="1689155872243" duration="843000" />
     </task>
     <task id="LOCAL-00001" summary="add user update">
       <created>1658339754084</created>
@@ -382,7 +394,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683758774596</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="fix : style">
+      <created>1683814428209</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1683814428210</updated>
+    </task>
+    <task id="LOCAL-00028" summary="khinkalnyapatch">
+      <created>1687951754118</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1687951754118</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -443,7 +469,8 @@
     <MESSAGE value="mail.service" />
     <MESSAGE value="mail" />
     <MESSAGE value="fix : style" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix : style" />
+    <MESSAGE value="khinkalnyapatch" />
+    <option name="LAST_COMMIT_MESSAGE" value="khinkalnyapatch" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

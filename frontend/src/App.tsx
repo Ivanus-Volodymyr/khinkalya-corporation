@@ -23,6 +23,7 @@ import {
     Users,
 } from './components';
 import {AddPromotions} from "./components/AddPromotions/AddPromotions";
+import {UpdateDish} from "./components/Dish/UpdateDish";
 
 function App() {
     return (
@@ -42,6 +43,7 @@ function App() {
                 <Route path={'/admin'} element={<Admin/>}></Route>
                 <Route path={'/users'} element={<Users/>}></Route>
                 <Route path={'/dish/:id'} element={<DishList/>}></Route>
+                <Route path={'/dish/update/:id'} element={<UpdateDish/>}></Route>
                 <Route path={'/cart'} element={<Cart/>}></Route>
                 <Route path={'/cart/orderDone'} element={<OrderDone/>}></Route>
                 <Route path={'/delivery'} element={<DeliveryInfo/>}></Route>

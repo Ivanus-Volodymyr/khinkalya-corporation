@@ -109,7 +109,6 @@ export class AuthService {
                 refreshToken,
                 "Refresh"
             );
-            console.log(tokenPayload);
             const tokenPairByUserId = await this.tokenService.getTokenPairByUserId(
                 tokenPayload.id
             );
